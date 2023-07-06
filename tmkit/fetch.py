@@ -8,13 +8,34 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.util.Kit import urlliby
 
 
-def tmkit_data(url, sv_fpn):
-    urlliby(
-        url=url,
-        fpn=sv_fpn
-    )
+from typing import List
+from tmkit.util.Kit import urlliby
 
-def unzip(in_fpn, out_fp):
+
+def tmkit_data(url: str, sv_fpn: str) -> None:
+    """_summary_
+
+    Parameters
+    ----------
+    url : str
+        _description_
+    sv_fpn : str
+        _description_
+    """
+    urlliby(url=url, fpn=sv_fpn)
+
+
+def unzip(in_fpn: str, out_fp: str) -> None:
+    """_summary_
+
+    Parameters
+    ----------
+    in_fpn : str
+        _description_
+    out_fp : str
+        _description_
+    """
     import zipfile
-    with zipfile.ZipFile(in_fpn, 'r') as zip_ref:
+
+    with zipfile.ZipFile(in_fpn, "r") as zip_ref:
         zip_ref.extractall(out_fp)

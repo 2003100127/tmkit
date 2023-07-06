@@ -7,11 +7,8 @@ __maintainer__ = "Jianfeng Sun"
 
 
 class select:
-
-    def chain(self, chain_name, chains='A+B+C+D+E+F+G+H+I+J+K'):
+    def chain(self, chain_name, chains="A+B+C+D+E+F+G+H+I+J+K"):
         from pymol import cmd
-        cmd.select(
-            name=chain_name,
-            selection='c. ' + chains
-        )
+
+        cmd.select(name=chain_name, selection="c. " + chains)
         return

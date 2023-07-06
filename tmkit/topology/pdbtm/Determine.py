@@ -6,20 +6,20 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import pandas as pd
-from tmkit.topology.Phobius import phobius
+
 from tmkit.topology.pdbtm.ToFastaId import toFastaId
+from tmkit.topology.Phobius import phobius
 
 
 class determine:
-
     def ce(
-            self,
-            pred_fp,
-            prot_name,
-            seq_chain,
-            pdbid_map,
-            fasid_map,
-            xml_fp,
+        self,
+        pred_fp,
+        prot_name,
+        seq_chain,
+        pdbid_map,
+        fasid_map,
+        xml_fp,
     ):
         fasta_lower_nontmh, fasta_upper_nontmh = toFastaId().nontmh(
             pdbid_map=pdbid_map,
@@ -43,32 +43,32 @@ class determine:
         df = w.format(phobius_fpn=pred_fp)
         pred_seg = w.extract(df=df)
         # print(pred_seg)
-        pdbtm_seg= {}
-        pdbtm_seg['tmh_lower'] = fasta_lower_tmh
-        pdbtm_seg['tmh_upper'] = fasta_upper_tmh
-        pdbtm_seg['cyto_lower'] = []
-        pdbtm_seg['cyto_upper'] = []
-        pdbtm_seg['extra_lower'] = []
-        pdbtm_seg['extra_upper'] = []
+        pdbtm_seg = {}
+        pdbtm_seg["tmh_lower"] = fasta_lower_tmh
+        pdbtm_seg["tmh_upper"] = fasta_upper_tmh
+        pdbtm_seg["cyto_lower"] = []
+        pdbtm_seg["cyto_upper"] = []
+        pdbtm_seg["extra_lower"] = []
+        pdbtm_seg["extra_upper"] = []
         # print(pdbtm_seg)
         # print(len(fasta_upper_nontmh))
         # print(len(fasta_lower_nontmh))
         for i, e in enumerate(fasta_lower_nontmh):
             # print('No. ', i)
-            i1 = pd.Interval(e, fasta_upper_nontmh[i], closed='both')
+            i1 = pd.Interval(e, fasta_upper_nontmh[i], closed="both")
             ic_accumulator = 0
-            for j, m in enumerate(pred_seg['cyto_lower']):
-                ic = pd.Interval(m, pred_seg['cyto_upper'][j], closed='both')
+            for j, m in enumerate(pred_seg["cyto_lower"]):
+                ic = pd.Interval(m, pred_seg["cyto_upper"][j], closed="both")
                 if i1.overlaps(ic):
                     # print('---> r', i1)
                     # print('---> c', ic)
                     left_max = max(ic.left, i1.left)
                     right_min = min(ic.right, i1.right)
-                    ic_accumulator = ic_accumulator + (right_min-left_max)
+                    ic_accumulator = ic_accumulator + (right_min - left_max)
                     # print(ic_accumulator)
             ie_accumulator = 0
-            for k, n in enumerate(pred_seg['extra_lower']):
-                ie = pd.Interval(n, pred_seg['extra_upper'][k], closed='both')
+            for k, n in enumerate(pred_seg["extra_lower"]):
+                ie = pd.Interval(n, pred_seg["extra_upper"][k], closed="both")
                 if i1.overlaps(ie):
                     # print('---> r', i1)
                     # print('---> e', ie)
@@ -78,9 +78,9 @@ class determine:
                     # print(ie_accumulator)
                     # print(right_min-left_max)
             if ic_accumulator >= ie_accumulator:
-                pdbtm_seg['cyto_lower'].append(i1.left)
-                pdbtm_seg['cyto_upper'].append(i1.right)
+                pdbtm_seg["cyto_lower"].append(i1.left)
+                pdbtm_seg["cyto_upper"].append(i1.right)
             else:
-                pdbtm_seg['extra_lower'].append(i1.left)
-                pdbtm_seg['extra_upper'].append(i1.right)
+                pdbtm_seg["extra_lower"].append(i1.left)
+                pdbtm_seg["extra_upper"].append(i1.right)
         return pdbtm_seg, pred_seg

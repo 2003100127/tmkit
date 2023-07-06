@@ -5,41 +5,65 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import requests
+
 import xml.etree.ElementTree as ET
+from typing import Any, Dict, List, Union
+
 import pypdb
+import requests
 
 
-class mapping:
+class Mapping:
+    """
+    Class for mapping various types of protein sequence identifiers.
+    """
 
-    def __init__(self, ):
-        self.BASE = 'http://www.uniprot.org'
-        self.KB_ENDPOINT = '/uniprot/'
-        self.TOOL_ENDPOINT = '/uploadlists/'
-
-    def uniprot_programmatically_py3(self, ids2map, source_fmt='ACC+ID', target_fmt='ACC', output_fmt='list'):
+    def __init__(self) -> None:
         """
-        ..  @description:
-            -------------
-            https://www.uniprot.org/help/api_idmapping
-
-        ..  @see:
-            -----
-            https://www.ebi.ac.uk/training/online/sites/ebi.ac.uk.training.online/files/UniProt_programmatically_py3.pdf
-
-        :param ids2map:
-        :param source_fmt:
-        :param target_fmt:
-        :param output_fmt:
-        :return:
+        Initialization of the Mapping class with necessary endpoints.
         """
-        if hasattr(ids2map, 'pop'):
-            ids2map = ' '.join(ids2map)
+        self.BASE = "http://www.uniprot.org"
+        self.KB_ENDPOINT = "/uniprot/"
+        self.TOOL_ENDPOINT = "/uploadlists/"
+
+    def uniprot_programmatically_py3(
+        self,
+        ids2map: Union[List[str], str],
+        source_fmt: str = "ACC+ID",
+        target_fmt: str = "ACC",
+        output_fmt: str = "list"
+    ) -> str:
+        """
+        Maps IDs from one format to another using the UniProt API.
+
+        Parameters
+        ----------
+        ids2map : Union[List[str], str]
+            The IDs to map.
+        source_fmt : str, optional
+            The format of the source IDs, by default "ACC+ID".
+        target_fmt : str, optional
+            The format of the target IDs, by default "ACC".
+        output_fmt : str, optional
+            The output format, by default "list".
+
+        Returns
+        -------
+        str
+            The result of the mapping request.
+
+        References
+        ----------
+        .. [1] https://www.uniprot.org/help/api_idmapping
+        .. [2] https://www.ebi.ac.uk/training/online/sites/ebi.ac.uk.training.online/files/UniProt_programmatically_py3.pdf
+        """
+        if hasattr(ids2map, "pop"):
+            ids2map = " ".join(ids2map)
         payload = {
-            'from': source_fmt,
-            'to': target_fmt,
-            'format': output_fmt,
-            'query': ids2map,
+            "from": source_fmt,
+            "to": target_fmt,
+            "format": output_fmt,
+            "query": ids2map,
         }
         response = requests.get(self.BASE + self.TOOL_ENDPOINT, params=payload)
         if response.ok:
@@ -47,49 +71,104 @@ class mapping:
         else:
             response.raise_for_status()
 
-    def uniprot_id(self, response_xml):
-        root = ET.fromstring(response_xml, parser=ET.XMLParser(encoding='utf-8'))
+    def uniprot_id(self, response_xml: str) -> str:
+        """
+        Extracts UniProt ID from the given XML string.
+
+        Parameters
+        ----------
+        response_xml : str
+            XML string to parse.
+
+        Returns
+        -------
+        str
+            The UniProt ID extracted from the XML string.
+        """
+        root = ET.fromstring(
+            response_xml, parser=ET.XMLParser(encoding="utf-8"))
         return next(
-            el for el in root.getchildren()[0].getchildren()
-            if el.attrib['dbSource'] == 'UniProt'
-        ).attrib['dbAccessionId']
+            el
+            for el in root.getchildren()[0].getchildren()
+            if el.attrib["dbSource"] == "UniProt"
+        ).attrib["dbAccessionId"]
 
-    def uniprot_name(self, uniport_id):
-        uniprot_url = 'http://www.uniprot.org/uniprot/{}.xml'
-        uinprot_response = requests.get(
-            uniprot_url.format(uniport_id)
-        ).text
-        return ET.fromstring(uinprot_response).find(
-            './/{http://uniprot.org/uniprot}recommendedName/{http://uniprot.org/uniprot}fullName'
-            ).text
-
-    def pdb2uniprot(self, pdb_ids=['1aij.L']):
+    def uniprot_name(self, uniport_id: str) -> str:
         """
+        Retrieves the name of a UniProt entry given its ID.
 
-        :param pdb_ids:
-        :return:
+        Parameters
+        ----------
+        uniport_id : str
+            The UniProt ID to get the name of.
+
+        Returns
+        -------
+        str
+            The name of the UniProt entry.
         """
-        pdb_mapping_url = 'http://www.rcsb.org/pdb/rest/das/pdb_uniprot_mapping/alignment'
+        uniprot_url = "http://www.uniprot.org/uniprot/{}.xml"
+        uinprot_response = requests.get(uniprot_url.format(uniport_id)).text
+        return (
+            ET.fromstring(uinprot_response)
+            .find(
+                ".//{http://uniprot.org/uniprot}recommendedName/{http://uniprot.org/uniprot}fullName"
+            )
+            .text
+        )
+
+    def pdb2uniprot(self, pdb_ids: List[str] = ["1aij.L"]) -> Dict[str, str]:
+        """
+        Converts PDB IDs to UniProt IDs.
+
+        Parameters
+        ----------
+        pdb_ids : List[str], optional
+            The list of PDB IDs to convert, by default ["1aij.L"].
+
+        Returns
+        -------
+        Dict[str, str]
+            A dictionary mapping PDB IDs to UniProt IDs.
+        """
+        pdb_mapping_url = (
+            "http://www.rcsb.org/pdb/rest/das/pdb_uniprot_mapping/alignment"
+        )
         mapping_ids = {}
         for id in pdb_ids:
             try:
                 pdb_mapping_xml = requests.get(
-                    pdb_mapping_url, params={'query': id}
+                    pdb_mapping_url, params={"query": id}
                 ).text
-                # print(pdb_mapping_xml)
+                print(pdb_mapping_xml)
                 mapping_ids[id] = self.uniprot_id(response_xml=pdb_mapping_xml)
             except:
-                mapping_ids[id] = 'no accession'
-            # uniprot_name = self.uniprot_name(uniprot_id)
+                mapping_ids[id] = "no accession"
+                # uniprot_name = self.uniprot_name(uniprot_id)
         return mapping_ids
 
-    def pypdb(self, pdb_ids=['1aij.L', '1aij.M']):
+    def pypdb(self, pdb_ids: List[str] = ["1aij.L", "1aij.M"]) -> Dict[str, str]:
+        """
+        Maps PDB IDs to UniProt IDs using the pypdb library.
+
+        Parameters
+        ----------
+        pdb_ids : List[str], optional
+            The list of PDB IDs to convert, by default ["1aij.L", "1aij.M"].
+
+        Returns
+        -------
+        Dict[str, str]
+            A dictionary mapping PDB IDs to UniProt IDs.
+        """
         mapping_ids = {}
         for id in pdb_ids:
             try:
-                mapping_ids[id] = pypdb.get_all_info(id)['polymer']['macroMolecule']['accession']['@id']
+                mapping_ids[id] = pypdb.get_all_info(id)["polymer"]["macroMolecule"][
+                    "accession"
+                ]["@id"]
             except:
-                mapping_ids[id] = 'no accession'
+                mapping_ids[id] = "no accession"
             # else:
             #     print(mapping_ids[id])
         return mapping_ids

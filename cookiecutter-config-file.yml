@@ -1,0 +1,11 @@
+default_context:
+  project_name: "tmkit"
+  project_description: "TMKit is a scalable Python programming interface holding a bundle of function modules to allow a variety of transmembrane protein studies."
+  organization: "Jianfeng Sun"
+  license: "GNU GPL v3.0"
+  minimal_python_version: 3.8
+  github_name: "2003100127"
+  email: "jianfeng.sun@ndorms.ox.ac.uk"
+  version: "0.1.0"
+  line_length: "88"
+  create_example_template: "cli"

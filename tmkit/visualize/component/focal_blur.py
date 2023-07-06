@@ -1,15 +1,13 @@
-from __future__ import print_function
-from pymol import cmd
-from tempfile import mkdtemp
+from math import cos, pi, sin, sqrt
 from shutil import rmtree
-from math import sin, cos, pi, sqrt
+from tempfile import mkdtemp
+
 from PIL import Image
+from pymol import cmd
 
 
-def FocalBlur(
-        tmpdir,
-        aperture=2.0, samples=10, ray=0, width=0, height=0):
-    '''
+def FocalBlur(tmpdir, aperture=2.0, samples=10, ray=0, width=0, height=0):
+    """
     DESCRIPTION
 
         Creates fancy figures by introducing a focal blur to the image. The object
@@ -31,10 +29,10 @@ def FocalBlur(
 
         FocalBlur aperture=1, samples=100
         FocalBlur aperture=2, samples=100, ray=1, width=600, height=400
-    '''
+    """
 
     # Formalize the parameter types
-    ray = (ray in ("True", "true", 1, "1"))
+    ray = ray in ("True", "true", 1, "1")
     aperture, samples = float(aperture), int(samples)
     width, height = int(width), int(height)
 
@@ -44,8 +42,8 @@ def FocalBlur(
     print(tmpdir)
 
     # Get the orientation of the protein and the light
-    light = cmd.get('light')[1:-1]
-    light = [float(s) for s in light.split(',')]
+    light = cmd.get("light")[1:-1]
+    light = [float(s) for s in light.split(",")]
     view = cmd.get_view()
 
     # Rotate the protein and the light in order to create the blur
@@ -60,18 +58,21 @@ def FocalBlur(
         yr = y / 180.0 * pi
 
         # Rotate the protein
-        cmd.turn('x', x)
-        cmd.turn('y', y)
+        cmd.turn("x", x)
+        cmd.turn("y", y)
 
         # Rotate the light
         ly = light[1] * cos(xr) - light[2] * sin(xr)
         lz = light[2] * cos(xr) + light[1] * sin(xr)
         lx = light[0] * cos(yr) + lz * sin(yr)
         lz = lz * cos(yr) - lx * sin(yr)
-        cmd.set('light', [lx, ly, lz])
+        cmd.set("light", [lx, ly, lz])
 
         curFile = "%s/frame-%04d.png" % (tmpdir, frame)
-        print("Created frame %i/%i (%0.0f%%)" % (frame + 1, samples, 100 * (frame + 1) / samples))
+        print(
+            "Created frame %i/%i (%0.0f%%)"
+            % (frame + 1, samples, 100 * (frame + 1) / samples)
+        )
 
         # Save the image to temporary directory
         if ray:
@@ -87,14 +88,15 @@ def FocalBlur(
             avg = Image.open(curFile)
 
         # Return the protein and the light to the original orientation
-        cmd.set('light', light)
+        cmd.set("light", light)
         cmd.set_view(view)
 
     # Load the blured image
-    avg.save('%s/avg.png' % (tmpdir))
-    cmd.load('%s/avg.png' % (tmpdir))
+    avg.save("%s/avg.png" % (tmpdir))
+    cmd.load("%s/avg.png" % (tmpdir))
 
     # Delete the temporary files
     # rmtree(tmpdir)
 
-cmd.extend('FocalBlur', FocalBlur)
+
+cmd.extend("FocalBlur", FocalBlur)

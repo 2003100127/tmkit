@@ -6,16 +6,29 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from Bio import SeqIO
+from typing import Dict, Any
 
 
-class fasta:
+class Fasta:
+    def get(self, fasta_fpn: str) -> Dict[int, str]:
+        """
+        Read a FASTA file and return a dictionary of sequence IDs and their corresponding sequences.
 
-    def get(self, fasta_fpn):
+        Parameters
+        ----------
+        fasta_fpn : str
+            The file path of the FASTA file.
+
+        Returns
+        -------
+        Dict[int, str]
+            A dictionary of sequence IDs and their corresponding sequences.
+        """
         sequence = []
         for seq in SeqIO.parse(fasta_fpn, "fasta"):
             sequence.append(str(seq.seq))
-        sequence = ''.join(sequence)
-        ids = {}
+        sequence = "".join(sequence)
+        ids: Dict[int, str] = {}
         for i, aa in enumerate(sequence):
-            ids[i+1] = aa
+            ids[i + 1] = aa
         return ids

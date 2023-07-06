@@ -29,10 +29,10 @@ class single:
     """
 
     def __init__(
-            self,
-            sequence,
-            position,
-            window_size,
+        self,
+        sequence,
+        position,
+        window_size,
     ):
         self.sequence = sequence
         self.m_sgls = position
@@ -75,7 +75,9 @@ class single:
         # #/*** block 1 ***/
         for i in range(num_m):
             for index_left in range(self.window_size):
-                window_m_id[i].append(self.m_sgls[i][0] - (self.window_size - index_left))
+                window_m_id[i].append(
+                    self.m_sgls[i][0] - (self.window_size - index_left)
+                )
             window_m_id[i].append(self.m_sgls[i][0])
             for index_right in range(self.window_size):
                 window_m_id[i].append(self.m_sgls[i][0] + (index_right + 1))
@@ -86,7 +88,11 @@ class single:
                 if window_m_id[i][j] < 1 or window_m_id[i][j] > len(self.sequence):
                     window_m_id[i][j] = None
         # print(window_m_id)
-        print('=========>Window molecule generation: {time}s.'.format(time=time.time() - start_time))
+        print(
+            "=========>Window molecule generation: {time}s.".format(
+                time=time.time() - start_time
+            )
+        )
         return window_m_id
 
     def mname(self, m_idices):

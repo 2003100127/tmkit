@@ -6,17 +6,35 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
+from typing import List
 from Bio import SeqIO
 
 
 class EmptyFastaError(Exception):
-   """Error raised if FASTA file does not contain sequence"""
+    """Error raised if FASTA file does not contain sequence"""
 
 
-def get(fasta_fpn):
-    sequence = ''.join(
-        [str(seq.seq) for seq in SeqIO.parse(fasta_fpn, "fasta")]
-    )
+def get(fasta_fpn: str) -> str:
+    """
+    Get the sequence from a FASTA file.
+
+    Parameters
+    ----------
+    fasta_fpn : str
+        The filepath of the FASTA file.
+
+    Returns
+    -------
+    str
+        The concatenated sequence from the FASTA file.
+
+    Raises
+    ------
+    EmptyFastaError
+        If the FASTA file does not contain any sequence.
+    """
+    sequence = "".join([str(seq.seq)
+                       for seq in SeqIO.parse(fasta_fpn, "fasta")])
     if not sequence:
-        raise EmptyFastaError('The sequence is empty.')
+        raise EmptyFastaError("The sequence is empty.")
     return sequence

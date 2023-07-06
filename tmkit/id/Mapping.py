@@ -6,43 +6,44 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import numpy as np
+from typing import Dict, List, Tuple
+
 from tmkit.util.Reader import reader as tmkreader
 
 
-class mapping:
-
+class Mapping:
     def tofas(
-            self,
-            pdbid_map,
-            fasid_map,
-            pdb_lower,
-            pdb_upper,
-    ):
+        self,
+        pdbid_map: Dict[str, str],
+        fasid_map: Dict[str, str],
+        pdb_lower: List[str],
+        pdb_upper: List[str],
+    ) -> Tuple[List[str], List[str]]:
         """
-
-        Notes
-        -----
-            mapping fasta id from pdb id.
+        Map fasta id from pdb id.
 
         Parameters
         ----------
-        pdbid_map
-        fasid_map
-        pdb_lower
-            lower 1d list of pdb ids
-        pdb_upper
-            upper 1d list of pdb ids
+        pdbid_map : dict
+            Dictionary mapping pdb ids to fasta ids.
+        fasid_map : dict
+            Dictionary mapping fasta ids to pdb ids.
+        pdb_lower : list
+            Lower 1d list of pdb ids.
+        pdb_upper : list
+            Upper 1d list of pdb ids.
 
         Returns
         -------
-
+        Tuple of two lists
+            Lower and upper fasta ids.
         """
         pdb_fas_id_map = dict(zip([*pdbid_map.keys()], [*fasid_map.keys()]))
         pdb_ids = [*pdbid_map.keys()]
         pdb_seg_lower = np.array(pdb_lower)
         pdb_seg_upper = np.array(pdb_upper)
-        # print('=========>Segment lower pdb id: {}'.format(pdb_seg_lower))
-        # print('=========>Segment upper pdb id: {}'.format(pdb_seg_upper))
+        print(f"=========>Segment lower pdb id: {pdb_seg_lower}")
+        print(f"=========>Segment upper pdb id: {pdb_seg_upper}")
         fasta_seg_lower = []
         fasta_seg_upper = []
         num_segments = pdb_seg_lower.shape[0]
@@ -52,27 +53,52 @@ class mapping:
                 fasta_seg_upper.append(pdb_fas_id_map[pdb_seg_upper[j]])
             else:
                 continue
-        # print('=========>Segment lower fasta id: {}'.format(fasta_seg_lower))
-        # print('=========>Segment upper fasta id: {}'.format(fasta_seg_upper))
+        print(f"=========>Segment lower fasta id: {fasta_seg_lower}")
+        print(f"=========>Segment upper fasta id: {fasta_seg_upper}")
         return fasta_seg_lower, fasta_seg_upper
 
     def entryConvert(
-            self,
-            id,
-            ref_fpn,
-            mode,
-    ):
-        df = tmkreader().generic(df_fpn=ref_fpn, df_sep=',', header=0)
+        self,
+        id: str,
+        ref_fpn: str,
+        mode: str,
+    ) -> str:
+        """
+        Convert between pdb and uniprot ids.
+
+        Parameters
+        ----------
+        id : str
+            Pdb or uniprot id.
+        ref_fpn : str
+            File path to reference file.
+        mode : str
+            Conversion mode, either "pdb -> uniprot" or "uniprot -> pdb".
+
+        Returns
+        -------
+        str
+            Converted id.
+        """
+        df = tmkreader().generic(df_fpn=ref_fpn, df_sep=",", header=0)
         # print(df)
-        if mode == 'pdb -> uniprot':
-            tar = df.loc[df['PDB'].isin([id.split('.')[0]])].drop_duplicates(['PDB'])['SP_PRIMARY'].values
+        if mode == "pdb -> uniprot":
+            tar = (
+                df.loc[df["PDB"].isin([id.split(".")[0]])]
+                .drop_duplicates(["PDB"])["SP_PRIMARY"]
+                .values
+            )
             if tar:
                 return tar[0]
             else:
-                return 'currently no accession id!'
-        elif mode == 'uniprot -> pdb':
-            tar = df.loc[df['SP_PRIMARY'].isin([id])].drop_duplicates(['SP_PRIMARY'])[['PDB', 'CHAIN']].values
+                return "currently no accession id!"
+        elif mode == "uniprot -> pdb":
+            tar = (
+                df.loc[df["SP_PRIMARY"].isin([id])]
+                .drop_duplicates(["SP_PRIMARY"])[["PDB", "CHAIN"]]
+                .values
+            )
             if len(tar) >= 1:
-                return '.'.join(tar[0])
+                return ".".join(tar[0])
             else:
-                return 'currently no accession id!'
+                return "currently no accession id!"

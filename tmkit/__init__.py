@@ -1,17 +1,23 @@
-from . import fetch
-from . import cath
-from . import edge
-from . import seq
-from . import qc
-from . import feature
-from . import mapping
-from . import msa
-from . import collate
-from . import topo
-from . import rrc
-from . import ppi
-from . import mut
-from . import vs
+import sys
+from importlib import metadata as importlib_metadata
+
+
+from . import (
+    cath,
+    collate,
+    edge,
+    feature,
+    fetch,
+    mapping,
+    msa,
+    mut,
+    ppi,
+    qc,
+    rrc,
+    seq,
+    topo,
+    vs,
+)
 
 __all__ = [
     "cath",
@@ -57,3 +63,13 @@ __all__ = [
 # import importlib.util
 # spam_spec = importlib.util.find_spec("vs")
 # found = spam_spec is not None
+
+
+def get_version() -> str:
+    try:
+        return importlib_metadata.version(__name__)
+    except importlib_metadata.PackageNotFoundError:  # pragma: no cover
+        return "unknown"
+
+
+version: str = get_version()

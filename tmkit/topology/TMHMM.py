@@ -5,31 +5,32 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+import linecache
 import os
 import re
 import subprocess
-import linecache
+
 import numpy as np
+
+from tmkit.interface import Topology
 from tmkit.sequence import Fasta as sfasta
 from tmkit.util.Reader import reader
 from tmkit.util.Writer import writer
-from tmkit.interface import Topology
 
 
 class tmhmm(Topology.topology):
-
     def __init__(
-            self,
+        self,
     ):
         self.reader = reader()
         self.writer = writer()
 
     def run(
-            self,
-            fasta_fpn,
-            tmhmm_model_fpn,
-            tag,
-            sv_fpn,
+        self,
+        fasta_fpn,
+        tmhmm_model_fpn,
+        tag,
+        sv_fpn,
     ):
         """
         Notes
@@ -52,26 +53,27 @@ class tmhmm(Topology.topology):
         -------
 
         """
-        print('===>TMHMM is running python inline...')
+        print("===>TMHMM is running python inline...")
         if sv_fpn is None:
-            raise 'sv_fpn has to be specified'
+            raise "sv_fpn has to be specified"
         import tmhmm as tmhmmpy
+
         annotation, posterior = tmhmmpy.predict(
             sequence=sfasta.get(fasta_fpn=fasta_fpn),
             header=None,
-            model_or_filelike=os.path.dirname(__file__) + '/lib/TMHMM2.0.model',
+            model_or_filelike=os.path.dirname(__file__) + "/lib/TMHMM2.0.model",
             # model_or_filelike=tmhmm_model_fpn,
         )
-        self.writer.save([[tag + '_tmhmm', annotation]], sv_fp=sv_fpn)
+        self.writer.save([[tag + "_tmhmm", annotation]], sv_fp=sv_fpn)
         return annotation
 
     def runLinux(
-            self,
-            fasta_fpn,
-            decodeanhmm,
-            options,
-            modelfile,
-            sv_fpn,
+        self,
+        fasta_fpn,
+        decodeanhmm,
+        options,
+        modelfile,
+        sv_fpn,
     ):
         """
         Notes
@@ -96,8 +98,19 @@ class tmhmm(Topology.topology):
             A message string
 
         """
-        print('===>TMHMM is running on Linux...')
-        order = 'cat ' + fasta_fpn + '.fasta | ' + decodeanhmm + ' -f ' + options + ' -modelfile ' + modelfile + ' -noPrintSeq -noPrintScores -noPrintID -noPrintStat > ' + sv_fpn
+        print("===>TMHMM is running on Linux...")
+        order = (
+            "cat "
+            + fasta_fpn
+            + ".fasta | "
+            + decodeanhmm
+            + " -f "
+            + options
+            + " -modelfile "
+            + modelfile
+            + " -noPrintSeq -noPrintScores -noPrintID -noPrintStat > "
+            + sv_fpn
+        )
         # print(order)
         subprocess.Popen(
             order,
@@ -105,7 +118,7 @@ class tmhmm(Topology.topology):
             stdout=subprocess.PIPE,
             shell=True,
         ).communicate()
-        return 'finished.'
+        return "finished."
 
     def extract(self, arr_2d):
         """
@@ -148,27 +161,27 @@ class tmhmm(Topology.topology):
         extra_lower, extra_upper = [], []
         rest_lower, rest_upper = [], []
         for i in range(length):
-            if arr_2d[i][0] == 'M':
+            if arr_2d[i][0] == "M":
                 tm_lower.append(arr_2d[i][1])
                 tm_upper.append(arr_2d[i][2])
-            elif arr_2d[i][0] == 'i':
+            elif arr_2d[i][0] == "i":
                 cyto_lower.append(arr_2d[i][1])
                 cyto_upper.append(arr_2d[i][2])
-            elif arr_2d[i][0] == 'o':
+            elif arr_2d[i][0] == "o":
                 extra_lower.append(arr_2d[i][1])
                 extra_upper.append(arr_2d[i][2])
             else:
                 rest_lower.append(arr_2d[i][1])
                 rest_upper.append(arr_2d[i][2])
         tmhmm_dict = {
-            'cyto_lower': cyto_lower,
-            'cyto_upper': cyto_upper,
-            'tmh_lower': tm_lower,
-            'tmh_upper': tm_upper,
-            'extra_lower': extra_lower,
-            'extra_upper': extra_upper,
-            'rest_lower': rest_lower,
-            'rest_upper': rest_upper,
+            "cyto_lower": cyto_lower,
+            "cyto_upper": cyto_upper,
+            "tmh_lower": tm_lower,
+            "tmh_upper": tm_upper,
+            "extra_lower": extra_lower,
+            "extra_upper": extra_upper,
+            "rest_lower": rest_lower,
+            "rest_upper": rest_upper,
         }
         return tmhmm_dict
 
@@ -194,16 +207,16 @@ class tmhmm(Topology.topology):
         # lines = linecache.getlines(tmhmm_fpn)
         line = linecache.getline(tmhmm_fpn, 1)
         # print(line)
-        block1 = re.split(r': ', line)
+        block1 = re.split(r": ", line)
         # print(block1)
-        block2 = block1[1].split(', ')
+        block2 = block1[1].split(", ")
         # print(block2)
         length = len(block2)
         arr = []
         for i in range(length):
-            tag = block2[i].split(' ')[0]
-            beg = block2[i].split(' ')[1]
-            end = block2[i].split(' ')[2]
+            tag = block2[i].split(" ")[0]
+            beg = block2[i].split(" ")[1]
+            end = block2[i].split(" ")[2]
             arr.append([tag, int(beg), int(end)])
         return arr
 
@@ -231,11 +244,11 @@ class tmhmm(Topology.topology):
         flag = 1
         for i in range(len(annot)):
             if i + 1 != len(annot):
-                if annot[i] == annot[i+1]:
+                if annot[i] == annot[i + 1]:
                     continue
                 else:
-                    arr.append([annot[i], flag, i+1])
-                    flag = i+2
+                    arr.append([annot[i], flag, i + 1])
+                    flag = i + 2
         arr.append([annot[-1], flag, len(annot)])
         # print(arr)
         return arr
@@ -262,16 +275,16 @@ class tmhmm(Topology.topology):
         for i in arr:
             sub = np.arange(i[1], i[2] + 1)
             for j in range(len(sub)):
-                if i[0] == 'o' or i[0] == 'O':
-                    helix_orien.append('O')
-                elif i[0] == 'i':
-                    helix_orien.append('I')
-                elif i[0] == 'M':
-                    helix_orien.append('H')
+                if i[0] == "o" or i[0] == "O":
+                    helix_orien.append("O")
+                elif i[0] == "i":
+                    helix_orien.append("I")
+                elif i[0] == "M":
+                    helix_orien.append("H")
                 else:
-                    helix_orien.append('U')
+                    helix_orien.append("U")
         trans_helix = "".join(helix_orien)
         if sv_fpn:
-            with open(sv_fpn, 'w') as f:
+            with open(sv_fpn, "w") as f:
                 f.write(trans_helix)
         return trans_helix

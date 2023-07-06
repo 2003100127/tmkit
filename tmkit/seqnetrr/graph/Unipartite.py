@@ -5,11 +5,13 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import time
 import itertools
+import time
+
 import numpy as np
-from tmkit.seqnetrr.window.base import Pair as ecabPair
+
 from tmkit.seqnetrr.net.Reader import reader as prrcreader
+from tmkit.seqnetrr.window.base import Pair as ecabPair
 
 
 class unipartite(ecabPair.pair):
@@ -30,31 +32,29 @@ class unipartite(ecabPair.pair):
     """
 
     def __init__(
-            self,
-            sequence,
-            window_size,
-            window_m_ids,
-            input_kind='general',
+        self,
+        sequence,
+        window_size,
+        window_m_ids,
+        input_kind="general",
     ):
-        super(unipartite, self).__init__(sequence, window_size, window_m_ids)
+        super().__init__(sequence, window_size, window_m_ids)
         self.prrcreader = prrcreader(
-            seq_sep_inferior=None,
-            seq_sep_superior=None
-        )
+            seq_sep_inferior=None, seq_sep_superior=None)
         self.input_kind = input_kind
-        if self.input_kind == 'general':
+        if self.input_kind == "general":
             self.file_initiator = self.prrcreader.general
-        elif self.input_kind == 'freecontact':
+        elif self.input_kind == "freecontact":
             self.file_initiator = self.prrcreader.freecontact
-        elif self.input_kind == 'mutual information':
+        elif self.input_kind == "mutual information":
             self.file_initiator = self.prrcreader.mi
-        elif self.input_kind == 'gdca':
+        elif self.input_kind == "gdca":
             self.file_initiator = self.prrcreader.gdca
-        elif self.input_kind == 'ccmpred':
+        elif self.input_kind == "ccmpred":
             self.file_initiator = self.prrcreader.ccmpred
-        elif self.input_kind == 'plmc':
+        elif self.input_kind == "plmc":
             self.file_initiator = self.prrcreader.plmc
-        elif self.input_kind == 'simulate':
+        elif self.input_kind == "simulate":
             self.file_initiator = self.prrcreader.simulate
         else:
             self.file_initiator = self.prrcreader.general
@@ -142,7 +142,11 @@ class unipartite(ecabPair.pair):
                 else:
                     local_pairs[i].append([None, None])
         end_time = time.time()
-        print('======>unipartite pair generation: {time}s.'.format(time=end_time - start_time))
+        print(
+            "======>unipartite pair generation: {time}s.".format(
+                time=end_time - start_time
+            )
+        )
         return local_pairs
 
     def combo2x2(self, array):
@@ -167,7 +171,7 @@ class unipartite(ecabPair.pair):
             combo.append(list(i))
         return combo
 
-    def assign(self, list_2d, fpn=None, simu_seq_len=100, mode='hash'):
+    def assign(self, list_2d, fpn=None, simu_seq_len=100, mode="hash"):
         """
 
         Notes
@@ -249,7 +253,7 @@ class unipartite(ecabPair.pair):
         """
         start_time = time.time()
         list_2d_ = list_2d
-        if mode == 'hash_rl':
+        if mode == "hash_rl":
             local_pair_ids = self.pairids()
             # print(local_pair_ids[0])
             # print(len(local_pair_ids))
@@ -267,7 +271,7 @@ class unipartite(ecabPair.pair):
             FCj = 0
             # #/*** block 1.1 ***/
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             # #/*** block 1.2 ***/
@@ -281,10 +285,10 @@ class unipartite(ecabPair.pair):
                     inf = pairs_left[i]
                     sup = pairs_right[i]
                     # print([inf, sup])
-                    list_2d_[FCj-1].append(evfold_dict[inf][sup])
-        elif mode == 'hash_ori':
+                    list_2d_[FCj - 1].append(evfold_dict[inf][sup])
+        elif mode == "hash_ori":
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             local_pair_ids = self.pairids()
@@ -298,9 +302,9 @@ class unipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     else:
                         list_2d_[i].append(evfold_dict[inf][sup])
-        elif mode == 'hash':
+        elif mode == "hash":
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             # #/*** block 1 ***/
@@ -335,13 +339,13 @@ class unipartite(ecabPair.pair):
                             list_2d_[i].append(evfold_dict[l2[1]][l2[0]])
                     else:
                         list_2d_[i].append(0)
-        elif mode == 'pandas':
+        elif mode == "pandas":
             evfold_df = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 is_sort=True,
                 sort_=3,
             )
-            evfold_df = evfold_df.set_index(['id_1', 'id_2'])
+            evfold_df = evfold_df.set_index(["id_1", "id_2"])
             # #/*** block 1 ***/
             for i in range(self.num_pairs):
                 # #/*** block 1.1 ***/
@@ -354,10 +358,12 @@ class unipartite(ecabPair.pair):
                     elif l1[0] is not None and l1[1] is not None:
                         if l1[0] < l1[1]:
                             # print(evfold_df.at[(l1[0], l1[1]), 'score'])
-                            list_2d_[i].append(evfold_df.at[(l1[0], l1[1]), 'score'])
+                            list_2d_[i].append(
+                                evfold_df.at[(l1[0], l1[1]), "score"])
                         else:
                             # print(evfold_df.at[(l1[1], l1[0]), 'score'])
-                            list_2d_[i].append(evfold_df.at[(l1[1], l1[0]), 'score'])
+                            list_2d_[i].append(
+                                evfold_df.at[(l1[1], l1[0]), "score"])
                     else:
                         list_2d_[i].append(0)
                 # #/*** block 1.2 ***/
@@ -369,14 +375,16 @@ class unipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     elif l2[0] is not None and l2[1] is not None:
                         if l2[0] < l2[1]:
-                            list_2d_[i].append(evfold_df.at[(l2[0], l2[1]), 'score'])
+                            list_2d_[i].append(
+                                evfold_df.at[(l2[0], l2[1]), "score"])
                         else:
-                            list_2d_[i].append(evfold_df.at[(l2[1], l2[0]), 'score'])
+                            list_2d_[i].append(
+                                evfold_df.at[(l2[1], l2[0]), "score"])
                     else:
                         list_2d_[i].append(0)
-        elif mode == 'numpy':
+        elif mode == "numpy":
             evfold_df = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 is_sort=True,
                 sort_=3,
             )
@@ -392,9 +400,19 @@ class unipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     elif l1[0] is not None and l1[1] is not None:
                         if l1[0] < l1[1]:
-                            list_2d_[i].append(evfold_np[2][(evfold_np[0] == l1[0]) & (evfold_np[1] == l1[1])][0])
+                            list_2d_[i].append(
+                                evfold_np[2][
+                                    (evfold_np[0] == l1[0]) & (
+                                        evfold_np[1] == l1[1])
+                                ][0]
+                            )
                         else:
-                            list_2d_[i].append(evfold_np[2][(evfold_np[0] == l1[1]) & (evfold_np[1] == l1[0])][0])
+                            list_2d_[i].append(
+                                evfold_np[2][
+                                    (evfold_np[0] == l1[1]) & (
+                                        evfold_np[1] == l1[0])
+                                ][0]
+                            )
                     else:
                         list_2d_[i].append(0)
                 # #/*** block 1.2 ***/
@@ -406,10 +424,24 @@ class unipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     elif l2[0] is not None and l2[1] is not None:
                         if l2[0] < l2[1]:
-                            list_2d_[i].append(evfold_np[2][(evfold_np[0] == l2[0]) & (evfold_np[1] == l2[1])][0])
+                            list_2d_[i].append(
+                                evfold_np[2][
+                                    (evfold_np[0] == l2[0]) & (
+                                        evfold_np[1] == l2[1])
+                                ][0]
+                            )
                         else:
-                            list_2d_[i].append(evfold_np[2][(evfold_np[0] == l2[1]) & (evfold_np[1] == l2[0])][0])
+                            list_2d_[i].append(
+                                evfold_np[2][
+                                    (evfold_np[0] == l2[1]) & (
+                                        evfold_np[1] == l2[0])
+                                ][0]
+                            )
                     else:
                         list_2d_[i].append(0)
-        print('======>unipartite pair assignment: {time}s.'.format(time=time.time() - start_time))
+        print(
+            "======>unipartite pair assignment: {time}s.".format(
+                time=time.time() - start_time
+            )
+        )
         return list_2d_

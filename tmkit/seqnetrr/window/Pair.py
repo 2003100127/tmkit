@@ -23,10 +23,10 @@ class pair:
     """
 
     def __init__(
-            self,
-            sequence,
-            position,
-            window_size,
+        self,
+        sequence,
+        position,
+        window_size,
     ):
         self.sequence = sequence
         self.m_pairs = position
@@ -76,17 +76,33 @@ class pair:
         # ###/*** block 1 ***/ ###
         # ###/*** block 1.1 ***/ ###
         for i in range(self.num_pairs):
-            left = [self.m_pairs[i][0] - (m1_left_id + 1) for m1_left_id in range(self.window_size)]
+            left = [
+                self.m_pairs[i][0] - (m1_left_id + 1)
+                for m1_left_id in range(self.window_size)
+            ]
             left.reverse()
-            right = [self.m_pairs[i][0] + (m1_right_id + 1) for m1_right_id in range(self.window_size)]
-            window_m_ids[i][0] = window_m_ids[i][0] + left + [self.m_pairs[i][0]] + right
+            right = [
+                self.m_pairs[i][0] + (m1_right_id + 1)
+                for m1_right_id in range(self.window_size)
+            ]
+            window_m_ids[i][0] = (
+                window_m_ids[i][0] + left + [self.m_pairs[i][0]] + right
+            )
         # print(window_m_ids)
         # ###/*** block 1.2 ***/ ###
         for i in range(self.num_pairs):
-            left = [self.m_pairs[i][3] - (m2_left_id + 1) for m2_left_id in range(self.window_size)]
+            left = [
+                self.m_pairs[i][3] - (m2_left_id + 1)
+                for m2_left_id in range(self.window_size)
+            ]
             left.reverse()
-            right = [self.m_pairs[i][3] + (m2_right_id + 1) for m2_right_id in range(self.window_size)]
-            window_m_ids[i][1] = window_m_ids[i][1] + left + [self.m_pairs[i][3]] + right
+            right = [
+                self.m_pairs[i][3] + (m2_right_id + 1)
+                for m2_right_id in range(self.window_size)
+            ]
+            window_m_ids[i][1] = (
+                window_m_ids[i][1] + left + [self.m_pairs[i][3]] + right
+            )
         # print(window_m_ids)
         # #/*** block 2 ***/
         for i in range(self.num_pairs):
@@ -96,7 +112,11 @@ class pair:
                 if window_m_ids[i][1][j] < 1 or window_m_ids[i][1][j] > self.len_seq:
                     window_m_ids[i][1][j] = None
         end_time = time.time()
-        print('=========>Window molecule generation: {time}s.'.format(time=end_time - start_time))
+        print(
+            "=========>Window molecule generation: {time}s.".format(
+                time=end_time - start_time
+            )
+        )
         return window_m_ids
 
     def mname(self, window_m_ids):

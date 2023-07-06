@@ -6,9 +6,11 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import time
+
 import numpy as np
-from tmkit.seqnetrr.window.base import Pair as ecabPair
+
 from tmkit.seqnetrr.net.Reader import reader as prrcreader
+from tmkit.seqnetrr.window.base import Pair as ecabPair
 
 
 class bipartite(ecabPair.pair):
@@ -24,13 +26,13 @@ class bipartite(ecabPair.pair):
     """
 
     def __init__(
-            self,
-            sequence,
-            window_size,
-            window_m_ids,
-            kind='memconp',
-            patch_size=None,
-            input_kind='general',
+        self,
+        sequence,
+        window_size,
+        window_m_ids,
+        kind="memconp",
+        patch_size=None,
+        input_kind="general",
     ):
         """
 
@@ -42,47 +44,68 @@ class bipartite(ecabPair.pair):
         kind
         patch_size
         """
-        super(bipartite, self).__init__(sequence, window_size, window_m_ids)
-        self.prrcreader = prrcreader(
-            seq_sep_inferior=None,
-            seq_sep_superior=None
-        )
-        if kind == 'memconp':
+        super().__init__(sequence, window_size, window_m_ids)
+        self.prrcreader = prrcreader(seq_sep_inferior=None, seq_sep_superior=None)
+        if kind == "memconp":
             self.bigraph = [
                 # self.num_to_dos types in MemConP
-                [4, -4], [4, 4], [3, -4], [-4, 3], [3, 4],
-                [4, 3], [0, -4], [0, 4], [0, -3], [0, 3],
-                [-1, 0], [1, 0], [0, 0], [0, -1], [0, 1],
-                [3, 0], [-3, 0], [4, 0], [-4, 0], [-3, -4],
-                [-4, -3], [-3, 4], [4, -3], [-4, -4], [-4, 4],
+                [4, -4],
+                [4, 4],
+                [3, -4],
+                [-4, 3],
+                [3, 4],
+                [4, 3],
+                [0, -4],
+                [0, 4],
+                [0, -3],
+                [0, 3],
+                [-1, 0],
+                [1, 0],
+                [0, 0],
+                [0, -1],
+                [0, 1],
+                [3, 0],
+                [-3, 0],
+                [4, 0],
+                [-4, 0],
+                [-3, -4],
+                [-4, -3],
+                [-3, 4],
+                [4, -3],
+                [-4, -4],
+                [-4, 4],
             ]
-        if kind == 'patch':
+        if kind == "patch":
             self.bigraph = self.computlib.patch(length=patch_size)
             # print(self.bigraph)
-        if kind == 'cross':
+        if kind == "cross":
             self.bigraph = [
-                [-1, 0], [1, 0], [0, 0], [0, 1], [0, -1],
+                [-1, 0],
+                [1, 0],
+                [0, 0],
+                [0, 1],
+                [0, -1],
             ]
-        if kind == 'unchanged':
+        if kind == "unchanged":
             self.bigraph = [
                 [0, 0],
             ]
         self.num_to_dos = len(self.bigraph)
         self.num_to_dos_in_window = self.num_to_dos * self.aa_in_window_size
         self.input_kind = input_kind
-        if self.input_kind == 'general':
+        if self.input_kind == "general":
             self.file_initiator = self.prrcreader.general
-        elif self.input_kind == 'freecontact':
+        elif self.input_kind == "freecontact":
             self.file_initiator = self.prrcreader.freecontact
-        elif self.input_kind == 'mutual information':
+        elif self.input_kind == "mutual information":
             self.file_initiator = self.prrcreader.mi
-        elif self.input_kind == 'gdca':
+        elif self.input_kind == "gdca":
             self.file_initiator = self.prrcreader.gdca
-        elif self.input_kind == 'ccmpred':
+        elif self.input_kind == "ccmpred":
             self.file_initiator = self.prrcreader.ccmpred
-        elif self.input_kind == 'plmc':
+        elif self.input_kind == "plmc":
             self.file_initiator = self.prrcreader.plmc
-        elif self.input_kind == 'simulate':
+        elif self.input_kind == "simulate":
             self.file_initiator = self.prrcreader.simulate
         else:
             self.file_initiator = self.prrcreader.general
@@ -137,7 +160,10 @@ class bipartite(ecabPair.pair):
             # #/*** block 1.1 ***/
             for j in range(num_aa_in_window):
                 # #/*** block 1.1.1 ***/
-                if self.window_m_ids[i][0][j] is None or self.window_m_ids[i][1][j] is None:
+                if (
+                    self.window_m_ids[i][0][j] is None
+                    or self.window_m_ids[i][1][j] is None
+                ):
                     for k in range(num_pending):
                         global_pair_ids[i].append([None, None])
                 # #/*** block 1.1.2 ***/
@@ -160,7 +186,11 @@ class bipartite(ecabPair.pair):
                             else:
                                 global_pair_ids[i].append([right, left])
         end_time = time.time()
-        print('======>bipartite pair generation: {time}s.'.format(time=end_time - start_time))
+        print(
+            "======>bipartite pair generation: {time}s.".format(
+                time=end_time - start_time
+            )
+        )
         # print(global_pair_ids)
         # print(len(global_pair_ids))
         # print(len(global_pair_ids[0]))
@@ -169,10 +199,10 @@ class bipartite(ecabPair.pair):
         # print(global_pair_ids[0][0])
         return global_pair_ids
 
-    def assign(self, list_2d, fpn=None, simu_seq_len=100, mode='hash'):
+    def assign(self, list_2d, fpn=None, simu_seq_len=100, mode="hash"):
         start_time = time.time()
         list_2d_ = list_2d
-        if mode == 'hash_rl':
+        if mode == "hash_rl":
             global_pair_ids = self.pairids()
             pairs_left = []
             pairs_right = []
@@ -186,7 +216,7 @@ class bipartite(ecabPair.pair):
             # #/*** block 1 ***/
             # #/*** block 1.1 ***/
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             # print(evfold_dict)
@@ -202,9 +232,9 @@ class bipartite(ecabPair.pair):
                     sup = pairs_right[i]
                     # print([inf, sup])
                     list_2d_[FCj - 1].append(evfold_dict[inf][sup])
-        elif mode == 'hash_ori':
+        elif mode == "hash_ori":
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             global_pair_ids = self.pairids()
@@ -218,12 +248,12 @@ class bipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     else:
                         list_2d_[i].append(evfold_dict[inf][sup])
-        elif mode == 'hash':
+        elif mode == "hash":
             n = len(self.sequence)
             num_pending = len(self.bigraph)
             num_aa_in_window = len(self.window_m_ids[0][0])
             evfold_dict = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 sort_=5,
             )
             # #/*** block 1 ***/
@@ -231,7 +261,10 @@ class bipartite(ecabPair.pair):
                 # #/*** block 1.1 ***/
                 for j in range(num_aa_in_window):
                     # #/*** block 1.1.1 ***/
-                    if self.window_m_ids[i][0][j] is None or self.window_m_ids[i][1][j] is None:
+                    if (
+                        self.window_m_ids[i][0][j] is None
+                        or self.window_m_ids[i][1][j] is None
+                    ):
                         for k in range(num_pending):
                             # global_pair_ids[i].append([None, None])
                             list_2d_[i].append(0)
@@ -246,7 +279,13 @@ class bipartite(ecabPair.pair):
                             right_inf = right < 1
                             right_sup = right > n
                             reflexive = left == right
-                            if left_inf or left_sup or right_inf or right_sup or reflexive:
+                            if (
+                                left_inf
+                                or left_sup
+                                or right_inf
+                                or right_sup
+                                or reflexive
+                            ):
                                 # global_pair_ids[i].append([None, None])
                                 list_2d_[i].append(0)
                             # #/*** block 1.1.2.2 ***/
@@ -255,16 +294,16 @@ class bipartite(ecabPair.pair):
                                     list_2d_[i].append(evfold_dict[left][right])
                                 else:
                                     list_2d_[i].append(evfold_dict[right][left])
-        elif mode == 'pandas':
+        elif mode == "pandas":
             n = len(self.sequence)
             num_pending = len(self.bigraph)
             num_aa_in_window = len(self.window_m_ids[0][0])
             evfold_df = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 is_sort=True,
                 sort_=3,
             )
-            evfold_df = evfold_df.set_index(['id_1', 'id_2'])
+            evfold_df = evfold_df.set_index(["id_1", "id_2"])
             # print(evfold_df)
             # evfold_df_gp = evfold_df.groupby(by=['id_1', 'id_2'])
             # evfold_df_gp_keys = evfold_df_gp.groups.keys()
@@ -274,7 +313,10 @@ class bipartite(ecabPair.pair):
                 # #/*** block 1.1 ***/
                 for j in range(num_aa_in_window):
                     # #/*** block 1.1.1 ***/
-                    if self.window_m_ids[i][0][j] is None or self.window_m_ids[i][1][j] is None:
+                    if (
+                        self.window_m_ids[i][0][j] is None
+                        or self.window_m_ids[i][1][j] is None
+                    ):
                         for k in range(num_pending):
                             # global_pair_ids[i].append([None, None])
                             list_2d_[i].append(0)
@@ -289,30 +331,40 @@ class bipartite(ecabPair.pair):
                             right_inf = right < 1
                             right_sup = right > n
                             reflexive = left == right
-                            if left_inf or left_sup or right_inf or right_sup or reflexive:
+                            if (
+                                left_inf
+                                or left_sup
+                                or right_inf
+                                or right_sup
+                                or reflexive
+                            ):
                                 # global_pair_ids[i].append([None, None])
                                 list_2d_[i].append(0)
                             # #/*** block 1.1.2.2 ***/
                             else:
                                 if left < right:
                                     # print(evfold_df.at[(left, right), 'score'])
-                                    list_2d_[i].append(evfold_df.at[(left, right), 'score'])
+                                    list_2d_[i].append(
+                                        evfold_df.at[(left, right), "score"]
+                                    )
                                     # list_2d_[i].append(evfold_df.loc[(evfold_df['id_1'] == left) & (evfold_df['id_2'] == right)])
                                     # list_2d_[i].append(evfold_df.ix[(left, right), 'score'])
                                     # list_2d_[i].append(evfold_df_gp.get_group((left, right))['score'].values[0])
                                 else:
                                     # print(evfold_df.at[(right, left), 'score'])
-                                    list_2d_[i].append(evfold_df.at[(right, left), 'score'])
+                                    list_2d_[i].append(
+                                        evfold_df.at[(right, left), "score"]
+                                    )
                                     # list_2d_[i].append(evfold_df.loc[(evfold_df['id_1'] == right) & (evfold_df['id_2'] == left)])
                                     # list_2d_[i].append(evfold_np[2][(evfold_np[0] == right) & (evfold_np[1] == left)])
                                     # list_2d_[i].append(evfold_df.ix[(right, left), 'score'])
                                     # list_2d_[i].append(evfold_df_gp.get_group((right, left))['score'].values[0])
-        elif mode == 'numpy':
+        elif mode == "numpy":
             n = len(self.sequence)
             num_pending = len(self.bigraph)
             num_aa_in_window = len(self.window_m_ids[0][0])
             evfold_df = self.file_initiator(
-                fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+                fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
                 is_sort=True,
                 sort_=3,
             )
@@ -323,7 +375,10 @@ class bipartite(ecabPair.pair):
                 # #/*** block 1.1 ***/
                 for j in range(num_aa_in_window):
                     # #/*** block 1.1.1 ***/
-                    if self.window_m_ids[i][0][j] is None or self.window_m_ids[i][1][j] is None:
+                    if (
+                        self.window_m_ids[i][0][j] is None
+                        or self.window_m_ids[i][1][j] is None
+                    ):
                         for k in range(num_pending):
                             # global_pair_ids[i].append([None, None])
                             list_2d_[i].append(0)
@@ -338,16 +393,36 @@ class bipartite(ecabPair.pair):
                             right_inf = right < 1
                             right_sup = right > n
                             reflexive = left == right
-                            if left_inf or left_sup or right_inf or right_sup or reflexive:
+                            if (
+                                left_inf
+                                or left_sup
+                                or right_inf
+                                or right_sup
+                                or reflexive
+                            ):
                                 # global_pair_ids[i].append([None, None])
                                 list_2d_[i].append(0)
                             # #/*** block 1.1.2.2 ***/
                             else:
                                 if left < right:
                                     # print(evfold_np[2][(evfold_np[0] == left) & (evfold_np[1] == right)][0])
-                                    list_2d_[i].append(evfold_np[2][(evfold_np[0] == left) & (evfold_np[1] == right)][0])
+                                    list_2d_[i].append(
+                                        evfold_np[2][
+                                            (evfold_np[0] == left)
+                                            & (evfold_np[1] == right)
+                                        ][0]
+                                    )
                                 else:
-                                    list_2d_[i].append(evfold_np[2][(evfold_np[0] == right) & (evfold_np[1] == left)][0])
+                                    list_2d_[i].append(
+                                        evfold_np[2][
+                                            (evfold_np[0] == right)
+                                            & (evfold_np[1] == left)
+                                        ][0]
+                                    )
         end_time = time.time()
-        print('======>bipartite pair assignment: {time}s.'.format(time=end_time - start_time))
+        print(
+            "======>bipartite pair assignment: {time}s.".format(
+                time=end_time - start_time
+            )
+        )
         return list_2d_

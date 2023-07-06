@@ -8,53 +8,53 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.base import PDB
 
 
+from typing import List
+
+
 class pdb(PDB.sequence):
-
-    def __init__(self, pdb_fp, prot_name, seq_chain, file_chain=''):
+    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = "") -> None:
         """
-
         Parameters
         ----------
-        pdb_fp
+        pdb_fp : str
             structure path
-        prot_name
+        prot_name : str
             structure name
-        file_chain
-            file chain
-        seq_chain
+        file_chain : str, optional
+            file chain, by default ""
+        seq_chain : str
             sequence chain
         """
-        super(pdb, self).__init__(pdb_fp, prot_name, seq_chain, file_chain)
+        super().__init__(pdb_fp, prot_name, seq_chain, file_chain)
 
-    def chain(self):
+    def chain(self) -> str:
         """
+        Get whole protein sequence from a PDB file.
 
         Notes
         -----
-            chain() can function in getting whole protein
-            sequence from a PDB file given. (1). For a PDB
-            file which contains many chains like A, B and C,
-            you can specify a specific chain through parameter
-            seq_chain. (2). For a PDB file which contains only
-            one chain like A, you can specify this chain 'A'
-            through parameter seq_chain. (3). For a PDB file
-            which doesn't contain any chain but the fact that
-            you know it contains A chain in truth, you can
-            specify '' chain through parameter seq_chain. It
-            is worth to mention that this function can also be
-            functional in the case where in each chain you specify
-            the residues are discontinuous, this function can
-            also find all discontinuous residues by a for-loop.
+        chain() can function in getting whole protein
+        sequence from a PDB file given. (1). For a PDB
+        file which contains many chains like A, B and C,
+        you can specify a specific chain through parameter
+        seq_chain. (2). For a PDB file which contains only
+        one chain like A, you can specify this chain 'A'
+        through parameter seq_chain. (3). For a PDB file
+        which doesn't contain any chain but the fact that
+        you know it contains A chain in truth, you can
+        specify '' chain through parameter seq_chain. It
+        is worth to mention that this function can also be
+        functional in the case where in each chain you specify
+        the residues are discontinuous, this function can
+        also find all discontinuous residues by a for-loop.
 
         Returns
         -------
-            a sequence
-
+        str
+            A sequence.
         """
-        seq=[]
+        seq: List[str] = []
         for pp in self.ppb.build_peptides(self.pdb_chain):
-            seq_tmp = str(pp.get_sequence())
-            # print(seq_tmp)
+            seq_tmp: str = str(pp.get_sequence())
             seq.append(seq_tmp)
-        return ''.join(seq)
-
+        return "".join(seq)

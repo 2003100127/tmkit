@@ -8,22 +8,59 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.seqnetrr.Controller import controller
 
 
+from typing import Optional
+
+
 def extract(
-        method,
-        fasta_fpn,
-        net_fpn,
-        window_size,
-        pair_mode,
-        seq_sep_inferior=0,
-        seq_sep_superior=None,
-        assign_mode='hash',
-        input_kind='freecontact',
-        cumu_ratio=1.,
-        sv_fpn=None,
-        is_sv=False,
+    method: str,
+    fasta_fpn: str,
+    net_fpn: str,
+    window_size: int,
+    pair_mode: str,
+    seq_sep_inferior: int = 0,
+    seq_sep_superior: Optional[int] = None,
+    assign_mode: str = "hash",
+    input_kind: str = "freecontact",
+    cumu_ratio: float = 1.0,
+    sv_fpn: Optional[str] = None,
+    is_sv: bool = False,
 ):
+    """_summary_
+
+    Parameters
+    ----------
+    method : str
+        _description_
+    fasta_fpn : str
+        _description_
+    net_fpn : str
+        _description_
+    window_size : int
+        _description_
+    pair_mode : str
+        _description_
+    seq_sep_inferior : int, optional
+        _description_, by default 0
+    seq_sep_superior : Optional[int], optional
+        _description_, by default None
+    assign_mode : str, optional
+        _description_, by default "hash"
+    input_kind : str, optional
+        _description_, by default "freecontact"
+    cumu_ratio : float, optional
+        _description_, by default 1.0
+    sv_fpn : Optional[str], optional
+        _description_, by default None
+    is_sv : bool, optional
+        _description_, by default False
+
+    Returns
+    -------
+    _type_
+        _description_
+    """
     return controller(
-        mode='internal',
+        mode="internal",
         method=method,
         assign_mode=assign_mode,
         fasta_fpn=fasta_fpn,

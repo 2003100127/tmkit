@@ -7,43 +7,70 @@ __maintainer__ = "Jianfeng Sun"
 
 import subprocess
 import urllib.request
+from typing import List, Tuple
+import pandas as pd
+
 from tmkit.util.Writer import writer
 
 
 class xml:
-
     def __init__(
-            self,
-            prot_series,
-    ):
+        self,
+        prot_series: pd.Series,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        prot_series : pd.Series
+            A pandas series containing protein names.
+        """
         self.write = writer()
         self.prot_dedup = prot_series.unique()
 
-    def pdbtm(self, sv_fp, is_cmd=False):
+    def pdbtm(self, sv_fp: str, is_cmd: bool = False) -> int:
+        """
+        Download PDBTM XML files for each protein in the series.
+
+        Parameters
+        ----------
+        sv_fp : str
+            The file path to save the downloaded XML files.
+        is_cmd : bool, optional
+            Whether to use command line to download the files, by default False.
+
+        Returns
+        -------
+        int
+            0 if all XML files are downloaded successfully.
+        """
         count = 0
         fails = []
         for i, prot_name in enumerate(self.prot_dedup):
-            print('===>No.{} protein name: {}'.format(i + 1, prot_name))
+            print(f"===>No.{i} protein name: {prot_name}")
             try:
-                url = 'http://pdbtm.enzim.hu/data/database/' + str(prot_name[1]) + str(prot_name[2]) + '/' + str(prot_name) + '.xml'
+                url = (
+                    "http://pdbtm.enzim.hu/data/database/"
+                    + str(prot_name[1])
+                    + str(prot_name[2])
+                    + "/"
+                    + str(prot_name)
+                    + ".xml"
+                )
                 if is_cmd:
                     subprocess.Popen(
-                        'wget ' + url,
+                        "wget " + url,
                         stderr=subprocess.PIPE,
                         stdout=subprocess.PIPE,
-                        shell=True
+                        shell=True,
                     ).communicate()
-                    print("======>successfully downloaded!")
                 else:
                     urllib.request.urlretrieve(
-                        url=url,
-                        filename=sv_fp + str(prot_name) + '.xml'
+                        url=url, filename=sv_fp + str(prot_name) + ".xml"
                     )
-                    print("======>successfully downloaded!")
             except:
                 count = count + 1
                 fails.append(prot_name)
-                print('===>number of xml that cannot be downloaded {}'.format(count))
+                print(f"===>number of xml that cannot be downloaded {count}")
                 continue
-        self.write.generic(fails, sv_fp + 'log_fail_ids.txt')
+        self.write.generic(fails, sv_fp + "log_fail_ids.txt")
         return 0

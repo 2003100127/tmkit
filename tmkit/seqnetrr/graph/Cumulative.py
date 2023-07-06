@@ -6,21 +6,58 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import time
+from typing import List, Dict, Union
 import numpy as np
+
 from tmkit.seqnetrr.net.Reader import reader as prrcreader
 from tmkit.seqnetrr.window.base import Single as ecabSgl
 
 
 class cumulative(ecabSgl.single):
-    
+    """
+    A class used to represent cumulative scores for a given sequence.
+
+    Attributes
+    ----------
+    sequence : str
+        A string representing the amino acid sequence.
+    window_size : int
+        An integer representing the size of the window.
+    window_m_ids : List[List[Union[int, None]]]
+        A list of lists containing integers or None values representing the window indices.
+    input_kind : str
+        A string representing the type of input.
+    prrcreader : tmkit.seqnetrr.net.Reader.reader
+        An instance of the reader class.
+
+    Methods
+    -------
+    sigmoid(value: float) -> float
+        Returns the sigmoid value of the input.
+    assign(list_2d: List[List[float]], L: int, simu_seq_len: int = 100, fpn: str = None, is_activate: bool = False) -> List[List[float]]
+        Assigns cumulative scores to a 2D list of floats.
+    """
+
     def __init__(
-            self,
-            sequence,
-            window_size,
-            window_m_ids,
-            input_kind='general',
-    ):
-        super(cumulative, self).__init__(sequence, window_size, window_m_ids)
+        self,
+        sequence: str,
+        window_size: int,
+        window_m_ids: List[List[Union[int, None]]],
+        input_kind: str = "general",
+    ) -> None:
+        """
+        Parameters
+        ----------
+        sequence : str
+            A string representing the amino acid sequence.
+        window_size : int
+            An integer representing the size of the window.
+        window_m_ids : List[List[Union[int, None]]]
+            A list of lists containing integers or None values representing the window indices.
+        input_kind : str, optional
+            A string representing the type of input, by default "general".
+        """
+        super().__init__(sequence, window_size, window_m_ids)
         self.prrcreader = prrcreader()
         self.window_size = window_size
         self.window_m_ids = window_m_ids
@@ -28,45 +65,82 @@ class cumulative(ecabSgl.single):
         self.sequence = sequence
         self.len_seq = len(self.sequence)
         self.input_kind = input_kind
-        if self.input_kind == 'general':
+        if self.input_kind == "general":
             self.file_initiator = self.prrcreader.general
-        elif self.input_kind == 'freecontact':
+        elif self.input_kind == "freecontact":
             self.file_initiator = self.prrcreader.freecontact
-        elif self.input_kind == 'mutual information':
+        elif self.input_kind == "mutual information":
             self.file_initiator = self.prrcreader.mi
-        elif self.input_kind == 'gdca':
+        elif self.input_kind == "gdca":
             self.file_initiator = self.prrcreader.gdca
-        elif self.input_kind == 'ccmpred':
+        elif self.input_kind == "ccmpred":
             self.file_initiator = self.prrcreader.ccmpred
-        elif self.input_kind == 'plmc':
+        elif self.input_kind == "plmc":
             self.file_initiator = self.prrcreader.plmc
-        elif self.input_kind == 'simulate':
+        elif self.input_kind == "simulate":
             self.file_initiator = self.prrcreader.simulate
         else:
             self.file_initiator = self.prrcreader.general
 
-    def sigmoid(self, value):
+    def sigmoid(self, value: float) -> float:
+        """
+        Returns the sigmoid value of the input.
+
+        Parameters
+        ----------
+        value : float
+            A float value.
+
+        Returns
+        -------
+        float
+            The sigmoid value of the input.
+        """
         return 1 / (1 + np.exp(-value))
 
-    def assign(self, list_2d, L, simu_seq_len=100, fpn=None, is_activate=False):
+    def assign(
+        self,
+        list_2d: List[List[float]],
+        L: int,
+        simu_seq_len: int = 100,
+        fpn: str = None,
+        is_activate: bool = False,
+    ) -> List[List[float]]:
+        """
+        Assigns cumulative scores to a 2D list of floats.
+
+        Parameters
+        ----------
+        list_2d : List[List[float]]
+            A 2D list of floats.
+        L : int
+            An integer representing the length of the sequence.
+        simu_seq_len : int, optional
+            An integer representing the length of the simulated sequence, by default 100.
+        fpn : str, optional
+            A string representing the file path name, by default None.
+        is_activate : bool, optional
+            A boolean value representing whether to activate the sigmoid function, by default False.
+
+        Returns
+        -------
+        List[List[float]]
+            A 2D list of floats representing the cumulative scores.
+        """
         start_time = time.time()
         list_2d_ = list_2d
         mm_sum = self.file_initiator(
-            fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+            fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
             sort_=3,
             is_sort=True,
-        )['score'].sum()
-        # print(mm_sum)
+        )["score"].sum()
         mm_ave = mm_sum / self.len_seq
-        # print(mm_sum)
-        # print(mm_ave)
         mm_dict = self.file_initiator(
-            fpn=simu_seq_len if self.input_kind == 'simulate' else fpn,
+            fpn=simu_seq_len if self.input_kind == "simulate" else fpn,
             sort_=7,
             len_seq=self.len_seq,
             L=L,
         )
-        # print(mm_dict)
         for i, m_win_ids in enumerate(self.window_m_ids):
             for j in m_win_ids:
                 if j is None:
@@ -76,5 +150,9 @@ class cumulative(ecabSgl.single):
                         list_2d_[i].append(self.sigmoid(mm_dict[j] / mm_ave))
                     else:
                         list_2d_[i].append(mm_dict[j] / mm_ave)
-        print('======>cumulative assignment: {time}s.'.format(time=time.time() - start_time))
+        print(
+            "======>cumulative assignment: {time}s.".format(
+                time=time.time() - start_time
+            )
+        )
         return list_2d_

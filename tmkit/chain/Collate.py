@@ -6,22 +6,46 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import warnings
-from Bio import BiopythonWarning
+
 import pandas as pd
-from tmkit.sequence.PDB import pdb as spdb
+from Bio import BiopythonWarning
+
 from tmkit.chain.PDB import pdb as cpdb
+from tmkit.sequence.PDB import pdb as spdb
 from tmkit.util.Kit import seqchainid
 
 
-class collate:
+from typing import Dict, List, Union
+import warnings
+import pandas as pd
+from Bio import BiopythonWarning
+from tmkit.chain.PDB import pdb as cpdb
+from tmkit.sequence.PDB import pdb as spdb
+from tmkit.util.Kit import seqchainid
 
+
+class Collate:
     def __init__(
-            self,
-            prot_name,
-            chain_focus,
-            pdb_pdbtm_fp,
-            pdb_rcsb_fp,
-    ):
+        self,
+        prot_name: str,
+        chain_focus: str,
+        pdb_pdbtm_fp: str,
+        pdb_rcsb_fp: str,
+    ) -> None:
+        """
+        Collate chains from PDBTM and RCSB.
+
+        Parameters
+        ----------
+        prot_name : str
+            Protein name.
+        chain_focus : str
+            Chain focus.
+        pdb_pdbtm_fp : str
+            PDBTM file path.
+        pdb_rcsb_fp : str
+            RCSB file path.
+        """
         self.prot_name = prot_name
         self.chain_focus = chain_focus
         self.pdb_pdbtm_fp = pdb_pdbtm_fp
@@ -38,22 +62,35 @@ class collate:
         ).chains()
 
         self.df = pd.DataFrame(
-            [[self.prot_name, self.chain_focus, ''.join(self.chains_pdbtm), ''.join(self.chains_rcsb)]],
-            columns=['prot_name', 'chain', 'pdbtm_chains', 'rcsb_chains'],
+            [
+                [
+                    self.prot_name,
+                    self.chain_focus,
+                    "".join(self.chains_pdbtm),
+                    "".join(self.chains_rcsb),
+                ]
+            ],
+            columns=["prot_name", "chain", "pdbtm_chains", "rcsb_chains"],
         )
 
         if self.chain_focus not in self.chains_rcsb:
-            self.df['source'] = 'pdbtm_tr'
+            self.df["source"] = "pdbtm_tr"
         else:
-            self.df['source'] = 'rcsb'
+            self.df["source"] = "rcsb"
 
-        self.df['diff'] = ''.join(list(set(self.chains_pdbtm).difference(set(self.chains_rcsb))))
-        self.df['same'] = ''.join(list(set(self.chains_pdbtm).intersection(set(self.chains_rcsb))))
+        self.df["diff"] = "".join(
+            list(set(self.chains_pdbtm).difference(set(self.chains_rcsb)))
+        )
+        self.df["same"] = "".join(
+            list(set(self.chains_pdbtm).intersection(set(self.chains_rcsb)))
+        )
 
-        # print('======>basic info: \n{}'.format(self.df))
+        print(f"======>basic info: \n{self.df}")
 
-    def throwback(self, symbol):
+    def throwback(self, symbol: str) -> Dict[str, Union[str, List[str]]]:
         """
+        # TODO: fix this docstring
+        Throw back chains.
 
         Notes
         -----
@@ -62,45 +99,62 @@ class collate:
             values 'untransformed' or 'collated' being whether protein chains
              are untransformed or collated, respectively.
 
+        # Parameters
+        # ----------
+        # prot_df
+        # prot_collated_df
+        # pdb_chain_path
+        # symbol
+
         Parameters
         ----------
-        prot_df
-        prot_collated_df
-        pdb_chain_path
-        symbol
+        symbol : str
+            Symbol.
 
         Returns
         -------
-            dict - throw_backs
-
+        Dict[str, Union[str, List[str]]]
+            Dictionary of throwbacks.
         """
         throw_backs = {}
-        if self.df.loc[0, 'source'] == 'rcsb':
-            throw_backs[self.prot_name + symbol + self.chain_focus] = 'untransformed'
+        if self.df.loc[0, "source"] == "rcsb":
+            throw_backs[self.prot_name + symbol +
+                        self.chain_focus] = "untransformed"
         else:
             pdbtm_to_rcsb_dict = self.isSameSeq(symbol=symbol)
             if len([*pdbtm_to_rcsb_dict.values()]) > 0:
-                print('======>master is collated: {} '.format([*pdbtm_to_rcsb_dict.values()][0]))
-                throw_backs[self.prot_name + symbol + self.chain_focus] = [*pdbtm_to_rcsb_dict.values()][0]
+                print(
+                    "======>master is collated: {} ".format(
+                        [*pdbtm_to_rcsb_dict.values()][0]
+                    )
+                )
+                throw_backs[self.prot_name + symbol + self.chain_focus] = [
+                    *pdbtm_to_rcsb_dict.values()
+                ][0]
             else:
-                throw_backs[self.prot_name + symbol + self.chain_focus] = 'transformed & uncollated'
+                throw_backs[
+                    self.prot_name + symbol + self.chain_focus
+                ] = "transformed & uncollated"
         return throw_backs
 
-    def isSameSeq(self, symbol='.'):
+    def isSameSeq(self, symbol: str) -> Dict[str, List[str]]:
         """
+        Check if sequences are the same.
 
         Parameters
         ----------
-        symbol
+        symbol : str
+            Symbol.
 
         Returns
         -------
-
+        Dict[str, List[str]]
+            Dictionary of PDBTM to RCSB mappings.
         """
         pdbtm_to_rcsb_dict = {}
 
         with warnings.catch_warnings():
-            warnings.simplefilter('ignore', BiopythonWarning)
+            warnings.simplefilter("ignore", BiopythonWarning)
 
             pdbtm_to_rcsb_dict[self.prot_name + symbol + self.chain_focus] = []
 
@@ -108,7 +162,7 @@ class collate:
                 pdb_fp=self.pdb_pdbtm_fp,
                 prot_name=self.prot_name,
                 seq_chain=self.chain_focus,
-                file_chain='',
+                file_chain="",
             ).chain()
 
             for chain_rcsb in self.chains_rcsb:
@@ -116,13 +170,15 @@ class collate:
                     pdb_fp=self.pdb_rcsb_fp,
                     prot_name=self.prot_name,
                     seq_chain=seqchainid(chain_rcsb),
-                    file_chain='',
+                    file_chain="",
                 ).chain()
                 if seq_pdbtm == seq_rcsb:
-                    print('=========>{}.{} in PDBTM corresponds to {}.{} in RCSB.'.format(
-                        self.prot_name, self.chain_focus, self.prot_name, chain_rcsb)
+                    print(
+                        "=========>{}.{} in PDBTM corresponds to {}.{} in RCSB.".format(
+                            self.prot_name, self.chain_focus, self.prot_name, chain_rcsb
+                        )
                     )
-                    pdbtm_to_rcsb_dict[self.prot_name + symbol + self.chain_focus].append(
-                        self.prot_name + symbol + chain_rcsb
-                    )
+                    pdbtm_to_rcsb_dict[
+                        self.prot_name + symbol + self.chain_focus
+                    ].append(self.prot_name + symbol + chain_rcsb)
         return pdbtm_to_rcsb_dict
