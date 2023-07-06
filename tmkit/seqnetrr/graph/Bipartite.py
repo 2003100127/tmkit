@@ -9,21 +9,12 @@ import time
 
 import numpy as np
 
-from tmkit.seqnetrr.net.Reader import reader as prrcreader
+from tmkit.seqnetrr.net.Reader import Reader as prrcreader
 from tmkit.seqnetrr.window.base import Pair as ecabPair
 
 
-class bipartite(ecabPair.pair):
-    """
-    Methods
-    -------
-        pairids(), assign()
-
-    Notes
-    -----
-        bipartite class offers methods to assign ECA to global pairs.
-
-    """
+class Bipartite(ecabPair.Pair):
+    """Bipartite class offers methods to assign ECA to global pairs."""
 
     def __init__(
         self,
@@ -39,10 +30,13 @@ class bipartite(ecabPair.pair):
         Parameters
         ----------
         sequence
+            a protein sequence
         window_size
+            window size
         window_m_ids
-        kind
-        patch_size
+            list contains ids of residues in windows
+        input_kind
+            residue contact prediction method
         """
         super().__init__(sequence, window_size, window_m_ids)
         self.prrcreader = prrcreader(seq_sep_inferior=None, seq_sep_superior=None)
@@ -112,9 +106,7 @@ class bipartite(ecabPair.pair):
 
     def pairids(self):
         """
-        Notes
-        -----
-            pairids() constitutes all global pairs.
+        Constitutes all global pairs.
 
         Methods
         -------
@@ -200,6 +192,24 @@ class bipartite(ecabPair.pair):
         return global_pair_ids
 
     def assign(self, list_2d, fpn=None, simu_seq_len=100, mode="hash"):
+        """
+
+        Parameters
+        ----------
+        list_2d
+            2dlist
+        fpn
+            path to a protein residue contact map file
+        simu_seq_len
+            length of a simulated FASTA sequence
+        mode
+            mode of assignment: hash | hash_ori | hash_rl | pandas | numpy
+
+        Returns
+        -------
+            2d array - list
+
+        """
         start_time = time.time()
         list_2d_ = list_2d
         if mode == "hash_rl":

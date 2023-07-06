@@ -5,10 +5,11 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import numpy as np
 from typing import Dict, List, Tuple
 
-from tmkit.util.Reader import reader as tmkreader
+import numpy as np
+
+from tmkit.util.Reader import Reader as tmkreader
 
 
 class Mapping:
@@ -57,7 +58,7 @@ class Mapping:
         print(f"=========>Segment upper fasta id: {fasta_seg_upper}")
         return fasta_seg_lower, fasta_seg_upper
 
-    def entryConvert(
+    def entry_convert(
         self,
         id: str,
         ref_fpn: str,
@@ -69,9 +70,9 @@ class Mapping:
         Parameters
         ----------
         id : str
-            Pdb or uniprot id.
+            PDB or UniProt accession code.
         ref_fpn : str
-            File path to reference file.
+            Reference file for conversion between PDB IDs and UniProt accession codes.
         mode : str
             Conversion mode, either "pdb -> uniprot" or "uniprot -> pdb".
 

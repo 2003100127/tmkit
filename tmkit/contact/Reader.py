@@ -5,17 +5,22 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Dict, List, Optional, Tuple, Union
+
 import numpy as np
 import pandas as pd
 
-from tmkit.position.scenario.Separation import separation as ppssep
+from tmkit.position.scenario.Separation import Separation as ppssep
 from tmkit.util.Kit import tactic1
-from tmkit.util.Reader import reader as greader
-from typing import List, Tuple, Union, Optional
+from tmkit.util.Reader import Reader as greader
 
 
-class reader:
-    def __init__(self, seq_sep_inferior: Optional[int] = None, seq_sep_superior: Optional[int] = None):
+class Reader:
+    def __init__(
+        self,
+        seq_sep_inferior: Optional[int] = None,
+        seq_sep_superior: Optional[int] = None,
+    ):
         """
         The reader class.
 
@@ -75,7 +80,9 @@ class reader:
         else:
             self.__sort_ = value
 
-    def sort_1(self, recombine: pd.DataFrame, dist_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def sort_1(
+        self, recombine: pd.DataFrame, dist_df: pd.DataFrame
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
         Perform first sort operation.
 
@@ -123,7 +130,9 @@ class reader:
         recombine_dist = recombine_dist.reset_index(inplace=False, drop=True)
         return recombine_, recombine_dist
 
-    def sort_2(self, recombine: pd.DataFrame, dist_df: pd.DataFrame, pair_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def sort_2(
+        self, recombine: pd.DataFrame, dist_df: pd.DataFrame, pair_df: pd.DataFrame
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
         Perform second sort operation.
 
@@ -197,7 +206,14 @@ class reader:
         recombine_dist = recombine_dist.reset_index(inplace=False, drop=True)
         return recombine_pred, recombine_dist
 
-    def sort_3(self, recombine: pd.DataFrame, is_sort: bool = False, is_uniform: bool = False, uniform_df: Optional[pd.DataFrame] = None, indicator: int = 0) -> pd.DataFrame:
+    def sort_3(
+        self,
+        recombine: pd.DataFrame,
+        is_sort: bool = False,
+        is_uniform: bool = False,
+        uniform_df: Optional[pd.DataFrame] = None,
+        indicator: int = 0,
+    ) -> pd.DataFrame:
         """
         Perform third sort operation.
         Nodes
@@ -276,7 +292,16 @@ class reader:
         dicts = tactic1(arr_2d)
         return dicts
 
-    def mi(self, mi_path: str, file_name: str, file_chain: str, dist_df: Optional[pd.DataFrame] = None, pair_list: Optional[List] = None, sort_: int = 0, is_sort: bool = False) -> Union[Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame]:
+    def mi(
+        self,
+        mi_path: str,
+        file_name: str,
+        file_chain: str,
+        dist_df: Optional[pd.DataFrame] = None,
+        pair_list: Optional[List] = None,
+        sort_: int = 0,
+        is_sort: bool = False,
+    ) -> Union[Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame]:
         """
         Perform the mi operation.
 
@@ -712,33 +737,33 @@ class reader:
         is_sort: bool = False,
     ) -> Union[pd.DataFrame, dict, Tuple[pd.DataFrame, pd.DataFrame]]:
         """
-        Process the MemconP data and returns it in a sorted or unsorted form based on the provided parameters.
+                Process the MemconP data and returns it in a sorted or unsorted form based on the provided parameters.
 
-        Parameters
-        ----------
-        mcp_path : str
-            Path to the MemconI'm sorry, the response was cut off. I'll continue the `memconp` function and add the `membrain2` function.
+                Parameters
+                ----------
+                mcp_path : str
+                    Path to the MemconI'm sorry, the response was cut off. I'll continue the `memconp` function and add the `membrain2` function.
 
-```python
-        mcp_path : str
-            Path to the MemconP data file.
-        file_name : str
-            Name of the data file.
-        file_chain : str
-            Chain to be processed in the data file.
-        dist_df : pd.DataFrame, optional
-            DataFrame containing the distribution data.
-        pair_list : List, optional
-            List of pairs to be processed.
-        sort_ : int, optional
-            Determines the type of sorting to be applied (default is 0, which means no sorting).
-        is_sort : bool, optional
-            Whether to sort the data or not (default is False).
+        ```python
+                mcp_path : str
+                    Path to the MemconP data file.
+                file_name : str
+                    Name of the data file.
+                file_chain : str
+                    Chain to be processed in the data file.
+                dist_df : pd.DataFrame, optional
+                    DataFrame containing the distribution data.
+                pair_list : List, optional
+                    List of pairs to be processed.
+                sort_ : int, optional
+                    Determines the type of sorting to be applied (default is 0, which means no sorting).
+                is_sort : bool, optional
+                    Whether to sort the data or not (default is False).
 
-        Returns
-        -------
-        Union[pd.DataFrame, dict, Tuple[pd.DataFrame, pd.DataFrame]]
-            Processed data, returned according to the sort_ parameter's value.
+                Returns
+                -------
+                Union[pd.DataFrame, dict, Tuple[pd.DataFrame, pd.DataFrame]]
+                    Processed data, returned according to the sort_ parameter's value.
         """
         self.__sort_ = sort_
         file_path = mcp_path + file_name + file_chain + ".memconp"
@@ -794,7 +819,7 @@ class reader:
 
     def membrain2(
         self,
-        membrain2_path: str,
+        mb_path: str,
         file_name: str,
         file_chain: str,
         dist_df: pd.DataFrame = None,
@@ -807,7 +832,7 @@ class reader:
 
         Parameters
         ----------
-        membrain2_path : str
+        mb_path : str
             Path to the Membrain2 data file.
         file_name : str
             Name of the data file.
@@ -915,8 +940,7 @@ class reader:
             df_sep="\t",
             is_utf8=True,
         )
-        results.columns = ["contact_id_1", "aa_1",
-                           "contact_id_2", "aa_2", "score"]
+        results.columns = ["contact_id_1", "aa_1", "contact_id_2", "aa_2", "score"]
         recombine = results[["contact_id_1", "contact_id_2", "score"]]
         if self.__sort_ == 1:
             pair_df = pd.DataFrame(pair_list)

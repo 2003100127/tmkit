@@ -1,14 +1,11 @@
-
-
+# Created by https://www.gitignore.io/api/osx,python,pycharm,windows,visualstudio,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=osx,python,pycharm,windows,visualstudio,visualstudiocode
 tmkit/data/
+tmkit/Path.py
 tmkit/seqnetrr/Compare.py
 tmkit/seqnetrr/Plot.py
 tmkit/util/Console.py
 tmkit/topology/lib/TMHMM2.0.model
-
-# Created by https://www.gitignore.io/api/osx,python,pycharm,windows,visualstudio,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=osx,python,pycharm,windows,visualstudio,visualstudiocode
-
 ### OSX ###
 # General
 .DS_Store

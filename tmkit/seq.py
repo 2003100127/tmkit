@@ -5,31 +5,37 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.id.Fasta import fasta as idfas
-from tmkit.id.PDB import pdb as idpdb
-from tmkit.retrieve.PDB import pdb as repdb
-from tmkit.retrieve.XML import xml as rexml
+import pandas as pd
+
+from tmkit.id.Fasta import Fasta as idfas
+from tmkit.id.PDB import PDB as idpdb
+from tmkit.retrieve.PDB import PDB as repdb
+from tmkit.retrieve.XML import XML as rexml
 from tmkit.sequence import Fasta as sfasta
-from tmkit.sequence.PDB import pdb as spdb
-from tmkit.sequence.XML import xml as sxml
-from tmkit.structure.PDB import pdb as stpdb
+from tmkit.sequence.PDB import PDB as spdb
+from tmkit.sequence.XML import XML as sxml
+from tmkit.structure.PDB import PDB as stpdb
 
 
-from typing import List, Tuple
-
-
-def retrieve_pdb_from_rcsb(prot_series: List[str], sv_fp: str, route: str = "biopython") -> None:
+def retrieve_pdb_from_rcsb(
+    prot_series: pd.Series, sv_fp: str, route: str = "biopython"
+) -> str:
     """
-    Retrieve PDB files from RCSB.
+    Retrieve a PDB file from RCSB.
 
     Parameters
     ----------
-    prot_series : List[str]
-        List of protein series.
+    prot_series : pd.Series
+        A Pandas Series of protein names.
     sv_fp : str
         File path to save the retrieved PDB files.
     route : str, optional
-        Route to retrieve the PDB files, by default "biopython".
+        Route to retrieve the PDB files, "biopython" by default.
+
+    Returns
+    -------
+    str
+        'Finished' if a PDB file is successfully retrieved.
     """
     return repdb(prot_series=prot_series).rcsb(
         sv_fp=sv_fp,
@@ -38,21 +44,26 @@ def retrieve_pdb_from_rcsb(prot_series: List[str], sv_fp: str, route: str = "bio
 
 
 def retrieve_pdb_from_pdbtm(
-    prot_series: List[str],
+    prot_series: pd.Series,
     sv_fp: str,
     kind: str = "tr",
-) -> None:
+) -> str:
     """
-    Retrieve PDB files from PDBTM.
+    Retrieve a PDB file from PDBTM.
 
     Parameters
     ----------
-    prot_series : List[str]
-        List of protein series.
+    prot_series : pd.Series
+        A Pandas Series of protein names.
     sv_fp : str
         File path to save the retrieved PDB files.
     kind : str, optional
         Kind of PDB files to retrieve, by default "tr".
+
+    Returns
+    -------
+    str
+        'Finished' if a PDB file is successfully retrieved.
     """
     return repdb(prot_series=prot_series).pdbtm(
         sv_fp=sv_fp,
@@ -61,18 +72,23 @@ def retrieve_pdb_from_pdbtm(
 
 
 def retrieve_xml_from_pdbtm(
-    prot_series: List[str],
+    prot_series: pd.Series,
     sv_fp: str,
-) -> None:
+) -> str:
     """
-    Retrieve XML files from PDBTM.
+    Retrieve a XML file from PDBTM.
 
     Parameters
     ----------
-    prot_series : List[str]
-        List of protein series.
+    prot_series : pd.Series
+        A Pandas Series of protein names.
     sv_fp : str
         File path to save the retrieved XML files.
+
+    Returns
+    -------
+    str
+        'Finished' if a PDB file is successfully retrieved.
     """
     return rexml(
         prot_series=prot_series,
@@ -83,18 +99,23 @@ def retrieve_xml_from_pdbtm(
 
 
 def retrieve_pdb_alphafold(
-    prot_series: List[str],
+    prot_series: pd.Series,
     sv_fp: str,
-) -> None:
+) -> str:
     """
-    Retrieve PDB files from AlphaFold.
+    Retrieve a PDB file from AlphaFold Database.
 
     Parameters
     ----------
-    prot_series : List[str]
-        List of protein series.
+    prot_series : pd.Series
+        A Pandas Series of protein names.
     sv_fp : str
         File path to save the retrieved PDB files.
+
+    Returns
+    -------
+    str
+        'Finished' if a PDB file is successfully retrieved.
     """
     return repdb(prot_series=prot_series).alphafold(
         sv_fp=sv_fp,
@@ -106,9 +127,10 @@ def retrieve_foldseek(
     prot_name: str,
     sv_fp: str,
     file_chain: str = "",
-) -> None:
+) -> str:
     """
-    Retrieve FoldSeek files from PDB.
+    Retrieve a FoldSeek file (*.gz) from PDB. See how to to use the compressed file
+    at http://localhost:8088/tmkit-guide/public/doc/msa/foldseek.
 
     Parameters
     ----------
@@ -120,6 +142,11 @@ def retrieve_foldseek(
         File path to save the retrieved FoldSeek files.
     file_chain : str, optional
         Chain of the PDB file, by default "".
+
+    Returns
+    -------
+    str
+        'Finished' if a PDB file is successfully retrieved.
     """
     return stpdb(
         pdb_fp=pdb_fp,
@@ -132,9 +159,9 @@ def retrieve_foldseek(
 
 def read_from_fasta(
     fasta_fpn: str,
-) -> Tuple[str, str]:
+) -> str:
     """
-    Read sequence from FASTA file.
+    Read a sequence from FASTA file.
 
     Parameters
     ----------
@@ -143,8 +170,8 @@ def read_from_fasta(
 
     Returns
     -------
-    Tuple[str, str]
-        Tuple containing the sequence ID and the sequence.
+    str
+        A protein sequence from a FASTA file.
     """
     return sfasta.get(fasta_fpn=fasta_fpn)
 
@@ -153,9 +180,9 @@ def read_from_xml(
     xml_fp: str,
     xml_name: str,
     seq_chain: str,
-) -> Tuple[str, str]:
+) -> str:
     """
-    Read sequence from XML file.
+    Read a sequence from XML file.
 
     Parameters
     ----------
@@ -168,8 +195,8 @@ def read_from_xml(
 
     Returns
     -------
-    Tuple[str, str]
-        Tuple containing the sequence ID and the sequence.
+    str
+        A protein sequence from a XML file.
     """
     return sxml().get(
         xml_fp=xml_fp,
@@ -185,7 +212,7 @@ def read_from_pdb(
     file_chain: str = "",
 ) -> str:
     """
-    Read sequence from PDB file.
+    Read a sequence from a PDB file.
 
     Parameters
     ----------
@@ -201,7 +228,7 @@ def read_from_pdb(
     Returns
     -------
     str
-        The sequence.
+        A protein sequence from a PDB file.
     """
     return spdb(
         pdb_fp=pdb_fp,
@@ -213,9 +240,9 @@ def read_from_pdb(
 
 def fasid(
     fasta_fpn: str,
-) -> str:
+) -> dict:
     """
-    Get the ID of a sequence from a FASTA file.
+    Get a dictionary mapping residue FASTA IDs to amino acid symbols.
 
     Parameters
     ----------
@@ -224,8 +251,8 @@ def fasid(
 
     Returns
     -------
-    str
-        The sequence ID.
+    dict
+        A dictionary mapping residue FASTA IDs to amino acid symbols.
     """
     return idfas().get(fasta_fpn=fasta_fpn)
 
@@ -235,9 +262,9 @@ def pdbid(
     prot_name: str,
     seq_chain: str,
     file_chain: str = "",
-) -> str:
+) -> dict:
     """
-    Get the ID of a sequence from a PDB file.
+    Get a dictionary mapping residue PDB IDs to amino acid symbols.
 
     Parameters
     ----------
@@ -252,8 +279,8 @@ def pdbid(
 
     Returns
     -------
-    str
-        The sequence ID.
+    dict
+        A dictionary mapping residue FASTA IDs to amino acid symbols.
     """
     return idpdb(
         pdb_fp=pdb_fp,

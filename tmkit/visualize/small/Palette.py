@@ -8,7 +8,10 @@ __maintainer__ = "Jianfeng Sun"
 
 from typing import List
 
-def palette(chains: List[str], prot_c: str = "rainbow", sm_c: str = "blue_green") -> None:
+
+def Palette(
+    chains: List[str], prot_c: str = "rainbow", sm_c: str = "blue_green"
+) -> None:
     """
     Apply color palettes to protein chains and small molecules.
 

@@ -10,37 +10,36 @@ import time
 
 import numpy as np
 
-from tmkit.seqnetrr.net.Reader import reader as prrcreader
+from tmkit.seqnetrr.net.Reader import Reader as prrcreader
 from tmkit.seqnetrr.window.base import Pair as ecabPair
 
 
-class unipartite(ecabPair.pair):
-    """
-
-    Notes
-    -----
-       make(), assign().
-    reflexive class offers methods to assign CI to reflexive pairs.
-
-    References
-    ----------
-       It has been built since April, 2018.
-       Change Log:
-       1>. It has been revised since the end of June, 2018.
-       2>. It has been revised since Oct. 11th, 2018.
-
-    """
+class Unipartite(ecabPair.Pair):
+    """Reflexive class offers methods to assign CI to reflexive pairs."""
 
     def __init__(
         self,
-        sequence,
-        window_size,
-        window_m_ids,
-        input_kind="general",
+        sequence: str,
+        window_size: int,
+        window_m_ids: list,
+        input_kind: str="general",
     ):
+        """
+
+        Parameters
+        ----------
+
+        sequence
+            a protein sequence
+        window_size
+            window size
+        window_m_ids
+            list contains ids of residues in windows
+        input_kind
+            residue contact prediction method
+        """
         super().__init__(sequence, window_size, window_m_ids)
-        self.prrcreader = prrcreader(
-            seq_sep_inferior=None, seq_sep_superior=None)
+        self.prrcreader = prrcreader(seq_sep_inferior=None, seq_sep_superior=None)
         self.input_kind = input_kind
         if self.input_kind == "general":
             self.file_initiator = self.prrcreader.general
@@ -151,10 +150,7 @@ class unipartite(ecabPair.pair):
 
     def combo2x2(self, array):
         """
-
-        Notes
-        -----
-            nonrepeated 2x2 combination of elements of an array.
+        Non-repeated 2x2 combination of elements of an array.
 
         Parameters
         ----------
@@ -163,6 +159,8 @@ class unipartite(ecabPair.pair):
 
         Returns
         -------
+        List
+            2D list
 
         """
         combo = []
@@ -173,10 +171,7 @@ class unipartite(ecabPair.pair):
 
     def assign(self, list_2d, fpn=None, simu_seq_len=100, mode="hash"):
         """
-
-        Notes
-        -----
-            assign() uses a fast algorithm to generate CI features for given reflexive pairs.
+        It uses a fast algorithm to generate CI features for given reflexive pairs.
 
         Methods
         -------
@@ -242,9 +237,13 @@ class unipartite(ecabPair.pair):
         Parameters
         ----------
         list_2d
+            2dlist
         fpn
+            path to a protein residue contact map file
         simu_seq_len
+            length of a simulated FASTA sequence
         mode
+            mode of assignment: hash | hash_ori | hash_rl | pandas | numpy
 
         Returns
         -------
@@ -358,12 +357,10 @@ class unipartite(ecabPair.pair):
                     elif l1[0] is not None and l1[1] is not None:
                         if l1[0] < l1[1]:
                             # print(evfold_df.at[(l1[0], l1[1]), 'score'])
-                            list_2d_[i].append(
-                                evfold_df.at[(l1[0], l1[1]), "score"])
+                            list_2d_[i].append(evfold_df.at[(l1[0], l1[1]), "score"])
                         else:
                             # print(evfold_df.at[(l1[1], l1[0]), 'score'])
-                            list_2d_[i].append(
-                                evfold_df.at[(l1[1], l1[0]), "score"])
+                            list_2d_[i].append(evfold_df.at[(l1[1], l1[0]), "score"])
                     else:
                         list_2d_[i].append(0)
                 # #/*** block 1.2 ***/
@@ -375,11 +372,9 @@ class unipartite(ecabPair.pair):
                         list_2d_[i].append(0)
                     elif l2[0] is not None and l2[1] is not None:
                         if l2[0] < l2[1]:
-                            list_2d_[i].append(
-                                evfold_df.at[(l2[0], l2[1]), "score"])
+                            list_2d_[i].append(evfold_df.at[(l2[0], l2[1]), "score"])
                         else:
-                            list_2d_[i].append(
-                                evfold_df.at[(l2[1], l2[0]), "score"])
+                            list_2d_[i].append(evfold_df.at[(l2[1], l2[0]), "score"])
                     else:
                         list_2d_[i].append(0)
         elif mode == "numpy":
@@ -402,15 +397,13 @@ class unipartite(ecabPair.pair):
                         if l1[0] < l1[1]:
                             list_2d_[i].append(
                                 evfold_np[2][
-                                    (evfold_np[0] == l1[0]) & (
-                                        evfold_np[1] == l1[1])
+                                    (evfold_np[0] == l1[0]) & (evfold_np[1] == l1[1])
                                 ][0]
                             )
                         else:
                             list_2d_[i].append(
                                 evfold_np[2][
-                                    (evfold_np[0] == l1[1]) & (
-                                        evfold_np[1] == l1[0])
+                                    (evfold_np[0] == l1[1]) & (evfold_np[1] == l1[0])
                                 ][0]
                             )
                     else:
@@ -426,15 +419,13 @@ class unipartite(ecabPair.pair):
                         if l2[0] < l2[1]:
                             list_2d_[i].append(
                                 evfold_np[2][
-                                    (evfold_np[0] == l2[0]) & (
-                                        evfold_np[1] == l2[1])
+                                    (evfold_np[0] == l2[0]) & (evfold_np[1] == l2[1])
                                 ][0]
                             )
                         else:
                             list_2d_[i].append(
                                 evfold_np[2][
-                                    (evfold_np[0] == l2[1]) & (
-                                        evfold_np[1] == l2[0])
+                                    (evfold_np[0] == l2[1]) & (evfold_np[1] == l2[0])
                                 ][0]
                             )
                     else:

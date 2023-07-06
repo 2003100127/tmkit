@@ -5,14 +5,16 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from abc import ABCMeta, abstractmethod
 from typing import List
+
+from abc import ABCMeta, abstractmethod
 
 
 class Topology(metaclass=ABCMeta):
     """
     Abstract base class for topology.
     """
+
     @abstractmethod
     def run(self, *args: List) -> None:
         """

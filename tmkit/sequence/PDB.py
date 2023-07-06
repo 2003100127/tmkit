@@ -5,14 +5,15 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.base import PDB
-
-
 from typing import List
 
+from tmkit.base import PDB as bpdb
 
-class pdb(PDB.sequence):
-    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = "") -> None:
+
+class PDB(bpdb.Sequence):
+    def __init__(
+        self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = ""
+    ) -> None:
         """
         Parameters
         ----------

@@ -150,9 +150,7 @@ if __name__ == "__main__":
         for resi in sorted(b_dict[chain]):
             b, resn = b_dict[chain][resi]
             print(
-                "b-factors {} {} {} {}  new B='{}'".format(
-                    pdb_file, chain, resn, resi, b
-                )
+                "b-factors %s %s %s %s  new B='%s'" % (pdb_file, chain, resn, resi, b)
             )
     sys.exit()
 
@@ -220,15 +218,15 @@ def data2b_atom(mol="", data_file="", property="b", quiet=0):
                 chain = ""
             b = _lookup(chain, resi, name, ID)
             if not quiet:
-                print(f"///{chain}/{resi}/{name} new: {b:f}")
+                print("///%s/%s/%s new: %f" % (chain, resi, name, b))
         except KeyError:
             if not quiet:
-                print(f"///{chain}/{resi}/{name} keeping: {b:f}")
+                print("///%s/%s/%s keeping: %f" % (chain, resi, name, b))
         return b
 
     stored.b = b_lookup
 
-    cmd.alter(mol, f"{property}=stored.b(chain, resi, name, ID, {property})")
+    cmd.alter(mol, "%s=stored.b(chain, resi, name, ID, %s)" % (property, property))
     cmd.rebuild()
 
 
@@ -269,15 +267,15 @@ def data2b_res(mol="", data_file="", property="b", quiet=0):
             else:
                 b = b_dict[""][resi][0]
             if not quiet:
-                print(f"///{chain}/{resi}/{name} new: {b:f}")
+                print("///%s/%s/%s new: %f" % (chain, resi, name, b))
         except KeyError:
             if not quiet:
-                print(f"///{chain}/{resi}/{name} keeping: {b:f}")
+                print("///%s/%s/%s keeping: %f" % (chain, resi, name, b))
         return b
 
     stored.b = b_lookup
 
-    cmd.alter(mol, f"{property}=stored.b(chain, resi, name, {property})")
+    cmd.alter(mol, "%s=stored.b(chain, resi, name, %s)" % (property, property))
     cmd.rebuild()
 
 

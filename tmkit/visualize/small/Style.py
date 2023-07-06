@@ -6,10 +6,9 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import Optional
-import numpy as np
 
 
-def style(sm_style: Optional[str] = "sticks") -> None:
+def Style(sm_style: Optional[str] = "sticks") -> None:
     """
     Change the representation style of the 'sm' selection in PyMOL.
 

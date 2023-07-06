@@ -5,17 +5,23 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import pandas as pd
 from typing import List, Tuple
-from tmkit.base.Position import position
-from tmkit.position.scenario.Separation import separation
+
+import pandas as pd
+
+from tmkit.base.Position import Position
+from tmkit.position.scenario.Separation import Separation
 
 
-class segment(position):
-    def __init__(self, seq_sep_inferior: int = None, seq_sep_superior: int = None) -> None:
+class Segment(Position):
+    def __init__(
+        self, seq_sep_inferior: int = None, seq_sep_superior: int = None
+    ) -> None:
         super().__init__(seq_sep_inferior, seq_sep_superior)
 
-    def toPair(self, fas_lower: List[str], fas_upper: List[str]) -> List[Tuple[str, str]]:
+    def to_pair(
+        self, fas_lower: List[str], fas_upper: List[str]
+    ) -> List[Tuple[str, str]]:
         """
         Get fasta ids of residue pairs of a protein regulated
         by seq_sep_inferior and (or) seq_sep_superior
@@ -37,7 +43,7 @@ class segment(position):
         else:
             df_ = pd.DataFrame(self.interv2combi(fas_lower, fas_upper))
             pairs = (
-                separation(
+                Separation(
                     df=df_,
                     first=0,
                     second=1,
@@ -49,22 +55,3 @@ class segment(position):
                 .values.tolist()
             )
             return pairs
-
-    def toSingle(self, fas_lower: List[str], fas_upper: List[str]) -> List[str]:
-        """
-        Get fasta ids of residue pairs of a protein regulated
-        by seq_sep_inferior and (or) seq_sep_superior
-
-        Parameters
-        ----------
-        fas_lower : List[str]
-            Fasta 1d list
-        fas_upper : List[str]
-            Fasta 1d list
-
-        Returns
-        -------
-        List[str]
-            List of residues
-        """
-        return self.asp.interv2single(fas_lower, fas_upper)

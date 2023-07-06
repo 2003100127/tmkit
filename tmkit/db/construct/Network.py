@@ -5,14 +5,16 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import numpy as np
 from typing import List, Tuple
+
+import numpy as np
+import pandas as pd
 
 
 class Network:
     def single(
         self,
-        interacting_df: np.ndarray,
+        interacting_df: pd.DataFrame,
         uniprot_id: str,
         by: List[str] = [],
         is_del_reflexive: bool = False,
@@ -43,8 +45,7 @@ class Network:
         interacting_right = interacting_df.groupby(by=[by[1]])
         # print(interacting_left.groups.keys())
         if uniprot_id in interacting_left.groups.keys():
-            interacting_left_grouped = np.array(
-                interacting_left.get_group(uniprot_id))
+            interacting_left_grouped = np.array(interacting_left.get_group(uniprot_id))
             # print(interacting_left_grouped)
             print(
                 "=========>Record(s) for {} found in the left column.".format(
@@ -79,12 +80,10 @@ class Network:
             interacting_right_grouped = np.empty(shape=[0, 2])
         if is_del_reflexive:
             A_row_marker = np.where(
-                interacting_left_grouped[:,
-                                         0] == interacting_left_grouped[:, 1]
+                interacting_left_grouped[:, 0] == interacting_left_grouped[:, 1]
             )
             B_row_marker = np.where(
-                interacting_right_grouped[:,
-                                          0] == interacting_right_grouped[:, 1]
+                interacting_right_grouped[:, 0] == interacting_right_grouped[:, 1]
             )
             interacting_left_grouped = np.delete(
                 interacting_left_grouped, A_row_marker, axis=0
@@ -101,8 +100,7 @@ class Network:
             single_network_B = np.unique(single_network[:, 1])
             single_network = np.concatenate(
                 (
-                    np.array([uniprot_id] * single_network_B.shape[0]
-                             )[:, np.newaxis],
+                    np.array([uniprot_id] * single_network_B.shape[0])[:, np.newaxis],
                     single_network_B[:, np.newaxis],
                 ),
                 axis=1,

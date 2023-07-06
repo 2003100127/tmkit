@@ -6,10 +6,13 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import Optional
+
 import pandas as pd
 
+from tmkit.seqnetrr.combo.Param import Param
 
-class Separation(param):
+
+class Separation(Param):
     """
     Class for extracting data from a pandas DataFrame based on the difference between two columns.
 
@@ -100,8 +103,7 @@ class Separation(param):
         ### /* block 4 */ ###
         else:
             query = 0 < df_[self.second] - df_[self.first]
-        df_ = df_.loc[query].sort_values(
-            by=[self.first, self.second], ascending=True)
+        df_ = df_.loc[query].sort_values(by=[self.first, self.second], ascending=True)
         if self.is_sort:
             df_ = df_.loc[query].sort_values([self.target], ascending=False)
         else:

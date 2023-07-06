@@ -5,31 +5,56 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Dict, List
+
 import numpy as np
 import pandas as pd
 
-from tmkit.chain.Collate import collate
-from tmkit.db.construct.Network import network as ppinet
-from tmkit.name.Mapping import mapping as idmap
+from tmkit.chain.Collate import Collate
+from tmkit.db.construct.Network import Network as ppinet
+from tmkit.name.Mapping import Mapping as idmap
 from tmkit.util.Kit import seqchainid
-from tmkit.util.Reader import reader
-from tmkit.util.Writer import writer
+from tmkit.util.Reader import Reader as greader
+from tmkit.util.Writer import Writer as gwriter
 
 
-class connectivity:
+class Connectivity:
     def __init__(
         self,
-        prot_name,
-        seq_chain,
-        prot_idmap,
-        interacting_partner_idmap,
-        pdb_pdbtm_fp=None,
-        pdb_rcsb_fp=None,
-        sv_fpn=None,
-        symbol=".",
+        prot_name: str,
+        seq_chain: str,
+        prot_idmap: Dict,
+        interacting_partner_idmap: Dict,
+        pdb_pdbtm_fp: str=None,
+        pdb_rcsb_fp: str=None,
+        sv_fpn: str=None,
+        symbol: str=".",
     ):
-        self.reader = reader()
-        self.writer = writer()
+        """
+
+        Parameters
+        ----------
+        prot_name : str
+            name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
+        seq_chain : str
+            chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb) (biological purpose).
+        sv_fp : str
+            path to where you want to save files.
+        prot_idmap : Dict
+            a Python dict with key -> value for PDB ID -> UniProt accession code (please see the command below for details).
+        interacting_partner_idmap : Dict
+            a Python dict with key -> value for PDB ID -> UniProt accession code (please see the command below for details).
+        pdb_rcsb_fp : str
+            path where a target PDB file is placed..
+        pdb_pdbtm_fp : str
+            path where a target PDB file is placed..
+        ppi_db_fpns : str
+            paths where interaction databases are placed (e.g., BIOGRID-ALL-4.4.212.biogrid and interA_B.intact).
+        symbol : str
+            '.'
+        """
+        self.reader = greader()
+        self.writer = gwriter()
         self.idmap = idmap()
 
         self.pdb_pdbtm_fp = pdb_pdbtm_fp
@@ -37,7 +62,7 @@ class connectivity:
         self.symbol = symbol
         self.sv_fpn = sv_fpn
 
-        self.collate = collate(
+        self.collate = Collate(
             prot_name=prot_name,
             chain_focus=seq_chain,
             pdb_rcsb_fp=self.pdb_rcsb_fp,
@@ -50,7 +75,7 @@ class connectivity:
         self.prot_collate_dict = self.collate.throwback(symbol=symbol)
         print(f"===>collated {self.prot_collate_dict}")
 
-        self.prot_master_idmap = self.idmap.pdb2uniprot(self.prot_collate_dict.keys())
+        self.prot_master_idmap = self.idmap.pdb2uniprot(pdb_ids=self.prot_collate_dict.keys())
 
         self.prot_master_idmap = prot_idmap
         self.interacting_partner_idmap = interacting_partner_idmap
@@ -66,16 +91,19 @@ class connectivity:
             ],
         }
 
-    def extract(self, ppi_db_fpns):
+    def extract(self, ppi_db_fpns: Dict) -> pd.DataFrame:
         """
+        Get PPI networks.
 
         Parameters
         ----------
-        ppi_db_fpns
+        ppi_db_fpns : str
+            Paths where interaction databases are placed (e.g., BIOGRID-ALL-4.4.212.biogrid and interA_B.intact).
 
         Returns
         -------
-
+        pd.DataFrame
+            PPI networks
         """
         print(f"===>UniProt protein id: {self.prot_master_idmap}")
         for i, key in enumerate(self.prot_master_idmap.keys()):
@@ -139,20 +167,31 @@ class connectivity:
         return self.df_collate
 
     def strategy(
-        self, ppi_db_fpns, uniprot_id, is_del_reflexive, is_del_repeated, overlap=False
-    ):
+        self, ppi_db_fpns: Dict,
+        uniprot_id: str,
+        is_del_reflexive: bool,
+        is_del_repeated: bool,
+        overlap: bool=False
+    ) -> np.ndarray:
         """
+        Get PPI networks.
 
         Parameters
         ----------
-        ppi_db_fpns
-        uniprot_id
-        is_del_reflexive
-        is_del_repeated
-        overlap
-
+        ppi_db_fpns : str
+            Paths where interaction databases are placed (e.g., BIOGRID-ALL-4.4.212.biogrid and interA_B.intact).
+        uniprot_id : str
+            UniProt accession code.
+        is_del_reflexive : bool
+            if deleted reflexive ones. False by default.
+        is_del_repeated : bool
+            if deleted repeated ones. False by default.
+        overlap: bool
+            False by default.
         Returns
         -------
+        np.ndarray
+            PPI networks
 
         """
         res = {}

@@ -7,13 +7,13 @@ __maintainer__ = "Jianfeng Sun"
 
 import subprocess
 import urllib.request
-from typing import List, Tuple
+
 import pandas as pd
 
-from tmkit.util.Writer import writer
+from tmkit.util.Writer import Writer
 
 
-class xml:
+class XML:
     def __init__(
         self,
         prot_series: pd.Series,
@@ -24,10 +24,10 @@ class xml:
         prot_series : pd.Series
             A pandas series containing protein names.
         """
-        self.write = writer()
+        self.write = Writer()
         self.prot_dedup = prot_series.unique()
 
-    def pdbtm(self, sv_fp: str, is_cmd: bool = False) -> int:
+    def pdbtm(self, sv_fp: str, is_cmd: bool = False) -> str:
         """
         Download PDBTM XML files for each protein in the series.
 
@@ -40,8 +40,8 @@ class xml:
 
         Returns
         -------
-        int
-            0 if all XML files are downloaded successfully.
+        str
+            'Finished' if a XML file is successfully retrieved.
         """
         count = 0
         fails = []
@@ -73,4 +73,4 @@ class xml:
                 print(f"===>number of xml that cannot be downloaded {count}")
                 continue
         self.write.generic(fails, sv_fp + "log_fail_ids.txt")
-        return 0
+        return 'Finished'

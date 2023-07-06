@@ -5,20 +5,22 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import re
 from typing import List, Union
+
+import re
+
 import pandas as pd
 
-from tmkit.util.Reader import reader as greader
-from tmkit.util.Writer import writer
+from tmkit.util.Reader import Reader as greader
+from tmkit.util.Writer import Writer
 
 
-class reader:
+class Reader:
     def __init__(
         self,
     ) -> None:
         self.greader = greader()
-        self.writer = writer()
+        self.writer = Writer()
 
     def decorate(self, x: str) -> str:
         """
@@ -64,10 +66,8 @@ class reader:
             + "/psimitab/intact.zip",
             fpn=sv_fp + "intact.zip",
         )
-        print("===>The database of version " +
-              version + " is successfully downloaded!")
-        print("===>The database of version " +
-              version + " is being decompressed...")
+        print("===>The database of version " + version + " is successfully downloaded!")
+        print("===>The database of version " + version + " is being decompressed...")
         import zipfile
 
         with zipfile.ZipFile(sv_fp + "intact.zip", "r") as zip_ref:

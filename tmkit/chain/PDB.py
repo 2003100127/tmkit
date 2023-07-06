@@ -5,14 +5,12 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.base import PDB
-
-
 from typing import List
-import numpy as np
+
+from tmkit.base import PDB as bpdb
 
 
-class pdb(PDB.chain):
+class PDB(bpdb.Chain):
     """
     A class representing a Protein Data Bank (PDB) file.
 

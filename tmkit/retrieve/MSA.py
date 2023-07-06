@@ -5,72 +5,116 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import List, Optional, Union
+
 import subprocess
 
-from tmkit.interface.Tool import tool
-
-from typing import List, Union, Optional
+from tmkit.interface.Tool import Tool
 
 
-class msa(tool):
+class MSA(Tool):
     """
-    Methods
-    -------
-    toolInitializer, execute, HHblits, .
-
-    Notes
-    -----
-    This class uses tools of multiple sequence alignment in Python interface.
-
-    See Also
-    --------
-    It was introduced since v1.0.
+    This class uses tools of multiple sequence alignments in Python interface.
     """
 
     def __init__(
-    self,
-    tool: str,
-    tool_fp: str,
-    input: str,
-    database: Optional[str] = None,
-    output2a3m: Optional[str] = None,
-    send2cloud: bool = False,
-    cloud_cmd: Optional[str] = None,
-    iteration: Optional[str] = None,
-    output: Optional[str] = None,
-    input_format: Optional[str] = None,
-    output_format: Optional[str] = None,
-    cpu: Optional[str] = None,
-    maxfilter: Optional[str] = None,
-    diff: Optional[str] = None,
-    id: Optional[str] = None,
-    cov: Optional[str] = None,
-    e: Optional[str] = None,
-    B: Optional[str] = None,
-    Z: Optional[str] = None,
-    all: Optional[str] = None,
-    realign_max: Optional[str] = None,
-    output2a2m: Optional[str] = None,
-    log: Optional[str] = None,
-    output2sto: Optional[str] = None,
-    jhm_E: Optional[str] = None,
-    incE: Optional[str] = None,
-    noali: Optional[str] = None,
-    tblout: Optional[str] = None,
-    remove_lower_aa: Optional[str] = None,
-    count_seqs_name_line: Optional[str] = None,
-    remove_secondary_structure: Optional[str] = None,
-    retain_solvent_seq: Optional[str] = None,
-    max_length_per_name_line: Optional[str] = None,
-    aa_per_line: Optional[str] = None,
-    w_upper: Optional[str] = None,
-    w_lower: Optional[str] = None,
-    gap_reformat: Optional[str] = None,
-    match_reformat: Optional[str] = None,
-    min_seq_id_query: Optional[str] = None,
-    min_score_per_col_query: Optional[str] = None,
-    neff: Optional[str] = None,
+        self,
+        tool: str,
+        tool_fp: str,
+        input: str,
+        database: Optional[str] = None,
+        output2a3m: Optional[str] = None,
+        send2cloud: bool = False,
+        cloud_cmd: Optional[str] = None,
+        iteration: Optional[int] = None,
+        output: Optional[str] = None,
+        input_format: Optional[str] = None,
+        output_format: Optional[str] = None,
+        cpu: Optional[int] = None,
+        maxfilter: Optional[int] = None,
+        diff: Optional[str] = None,
+        id: Optional[int] = None,
+        cov: Optional[str] = None,
+        e: Optional[float] = None,
+        B: Optional[int] = None,
+        Z: Optional[int] = None,
+        all: Optional[int] = None,
+        realign_max: Optional[int] = None,
+        output2a2m: Optional[str] = None,
+        log: Optional[str] = None,
+        output2sto: Optional[str] = None,
+        jhm_E: Optional[int] = None,
+        incE: Optional[float] = None,
+        noali: Optional[str] = None,
+        tblout: Optional[str] = None,
+        remove_lower_aa: Optional[str] = None,
+        count_seqs_name_line: Optional[str] = None,
+        remove_secondary_structure: Optional[str] = None,
+        retain_solvent_seq: Optional[str] = None,
+        max_length_per_name_line: Optional[int] = None,
+        aa_per_line: Optional[int] = None,
+        w_upper: Optional[str] = None,
+        w_lower: Optional[str] = None,
+        gap_reformat: Optional[str] = None,
+        match_reformat: Optional[str] = None,
+        min_seq_id_query: Optional[str] = None,
+        min_score_per_col_query: Optional[str] = None,
+        neff: Optional[str] = None,
     ):
+        """
+
+        Parameters
+        ----------
+        tool : str
+            tool name. hhblits, hhfilter, jackHmmer, and reformat.
+        tool_fp : str
+            path where an executable of HHblits is placed (normally it is in hhblits/bin).
+            path where an executable of HHfilter is placed (normally it is in hhblits/bin).
+            Path where an executable of JackHmmer is placed (normally it is in hmmer3.1b2/bin).
+            path where an executable of Reformat is placed.
+        fasta_fp : str
+            path where a protein Fasta file is placed.
+        db_path : str
+            path where a protein sequence database is placed.
+        sv_fp : str
+            path to where you want to save the MSAs in a3m format.
+        cpu : int
+            number of CPUs.
+        iteration : int
+            number of iterations by a hidden Markov model.
+        maxfilter : int
+            max number of hits allowed to pass 2nd prefilter (default=20000).
+        realign_max :
+            realign maximum hits displayed hits with the max accuracy algorithm.
+        all :
+            do not filter the resulting MSA. '' by default.
+        B : int
+            maximum number of alignments in alignment list (default=500).
+        Z : int
+            maximum number of lines in summary hit list (default=500).
+        e : float
+            maximum E-value in summary and alignment list (default=1E+06).
+        a3m_path :
+            path where a protein a3m file is placed.
+        new_a3m_path :
+            path to where you want to save a filtered MSA in a3m format.
+        id :
+            maximum pairwise sequence identity (def=90).
+        jhm_E : int
+            In the per-target output, report target sequences with an E-value of <= . The default is 10.0, meaning that on average, about 10 false positives will be reported per query, so you can see the top of the noise and decide for yourself if it’s really noise.
+        incE : float
+            Use an E-value as the per-target inclusion threshold. The default is 0.01, meaning that on average, about 1 false positive would be expected in every 100 searches with different query sequences.
+        noali :
+            Omit the alignment section from the main output. This can greatly reduce the output volume.
+        max_length_per_name_line : int
+            maximum number of characers in nameline (default=1000)
+        aa_per_line : int
+            number of residues per line (for Clustal, FASTA, A2M, A3M formats) (default=100)
+            # if you won't do it on clusters, please give False to the parameter send2cloud
+        send2cloud : bool
+            If in cluster running. False or True
+        cloud_cmd :str
+        """
         self.tool = tool
         self.tool_fp = tool_fp
         self.send2cloud = send2cloud
@@ -114,21 +158,19 @@ class msa(tool):
         self.min_score_per_col_query = min_score_per_col_query
         self.neff = neff
 
-    def initializer(self):
+    def initializer(self) -> str:
         """
-        Notes
-        -----
-        which tool is selected.
+            Generate a command of a querying tool.
 
         Returns
         -------
-            command of a querying tool.
+        str
+            Command of a querying tool.
 
         """
         switch = {
             "hhblits": self.hhblits,
             "jackhmmer": self.jackhmmer,
-            "blast": self.blast,
             "hhfilter": self.hhfilter,
             "reformat.pl": self.reformat,
         }
@@ -136,15 +178,14 @@ class msa(tool):
         print(f"===>The current order: {execute_order}")
         return execute_order
 
-    def execute(self):
+    def execute(self) -> str:
         """
-
-        Notes
-        -----
-           which tool is executed.
+        Execute a command.
 
         Returns
         -------
+        str
+            'Finished' if this operation is passed.
 
         """
         s = subprocess.Popen(
@@ -154,13 +195,11 @@ class msa(tool):
             shell=True,
         )
         s.communicate()
+        return 'Finished'
 
-    def hhblits(self):
+    def hhblits(self) -> str:
         """
-
-        Notes
-        -----
-           obtain hhblits' command
+        Generate a HHblits command.
 
         Examples
         --------
@@ -174,7 +213,8 @@ class msa(tool):
 
         Returns
         -------
-            command
+        str
+            a HHblits command
 
         """
         order_list = {
@@ -236,19 +276,13 @@ class msa(tool):
         ]
         return self.recast(orderc, self.send2cloud, self.cloud_cmd)
 
-    def blast(self):
-        pass
-
-    def jackhmmer(self):
+    def jackhmmer(self) -> str:
         """
-
-        Notes
-        -----
-           obtain jackhmmer's command
+        Obtain a Jackhmmer command.
 
         Returns
         -------
-            command
+            A Jackhmmer command.
         """
         order_list = {
             "cpu": "--cpu",
@@ -285,16 +319,13 @@ class msa(tool):
 
     def hhfilter(
         self,
-    ):
+    ) -> str:
         """
-
-        Notes
-        -----
-           obtain hhfilter's command.
+        Obtain a hhfilter command.
 
         Returns
         -------
-            command
+            A hhfilter command.
         """
         order_list = {
             "input": "-i",
@@ -331,16 +362,13 @@ class msa(tool):
 
     def reformat(
         self,
-    ):
+    ) -> str:
         """
-
-        Notes
-        -----
-           obtain reformat's command.
+        Obtain a reformat command.
 
         Returns
         -------
-            command
+            A reformat command.
         """
         order_list = {
             "input_format": "",
@@ -390,10 +418,10 @@ class msa(tool):
         return self.recast(orderc, self.send2cloud, self.cloud_cmd)
 
     @staticmethod
-
-
     def recast(orderc: List[Union[str, None]], send2cloud: bool, cloud_cmd: str) -> str:
         """
+        Generate a command.
+
         Parameters
         ----------
         orderc: List[Union[str, None]]

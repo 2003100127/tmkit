@@ -8,7 +8,7 @@ __maintainer__ = "Jianfeng Sun"
 import numpy as np
 import pandas as pd
 
-from tmkit.util.Reader import reader as greader
+from tmkit.util.Reader import Reader as greader
 
 
 class Reader:
@@ -51,7 +51,9 @@ class Reader:
         else:
             self.__sort_ = value
 
-    def mbpred(self, mbp_path: str, file_name: str, file_chain: str, sort_: int = 0) -> pd.DataFrame:
+    def mbpred(
+        self, mbp_path: str, file_name: str, file_chain: str, sort_: int = 0
+    ) -> pd.DataFrame:
         """
         Reads an mbpred file and returns a DataFrame with the interact_id and score columns.
 
@@ -83,7 +85,9 @@ class Reader:
         recombine = results[["interact_id", "score"]]
         return recombine
 
-    def delphi(self, delphi_path: str, file_name: str, file_chain: str, sort_: int = 0) -> pd.DataFrame:
+    def delphi(
+        self, delphi_path: str, file_name: str, file_chain: str, sort_: int = 0
+    ) -> pd.DataFrame:
         """
         Reads a delphi file and returns a DataFrame with the interact_id and score columns.
 
@@ -120,7 +124,9 @@ class Reader:
         recombine = results[["interact_id", "score"]]
         return recombine
 
-    def graphppis(self, graphppis_path: str, file_name: str, file_chain: str, sort_: int = 0) -> pd.DataFrame:
+    def graphppis(
+        self, graphppis_path: str, file_name: str, file_chain: str, sort_: int = 0
+    ) -> pd.DataFrame:
         """
         Reads a graphppis file and returns a DataFrame with the interact_id and score columns.
 
@@ -163,7 +169,9 @@ class Reader:
         ]
         return recombine
 
-    def tma300(self, tma300_path: str, file_name: str, file_chain: str, sort_: int = 0) -> pd.DataFrame:
+    def tma300(
+        self, tma300_path: str, file_name: str, file_chain: str, sort_: int = 0
+    ) -> pd.DataFrame:
         """
         Reads a tma300 file and returns a DataFrame with the interact_id and score columns.
 

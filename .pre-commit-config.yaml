@@ -15,7 +15,8 @@ repos:
     hooks:
       - id: pyupgrade
         name: pyupgrade
-        entry: poetry run pyupgrade --py38-plus
+        # only check the ./tmkit folder
+        entry: poetry run pyupgrade --py36-plus --exit-zero-even-if-changed --keep-percent-format
         types: [python]
         language: system
 

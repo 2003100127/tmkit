@@ -1,21 +1,26 @@
-__author__: str = "Jianfeng Sun"
-__version__: str = "v1.0"
-__copyright__: str = "Copyright 2023"
-__license__: str = "GPL v3.0"
-__email__: str = "jianfeng.sunmt@gmail.com"
-__maintainer__: str = "Jianfeng Sun"
+__author__ = "Jianfeng Sun"
+__version__ = "v1.0"
+__copyright__ = "Copyright 2023"
+__license__ = "GPL v3.0"
+__email__ = "jianfeng.sunmt@gmail.com"
+__maintainer__ = "Jianfeng Sun"
 
 
-from typing import List, Tuple
-from tmkit.db.biogrid.Reader import reader as biogridreader
-from tmkit.db.Connectivity import connectivity as ppiconn
-from tmkit.db.intact.Reader import reader as intactreader
+from typing import List, Dict
+
+import numpy as np
+
+import pandas as pd
+
+from tmkit.db.biogrid.Reader import Reader as biogridreader
+from tmkit.db.Connectivity import Connectivity as ppiconn
+from tmkit.db.intact.Reader import Reader as intactreader
 
 
 def download_biogrid_db(
     sv_fp: str,
     version: str = "4.4.212",
-) -> None:
+) -> str:
     """
     Download BioGRID database.
 
@@ -28,7 +33,8 @@ def download_biogrid_db(
 
     Returns
     -------
-    None
+    str
+        A message indicating that the download and decompression is finished.
     """
     return biogridreader().fetch(
         version=version,
@@ -43,7 +49,7 @@ def read_biogrid_db(
         "SWISS-PROT Accessions Interactor A",
         "SWISS-PROT Accessions Interactor B",
     ],
-) -> Tuple[List[str], List[Tuple[str, str]]]:
+) -> pd.DataFrame:
     """
     Read BioGRID database.
 
@@ -58,8 +64,8 @@ def read_biogrid_db(
 
     Returns
     -------
-    Tuple[List[str], List[Tuple[str, str]]]
-        List of extracted column names and a list of extracted interactions.
+    pd.DataFrame
+        A dataframe containing the extracted columns.
     """
     return biogridreader().tab3(
         biogrid_fpn=biogrid_fpn,
@@ -71,7 +77,7 @@ def read_biogrid_db(
 def download_intact_db(
     sv_fp: str,
     version: str = "4.4.212",
-) -> None:
+) -> str:
     """
     Download IntAct database.
 
@@ -84,7 +90,8 @@ def download_intact_db(
 
     Returns
     -------
-    None
+    str
+        A message indicating the completion of the download and decompression.
     """
     return intactreader().fetch(
         version=version,
@@ -99,7 +106,7 @@ def read_intact_db(
         "#ID(s) interactor A",
         "ID(s) interactor B",
     ],
-) -> Tuple[List[str], List[Tuple[str, str]]]:
+) -> pd.DataFrame:
     """
     Read IntAct database.
 
@@ -114,8 +121,8 @@ def read_intact_db(
 
     Returns
     -------
-    Tuple[List[str], List[Tuple[str, str]]]
-        List of extracted column names and a list of extracted interactions.
+    pd.DataFrame
+        The extracted data as a pandas DataFrame.
     """
     return intactreader().full(
         intact_fpn=intact_fpn,
@@ -127,13 +134,13 @@ def read_intact_db(
 def get_network(
     prot_name: str,
     seq_chain: str,
-    prot_idmap: str,
-    interacting_partner_idmap: str,
+    prot_idmap: Dict,
+    interacting_partner_idmap: Dict,
     pdb_rcsb_fp: str,
     pdb_pdbtm_fp: str,
     sv_fpn: str,
-    ppi_db_fpns: List[str],
-) -> List[Tuple[str, str]]:
+    ppi_db_fpns: Dict,
+) -> np.ndarray:
     """
     Get protein-protein interaction network.
 
@@ -158,8 +165,8 @@ def get_network(
 
     Returns
     -------
-    List[Tuple[str, str]]
-        List of protein-protein interactions.
+    np.ndarray
+        protein-protein interactions.
     """
     return ppiconn(
         prot_name=prot_name,
@@ -181,13 +188,13 @@ def get_network(
 def connectivity(
     prot_name: str,
     seq_chain: str,
-    prot_idmap: str,
-    interacting_partner_idmap: str,
+    prot_idmap: Dict,
+    interacting_partner_idmap: Dict,
     pdb_rcsb_fp: str,
     pdb_pdbtm_fp: str,
     sv_fpn: str,
-    ppi_db_fpns: List[str],
-) -> List[Tuple[str, str]]:
+    ppi_db_fpns: Dict,
+) -> pd.DataFrame:
     """
     Get protein-protein interaction connectivity.
 
@@ -212,7 +219,7 @@ def connectivity(
 
     Returns
     -------
-    List[Tuple[str, str]]
+    pd.DataFrame
         List of protein-protein interactions.
     """
     return ppiconn(

@@ -5,8 +5,9 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Any, Dict
+
 from Bio import SeqIO
-from typing import Dict, Any
 
 
 class Fasta:

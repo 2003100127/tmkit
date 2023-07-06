@@ -9,7 +9,7 @@ from typing import List, Tuple
 
 
 class Position:
-    def __init__(self, sequence: str) -> None:
+    def __init__(self, sequence: str):
         """
         Initialize Position object.
 
@@ -25,7 +25,7 @@ class Position:
         self.sequence = sequence
         self.len_seq = len(self.sequence)
 
-    def single(self, pos_list: List[int]) -> List[List[int]]:
+    def single(self, pos_list: List) -> List[List[int]]:
         """
         Calculate the distance matrix for a single position.
 
@@ -43,11 +43,11 @@ class Position:
         len_pairs = len(pos_list)
         dist_matrix = []
         for id in range(len_pairs):
-            fas_id1 = pos_list[id]
+            fas_id1 = pos_list[id][0]
             dist_matrix.append([fas_id1, seq_dict[fas_id1], fas_id1, 0])
         return dist_matrix
 
-    def pair(self, pos_list: List[Tuple[int, int]]) -> List[List[int]]:
+    def pair(self, pos_list: List) -> List[List[int]]:
         """
         Calculate the distance matrix for a pair of positions.
 

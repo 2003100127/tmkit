@@ -8,20 +8,20 @@ __maintainer__ = "Jianfeng Sun"
 import numpy as np
 import pandas as pd
 
-from tmkit.seqnetrr.combo.Separation import separation as ppssep
-from tmkit.seqnetrr.ComputLib import computLib
-from tmkit.util.Reader import reader as pfrreader
-from tmkit.util.Writer import writer as pfwwriter
+from tmkit.seqnetrr.combo.Separation import Separation as ppssep
+from tmkit.seqnetrr.ComputLib import ComputLib
+from tmkit.util.Reader import Reader as pfrreader
+from tmkit.util.Writer import Writer as pfwwriter
 
 
-class reader:
+class Reader:
     def __init__(self, seq_sep_inferior=None, seq_sep_superior=None):
         self.__sort_ = -1
         self.seq_sep_inferior = seq_sep_inferior
         self.seq_sep_superior = seq_sep_superior
         self.pfrreader = pfrreader()
         self.pfwwriter = pfwwriter()
-        self.computlib = computLib()
+        self.computlib = ComputLib()
 
     @property
     def sort_(self):

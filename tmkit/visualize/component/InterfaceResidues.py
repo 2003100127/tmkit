@@ -61,7 +61,7 @@ def interfaceResidues(cmpx, cA="c. A", cB="c. B", cutoff=1.0, selName="interface
     cmd.disable(cmpx)
 
     # remove cruft and inrrelevant chains
-    cmd.remove(tempC + f" and not (polymer and ({cA} or {cB}))")
+    cmd.remove(tempC + " and not (polymer and (%s or %s))" % (cA, cB))
 
     # get the area of the complete complex
     cmd.get_area(tempC, load_b=1)
@@ -77,13 +77,13 @@ def interfaceResidues(cmpx, cA="c. A", cB="c. B", cutoff=1.0, selName="interface
     cmd.get_area(chB, load_b=1)
 
     # update the chain-only objects w/the difference
-    cmd.alter(f"{chA} or {chB}", "b=b-q")
+    cmd.alter("%s or %s" % (chA, chB), "b=b-q")
 
     # The calculations are done.  Now, all we need to
     # do is to determine which residues are over the cutoff
     # and save them.
     stored.r, rVal, seen = [], [], []
-    cmd.iterate(f"{chA} or {chB}", "stored.r.append((model,resi,b))")
+    cmd.iterate("%s or %s" % (chA, chB), "stored.r.append((model,resi,b))")
 
     cmd.enable(cmpx)
     cmd.select(selName1, None)
@@ -99,7 +99,7 @@ def interfaceResidues(cmpx, cA="c. A", cB="c. B", cutoff=1.0, selName="interface
             # creating one large selection b/c if there are too many residues PyMOL
             # might crash on a very large selection.  This is pretty much guaranteed
             # not to kill PyMOL; but, it might take a little longer to run.
-            cmd.select(selName1, selName1 + f" or ({model} and i. {resi})")
+            cmd.select(selName1, selName1 + " or (%s and i. %s)" % (model, resi))
 
     # this is how you transfer a selection to another object.
     cmd.select(selName, cmpx + " in " + selName1)

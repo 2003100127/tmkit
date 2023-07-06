@@ -79,7 +79,7 @@ def spectrumany(
             maximum = max(stored.e)
     minimum, maximum = float(minimum), float(maximum)
     if not quiet:
-        print(f" Spectrum: range ({minimum:.5f} to {maximum:.5f})")
+        print(" Spectrum: range (%.5f to %.5f)" % (minimum, maximum))
 
     if maximum == minimum:
         print("no spectrum possible, only equal %s values" % (expression))
@@ -104,7 +104,7 @@ def spectrumany(
             ]
             # print(col_list)
             # ### /*** the line below is where I modified sth. ***/
-            col_name = "0x{:02x}{:02x}{:02x}".format(
+            col_name = "0x%02x%02x%02x" % (
                 int(col_list[0] * 255),
                 int(col_list[1] * 255),
                 int(col_list[2] * 255),
@@ -118,8 +118,7 @@ def spectrumany(
                 )
             else:
                 cmd.color(
-                    col_name,
-                    f"({selection}) and {expression} > {val_start:f}",
+                    col_name, "(%s) and %s > %f" % (selection, expression, val_start)
                 )
             val_start = val_end
 

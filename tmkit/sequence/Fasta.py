@@ -6,7 +6,6 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
-from typing import List
 from Bio import SeqIO
 
 
@@ -26,15 +25,14 @@ def get(fasta_fpn: str) -> str:
     Returns
     -------
     str
-        The concatenated sequence from the FASTA file.
+        A sequence from the FASTA file.
 
     Raises
     ------
     EmptyFastaError
         If the FASTA file does not contain any sequence.
     """
-    sequence = "".join([str(seq.seq)
-                       for seq in SeqIO.parse(fasta_fpn, "fasta")])
+    sequence = "".join([str(seq.seq) for seq in SeqIO.parse(fasta_fpn, "fasta")])
     if not sequence:
         raise EmptyFastaError("The sequence is empty.")
     return sequence

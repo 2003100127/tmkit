@@ -6,18 +6,20 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 import warnings
+
 import pandas as pd
 from Bio import BiopythonWarning
 from Bio.PDB import *
+
 from tmkit.base import PDB
 from tmkit.sequence import Fasta as sfasta
-from tmkit.topology.pdbtm.TMH import tmh as tmhseg
+from tmkit.topology.pdbtm.TMH import TMH as tmhseg
 from tmkit.util.Kit import chainid
-from tmkit.util.Reader import reader
-from tmkit.util.Writer import writer
+from tmkit.util.Reader import Reader
+from tmkit.util.Writer import Writer
 
 
-class workbench:
+class Workbench:
     def __init__(
         self,
         df_prot: pd.DataFrame,
@@ -32,15 +34,15 @@ class workbench:
         Parameters
         ----------
         df_prot : pd.DataFrame
-            The DataFrame for protein.
+            Pandas dataframe storing protein names and chain names.
         pdb_cplx_fp : str
-            The file path for the PDB complex.
+            path where a protein complex file from PDBTM is placed.
         fasta_fp : str
-            The file path for the FASTA file.
-        xml_fp : str, optional
-            The file path for the XML file.
-        sv_fp : str, optional
-            The save file path.
+            path where a protein Fasta file is placed.
+        xml_fp : str
+            path where a protein XML file from PDBTM is placed.
+        sv_fp : str
+            path to save files.
         """
         self.df_prot = df_prot
         self.pdb_cplx_fp = pdb_cplx_fp
@@ -49,8 +51,8 @@ class workbench:
         self.sv_fp = sv_fp
 
         self.parser = PDBParser()
-        self.reader = reader()
-        self.writer = writer()
+        self.reader = Reader()
+        self.writer = Writer()
 
         self.num_pc = self.df_prot.shape[0]
 
@@ -64,17 +66,17 @@ class workbench:
         metric: str,
     ) -> pd.DataFrame:
         """
-        Template function for manipulating data.
+        Obtain a single metric for a list of proteins.
 
         Parameters
         ----------
-        metric : str
-            Metric to manipulate the data.
+        metric : str, optional
+            The metric to calculate. Can be "rez", "met", "bio_name", "head", "desc", "mthm", or "seq".
 
         Returns
         -------
         df_prot : pd.DataFrame
-            The updated DataFrame for protein.
+            A dataframe of the calculated metric.
         """
         fail_list = []
         fail_count = 0
@@ -85,13 +87,11 @@ class workbench:
                 seq_chain = self.df_prot.loc[i, "chain"]
                 try:
                     if metric == "rez" or metric == "met":
-                        prot_name_pre = self.df_prot.loc[i -
-                                                         1 if i > 0 else i, "prot"]
+                        prot_name_pre = self.df_prot.loc[i - 1 if i > 0 else i, "prot"]
                         if i > 0 and prot_name_pre == prot_name:
-                            self.df_prot.loc[i,
-                                             "rez"] = self.df_prot.loc[i - 1, "rez"]
+                            self.df_prot.loc[i, "rez"] = self.df_prot.loc[i - 1, "rez"]
                         else:
-                            struct = PDB.structure(
+                            struct = PDB.Structure(
                                 pdb_fp=self.pdb_cplx_fp,
                                 prot_name=prot_name,
                                 seq_chain=seq_chain,
@@ -103,7 +103,7 @@ class workbench:
                                 self.df_prot.loc[i, metric] = struct.met
                     else:
                         if metric == "bio_name":
-                            struct = PDB.structure(
+                            struct = PDB.Structure(
                                 pdb_fp=self.pdb_cplx_fp,
                                 prot_name=prot_name,
                                 seq_chain=seq_chain,
@@ -111,7 +111,7 @@ class workbench:
                             )
                             self.df_prot.loc[i, metric] = struct.name
                         elif metric == "head":
-                            struct = PDB.structure(
+                            struct = PDB.Structure(
                                 pdb_fp=self.pdb_cplx_fp,
                                 prot_name=prot_name,
                                 seq_chain=seq_chain,
@@ -125,8 +125,7 @@ class workbench:
                                 list = line.split()
                                 id = list[0]
                                 if id == "HEADER":
-                                    self.df_prot.loc[i, metric] = " ".join(
-                                        list[1:-2])
+                                    self.df_prot.loc[i, metric] = " ".join(list[1:-2])
                         elif metric == "mthm":
                             tmh_beg, tmh_last = tmhseg(
                                 xml_fp=self.xml_fp,
@@ -172,20 +171,19 @@ class workbench:
 
     def integrate(self, metrics: list) -> pd.DataFrame:
         """
-        Integrate function to manipulate the DataFrame using multiple metrics.
+        Generate multiple metrics for a list proteins.
 
         Parameters
         ----------
         metrics : list
-            List of metrics to manipulate the data.
+            A list of metrics to calculate. Can include "rez", "met", "bio_name", "head", "desc", "mthm", and "seq".
 
         Returns
         -------
         df_prot : pd.DataFrame
-            The updated DataFrame for protein.
+            A dataframe of the calculated metrics.
         """
-        self.df_prot["prot_mark"] = self.df_prot["prot"] + \
-            self.df_prot["chain"]
+        self.df_prot["prot_mark"] = self.df_prot["prot"] + self.df_prot["chain"]
         for i, metric in enumerate(metrics):
             print(f"======>metric: {metric}")
             self.template(metric=metric)

@@ -1,3 +1,12 @@
+__author__ = "Jianfeng Sun"
+__version__ = "v1.0"
+__copyright__ = "Copyright 2023"
+__license__ = "GPL v3.0"
+__email__ = "jianfeng.sunmt@gmail.com"
+__maintainer__ = "Jianfeng Sun"
+
+from typing import Any, Dict, List, Tuple, Union
+
 import gzip
 import os
 import re
@@ -5,16 +14,9 @@ import shutil
 import urllib.request
 
 
-import os
-import re
-
-import urllib.request
-import gzip
-import shutil
-from typing import List, Dict, Any, Tuple, Union
-
-
-def chainid(prot_chain: str) -> str:
+def chainid(
+    prot_chain: str,
+) -> str:
     """
     Add 'l' to the end of the chain ID if it is lowercase.
 
@@ -31,7 +33,9 @@ def chainid(prot_chain: str) -> str:
     return str(prot_chain) + "l" if str(prot_chain).islower() else str(prot_chain)
 
 
-def seqchainid(prot_chain: str) -> str:
+def seqchainid(
+    prot_chain: str,
+) -> str:
     """
     Get the chain ID of a protein sequence.
 
@@ -48,7 +52,9 @@ def seqchainid(prot_chain: str) -> str:
     return str(prot_chain[0])
 
 
-def delete(fpn: str) -> None:
+def delete(
+    fpn: str,
+) -> None:
     """
     Delete a file.
 
@@ -60,7 +66,10 @@ def delete(fpn: str) -> None:
     os.remove(fpn)
 
 
-def create(DIRECTORY: str, mode: str = "dir") -> None:
+def create(
+    DIRECTORY: str,
+    mode: str = "dir",
+) -> None:
     """
     Create a directory.
 
@@ -76,7 +85,12 @@ def create(DIRECTORY: str, mode: str = "dir") -> None:
             os.makedirs(DIRECTORY)
 
 
-def batchRename(file_path: str, old_suffix: str, new_suffix: str, flag: int = 1) -> None:
+def batchRename(
+    file_path: str,
+    old_suffix: str,
+    new_suffix: str,
+    flag: int = 1,
+) -> None:
     """
     Batch rename files.
 
@@ -113,7 +127,10 @@ def batchRename(file_path: str, old_suffix: str, new_suffix: str, flag: int = 1)
                 )
 
 
-def urlliby(url: str, fpn: str) -> None:
+def urlliby(
+    url: str,
+    fpn: str,
+) -> None:
     """
     Download a file from a given URL and save it to the specified file path.
 
@@ -131,7 +148,12 @@ def urlliby(url: str, fpn: str) -> None:
     return urllib.request.urlretrieve(url=url, filename=fpn)
 
 
-def ungz(file_path: str, file_name: str, sv_fp: str, new_suffix: str = ".pdb") -> None:
+def ungz(
+    file_path: str,
+    file_name: str,
+    sv_fp: str,
+    new_suffix: str = ".pdb",
+) -> None:
     """
     Extract a gzipped file and save it with a new suffix.
 
@@ -162,11 +184,26 @@ def ungz(file_path: str, file_name: str, sv_fp: str, new_suffix: str = ".pdb") -
 def tactic1(arr_2d: List[List[Any]]) -> Dict[Any, Dict[Any, Any]]:
     """
     Convert a 2D list into a nested dictionary using tactic 1.
+    Is a 2D list has the following form [[15, 48, 78],...].
+    The returned dictionary is {key1: {key2: value1}, ...},
+    in which key 1 is 15, key 2 is 48, and value1
+    is 78. Is a 2D list has the following form [[15, 48, 78, 82],...].
+    The returned dictionary is {key1: {key2: value1}, ...},
+    in which key 1 is 15, key 2 is 48, and value1
+    is [78, 82]. See Examples below
 
     Parameters
     ----------
     arr_2d : List[List[Any]]
         The input 2D list.
+
+    Examples
+    --------
+    1st example
+    >>> arr_2d = [[15, 48, 78, 82], [30, 53, 99, 84], [2, 3, 11, 2]]
+    >>> arr_2d
+    # output
+    >>> {15: {48: [78, 82]}, 30: {53: [99, 84]}, 2: {3: [11, 2]}}
 
     Returns
     -------
@@ -186,12 +223,26 @@ def tactic1(arr_2d: List[List[Any]]) -> Dict[Any, Dict[Any, Any]]:
 
 def tactic5(arr_2d: List[List[Any]]) -> Dict[Any, List[Any]]:
     """
-    Convert a 2D list into a dictionary using tactic 5.
+    Convert a 2D list into a dictionary. If the 1st element in
+     list A in the 2nd dimension of a 2D list is the same as that in
+     another list B in the 2nd dimension of the 2D list, then
+     the unrepeated 2nd element in lists A and B will be put together in
+      a Python dict. They share the same key (the 1st element).
+      See below Examples. For key -> value, in this case, 'value'
+      is a list.
 
     Parameters
     ----------
     arr_2d : List[List[Any]]
         The input 2D list.
+
+    Examples
+    --------
+    1st example
+    >>> arr_2d = [[15, 48], [15, 53], [2, 3]]
+    >>> arr_2d
+    # output
+    >>> {15: [48, 53], 2: [3]}
 
     Returns
     -------
@@ -207,14 +258,37 @@ def tactic5(arr_2d: List[List[Any]]) -> Dict[Any, List[Any]]:
     return result
 
 
-def tactic6(arr_2d: List[List[Union[int, float, str]]]) -> Dict[Union[int, float, str], List[Union[float, str]]]:
+def tactic6(
+    arr_2d: List[List[Union[int, float, str]]]
+) -> Dict[Union[int, float, str], List[Union[float, str]]]:
     """
-    Apply tactic 6 to a 2D array and return the result as a dictionary.
+    Apply tactic 6 to a 2D list and return the result as a dictionary.
+    If the second dimension of a 2D list is 2, then it returns a dictionary
+    that consists of simply the key -> value by taking the 1st element
+    (from the list at the second dimension, e.g., [15, 48]) as key
+    and the 2nd element as the value. If the list at the second dimension
+    has a length of more than 2, then the value of the returned dictionary
+    will be this list but eliminating its 1st element, because
+    the 1st element will be taken as the key. See Examples below.
 
     Parameters
     ----------
     arr_2d : List[List[Union[int, float, str]]]
         The input 2D array.
+
+    Examples
+    --------
+    1st example
+    >>> arr_2d = [[15, 48], [30, 53], [2, 3]]
+    >>> arr_2d
+    # output
+    >>> {15: 53, 2: 3}
+
+    2nd example
+    >>> arr_2d = [[15, 48, 78], [30, 53, 99], [30, 3, 11]]
+    >>> arr_2d
+    # output
+    >>> {15: [48, 78], 30: [3, 11]}
 
     Returns
     -------
@@ -233,14 +307,30 @@ def tactic6(arr_2d: List[List[Union[int, float, str]]]) -> Dict[Union[int, float
     return result
 
 
-def tactic7(arr_2d: List[List[Union[int, float, str]]]) -> Dict[Union[int, float, str], Dict[Union[int, float, str], List[Union[int, float, str]]]]:
+def tactic7(
+    arr_2d: List[List[Union[int, float, str]]]
+) -> Dict[
+    Union[int, float, str], Dict[Union[int, float, str], List[Union[int, float, str]]]
+]:
     """
     Apply tactic 7 to a 2D array and return the result as a nested dictionary.
+    It is only applicable to the list (at the 2nd dimension) of a 2D list
+    that has the length of 3, e.g.,[[15, 48, 78],...]. The returned dictionary
+    is {key1: {key2: value1}, ...}, in which key 1 is 15, key 2 is 48, and value1
+    is 78. See Examples below
 
     Parameters
     ----------
     arr_2d : List[List[Union[int, float, str]]]
         The input 2D array.
+
+    Examples
+    --------
+    1st example
+    >>> arr_2d = [[15, 48, 78], [30, 53, 99], [30, 3, 11]]
+    >>> arr_2d
+    # output
+    >>> {15: {48: [78]}, 30: {53: [99], 3: [11]}}
 
     Returns
     -------
@@ -260,9 +350,15 @@ def tactic7(arr_2d: List[List[Union[int, float, str]]]) -> Dict[Union[int, float
     return result
 
 
-def tactic8(arr_1d_1: List[Union[int, float, str]], arr_1d_2: List[Union[int, float, str]]) -> Dict[Union[int, float, str], Union[int, float, str]]:
+def tactic8(
+    arr_1d_1: List[Union[int, float, str]],
+    arr_1d_2: List[Union[int, float, str]],
+) -> Dict[Union[int, float, str], Union[int, float, str]]:
     """
     Create a dictionary by mapping elements from two 1D arrays.
+    The input two 1D lists that must has the same length.
+    The function will take each element from arr_1d_1 as the key,
+    and each element from arr_1d_2 as the value. See Examples below.
 
     Parameters
     ----------
@@ -270,6 +366,13 @@ def tactic8(arr_1d_1: List[Union[int, float, str]], arr_1d_2: List[Union[int, fl
         The first input 1D array.
     arr_1d_2 : List[Union[int, float, str]]
         The second input 1D array.
+
+    Examples
+    --------
+    >>> l1 = [15, 48, 78, 82]
+    >>> l2 = [30, 53, 99, 84]
+    # output
+    >>> {15: 30, 48: 53, 78: 99, 82: 84}
 
     Returns
     -------

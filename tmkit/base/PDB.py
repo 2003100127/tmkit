@@ -5,16 +5,12 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import warnings
-
-from Bio.PDB.PDBParser import PDBParser
-from Bio.PDB.Polypeptide import PPBuilder
-
-
 from typing import List, Tuple
+
+import warnings
+
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.Polypeptide import PPBuilder
-import warnings
 
 
 class Sequence:
@@ -45,7 +41,9 @@ class Sequence:
         The polypeptide builder object.
     """
 
-    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str) -> None:
+    def __init__(
+        self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str
+    ) -> None:
         from Bio import BiopythonWarning
 
         with warnings.catch_warnings():
@@ -57,8 +55,7 @@ class Sequence:
             self.pdb_fpn = self.pdb_fp + self.prot_name + self.file_chain + ".pdb"
 
             self.bio_parser = PDBParser()
-            self.structure = self.bio_parser.get_structure(
-                self.prot_name, self.pdb_fpn)
+            self.structure = self.bio_parser.get_structure(self.prot_name, self.pdb_fpn)
             self.model = self.structure[0]
             self.pdb_chain = self.model[self.seq_chain]
             self.ppb = PPBuilder()
@@ -90,7 +87,9 @@ class ID:
         The chain object corresponding to the protein sequence.
     """
 
-    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str) -> None:
+    def __init__(
+        self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str
+    ) -> None:
         self.pdb_fp = pdb_fp
         self.prot_name = prot_name
         self.file_chain = file_chain
@@ -98,8 +97,7 @@ class ID:
         self.pdb_fpn = self.pdb_fp + self.prot_name + self.file_chain + ".pdb"
 
         self.bio_parser = PDBParser()
-        self.structure = self.bio_parser.get_structure(
-            self.prot_name, self.pdb_fpn)
+        self.structure = self.bio_parser.get_structure(self.prot_name, self.pdb_fpn)
         self.model = self.structure[0]
         self.pdb_chain = self.model[self.seq_chain]
 
@@ -130,7 +128,9 @@ class Structure:
         The chain object corresponding to the protein sequence.
     """
 
-    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str) -> None:
+    def __init__(
+        self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str
+    ) -> None:
         self.pdb_fp = pdb_fp
         self.prot_name = prot_name
         self.file_chain = file_chain
@@ -138,8 +138,7 @@ class Structure:
         self.pdb_fpn = self.pdb_fp + self.prot_name + self.file_chain + ".pdb"
 
         self.bio_parser = PDBParser()
-        self.structure = self.bio_parser.get_structure(
-            self.prot_name, self.pdb_fpn)
+        self.structure = self.bio_parser.get_structure(self.prot_name, self.pdb_fpn)
         self.model = self.structure[0]
         if self.seq_chain != "":
             self.pdb_chain = self.model[self.seq_chain]
@@ -244,6 +243,5 @@ class Chain:
         self.prot_name = prot_name
         self.pdb_fpn = self.pdb_fp + self.prot_name + ".pdb"
         self.bio_parser = PDBParser(QUIET=True)
-        self.structure = self.bio_parser.get_structure(
-            self.prot_name, self.pdb_fpn)
+        self.structure = self.bio_parser.get_structure(self.prot_name, self.pdb_fpn)
         self.model = self.structure[0]

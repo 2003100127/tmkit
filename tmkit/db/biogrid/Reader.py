@@ -6,11 +6,14 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import List
-from tmkit.util.Reader import reader as greader
-from tmkit.util.Writer import writer
+
+import pandas as pd
+
+from tmkit.util.Reader import Reader as greader
+from tmkit.util.Writer import Writer
 
 
-class reader:
+class Reader:
     """
     A class for reading and processing BioGRID database files.
 
@@ -32,8 +35,8 @@ class reader:
     def __init__(
         self,
     ) -> None:
-        self.greader: greader = greader()
-        self.writer: writer = writer()
+        self.greader = greader()
+        self.writer = Writer()
 
     def fetch(self, sv_fp: str, version: str) -> str:
         """
@@ -64,10 +67,8 @@ class reader:
             + ".tab3.zip",
             fpn=sv_fp + "BIOGRID-ALL-" + version + ".tab3.zip",
         )
-        print("===>The database of version " +
-              version + " is successfully downloaded!")
-        print("===>The database of version " +
-              version + " is being decompressed...")
+        print("===>The database of version " + version + " is successfully downloaded!")
+        print("===>The database of version " + version + " is being decompressed...")
         import zipfile
 
         with zipfile.ZipFile(
@@ -84,7 +85,7 @@ class reader:
         biogrid_fpn: str,
         sv_fpn: str,
         extract_ids: List[str],
-    ) -> pandas.DataFrame:
+    ) -> pd.DataFrame:
         """
         Reads the BioGRID database file and extracts specified columns.
 

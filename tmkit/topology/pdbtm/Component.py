@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 from functools import wraps
 
 
-class component:
+class Component:
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs

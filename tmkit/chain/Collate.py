@@ -5,22 +5,15 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import warnings
-
-import pandas as pd
-from Bio import BiopythonWarning
-
-from tmkit.chain.PDB import pdb as cpdb
-from tmkit.sequence.PDB import pdb as spdb
-from tmkit.util.Kit import seqchainid
-
-
 from typing import Dict, List, Union
+
 import warnings
+
 import pandas as pd
 from Bio import BiopythonWarning
-from tmkit.chain.PDB import pdb as cpdb
-from tmkit.sequence.PDB import pdb as spdb
+
+from tmkit.chain.PDB import PDB as cpdb
+from tmkit.sequence.PDB import PDB as spdb
 from tmkit.util.Kit import seqchainid
 
 
@@ -33,18 +26,18 @@ class Collate:
         pdb_rcsb_fp: str,
     ) -> None:
         """
-        Collate chains from PDBTM and RCSB.
+        Collate chains between PDBTM and RCSB.
 
         Parameters
         ----------
         prot_name : str
-            Protein name.
+            Name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
         chain_focus : str
-            Chain focus.
-        pdb_pdbtm_fp : str
-            PDBTM file path.
+            Chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb)..
         pdb_rcsb_fp : str
-            RCSB file path.
+            Path where protein complexes from RCSB are placed.
+        pdb_pdbtm_fp: str
+            Path where protein complexes from PDBTM are placed.
         """
         self.prot_name = prot_name
         self.chain_focus = chain_focus
@@ -89,39 +82,26 @@ class Collate:
 
     def throwback(self, symbol: str) -> Dict[str, Union[str, List[str]]]:
         """
-        # TODO: fix this docstring
-        Throw back chains.
-
-        Notes
-        -----
-            throw_backs is a dict with keys being the collated protein chains
-            corresponding to the chains in RCSB mapped from PDBTM, with the
-            values 'untransformed' or 'collated' being whether protein chains
-             are untransformed or collated, respectively.
-
-        # Parameters
-        # ----------
-        # prot_df
-        # prot_collated_df
-        # pdb_chain_path
-        # symbol
+        Return a dict with keys being the collated protein chains
+        corresponding to the chains in RCSB mapped from PDBTM, with the
+        values 'untransformed' or 'collated' being whether protein chains
+         are untransformed or collated, respectively.
 
         Parameters
         ----------
         symbol : str
-            Symbol.
+            The symbol to use for missing residues, by default "."
 
         Returns
         -------
         Dict[str, Union[str, List[str]]]
-            Dictionary of throwbacks.
+            The collated dictionary: protein name -> 'transformed' or 'untransformed' (can be a list).
         """
         throw_backs = {}
         if self.df.loc[0, "source"] == "rcsb":
-            throw_backs[self.prot_name + symbol +
-                        self.chain_focus] = "untransformed"
+            throw_backs[self.prot_name + symbol + self.chain_focus] = "untransformed"
         else:
-            pdbtm_to_rcsb_dict = self.isSameSeq(symbol=symbol)
+            pdbtm_to_rcsb_dict = self.is_same_seq(symbol=symbol)
             if len([*pdbtm_to_rcsb_dict.values()]) > 0:
                 print(
                     "======>master is collated: {} ".format(
@@ -137,14 +117,14 @@ class Collate:
                 ] = "transformed & uncollated"
         return throw_backs
 
-    def isSameSeq(self, symbol: str) -> Dict[str, List[str]]:
+    def is_same_seq(self, symbol: str) -> Dict[str, List[str]]:
         """
         Check if sequences are the same.
 
         Parameters
         ----------
         symbol : str
-            Symbol.
+            The symbol to use for missing residues, by default "."
 
         Returns
         -------

@@ -14,16 +14,16 @@ import numpy as np
 
 from tmkit.interface import Topology
 from tmkit.sequence import Fasta as sfasta
-from tmkit.util.Reader import reader
-from tmkit.util.Writer import writer
+from tmkit.util.Reader import Reader
+from tmkit.util.Writer import Writer
 
 
-class tmhmm(Topology.topology):
+class TMHMM(Topology.Topology):
     def __init__(
         self,
     ):
-        self.reader = reader()
-        self.writer = writer()
+        self.reader = Reader()
+        self.writer = Writer()
 
     def run(
         self,

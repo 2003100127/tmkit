@@ -5,9 +5,10 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Any, Dict, List, Tuple
+
 import os
 import subprocess
-from typing import List, Tuple, Dict, Any
 
 import numpy as np
 import pandas as pd
@@ -15,7 +16,7 @@ import pandas as pd
 from tmkit.interface import Topology
 
 
-class Phobius(Topology):
+class Phobius(Topology.Topology):
     """
     Phobius topology class for running Phobius prediction on protein sequences.
 
@@ -135,18 +136,13 @@ class Phobius(Topology):
         Dict[str, Tuple[List[int], List[int]]]
             Dictionary of extracted regions.
         """
-        inside = df[[2, 3]].loc[df["type"].isin(
-            ["CYTOPLASMIC."])].values.tolist()
+        inside = df[[2, 3]].loc[df["type"].isin(["CYTOPLASMIC."])].values.tolist()
         tms = df[[2, 3]].loc[df[1].isin(["TRANSMEM"])].values.tolist()
-        outside = df[[2, 3]].loc[df["type"].isin(
-            ["NONCYTOPLASMIC."])].values.tolist()
+        outside = df[[2, 3]].loc[df["type"].isin(["NONCYTOPLASMIC."])].values.tolist()
         signal = df[[2, 3]].loc[df[1].isin(["SIGNAL"])].values.tolist()
-        cregion = df[[2, 3]].loc[df["type"].isin(
-            ["C-REGION."])].values.tolist()
-        hregion = df[[2, 3]].loc[df["type"].isin(
-            ["H-REGION."])].values.tolist()
-        nregion = df[[2, 3]].loc[df["type"].isin(
-            ["N-REGION."])].values.tolist()
+        cregion = df[[2, 3]].loc[df["type"].isin(["C-REGION."])].values.tolist()
+        hregion = df[[2, 3]].loc[df["type"].isin(["H-REGION."])].values.tolist()
+        nregion = df[[2, 3]].loc[df["type"].isin(["N-REGION."])].values.tolist()
         cytoplasmic = self.separate(inside)
         transmembrane = self.separate(tms)
         extracellular = self.separate(outside)

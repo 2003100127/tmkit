@@ -5,15 +5,17 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from typing import Dict, Any
+from typing import Dict
 
 from Bio.PDB.Polypeptide import three_to_one
 
-from tmkit.base import PDB
+from tmkit.base import PDB as bpdb
 
 
-class pdb(PDB.id):
-    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = "") -> None:
+class PDB(bpdb.ID):
+    def __init__(
+        self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = ""
+    ) -> None:
         """
         Parameters
         ----------
@@ -30,6 +32,8 @@ class pdb(PDB.id):
 
     def chain(self) -> Dict[int, str]:
         """
+        get a dictionary for mapping residue IDs to amino acid symbols
+
         Returns
         -------
         Dict[int, str]
@@ -40,5 +44,4 @@ class pdb(PDB.id):
             res_name: str = three_to_one(residue.get_resname())
             ids[residue.id[1]] = res_name
             # print([*ids.keys()])
-
         return ids

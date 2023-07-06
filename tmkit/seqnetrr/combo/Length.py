@@ -5,15 +5,18 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import List
+
 import pandas as pd
-import numpy as np
 
-from tmkit.seqnetrr.combo.Param import param
-from tmkit.seqnetrr.combo.Separation import separation
+from tmkit.seqnetrr.combo.Param import Param
+from tmkit.seqnetrr.combo.Separation import Separation
 
 
-class length(param):
-    def __init__(self, seq_sep_inferior: int = None, seq_sep_superior: int = None) -> None:
+class length(Param):
+    def __init__(
+        self, seq_sep_inferior: int = None, seq_sep_superior: int = None
+    ) -> None:
         """
         Parameters
         ----------
@@ -24,7 +27,7 @@ class length(param):
         """
         super().__init__(seq_sep_inferior, seq_sep_superior)
 
-    def topair(self, length: int, kind: str = "standard") -> np.ndarray:
+    def to_pair(self, length: int, kind: str = "standard") -> List:
         """
         Given length of a protein sequence, it gets fasta
         ids of residue pairs of a protein regulated by
@@ -39,29 +42,27 @@ class length(param):
 
         Returns
         -------
-        np.ndarray
-            2d array
+        List
+            2d list
         """
         df_ = pd.DataFrame(self.computlib.num2arr(length))
         if kind == "standard":
             return (
-                separation(
+                Separation(
                     df=df_,
                     first=0,
                     second=1,
                     is_sort=False,
                     seq_sep_inferior=self.seq_sep_inferior,
                     seq_sep_superior=self.seq_sep_superior,
-                )
-                .extract()
-                .values.tolist()
+                ).extract().values.tolist()
             )
         elif kind == "triangular":
             return self.computlib.num2triangular(length)
         elif kind == "under_triangular":
             return self.computlib.num2arr(length)
 
-    def tosgl(self, length: int) -> np.ndarray:
+    def tosgl(self, length: int) -> List:
         """
         Given length of a protein sequence, it gets fasta
         ids of residue pairs of a protein regulated by
@@ -74,7 +75,7 @@ class length(param):
 
         Returns
         -------
-        np.ndarray
-            2d array
+        List
+            2d list
         """
         return self.computlib.num2arr2d(1, length)

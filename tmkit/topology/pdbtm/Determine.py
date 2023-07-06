@@ -5,10 +5,12 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Tuple, Dict
+
 import pandas as pd
 
 from tmkit.topology.pdbtm.ToFastaId import toFastaId
-from tmkit.topology.Phobius import phobius
+from tmkit.topology.Phobius import Phobius
 
 
 class determine:
@@ -20,7 +22,27 @@ class determine:
         pdbid_map,
         fasid_map,
         xml_fp,
-    ):
+    ) -> Tuple[Dict, Dict]:
+        """
+
+        Parameters
+        ----------
+        pred_fp
+            A topo file, i.e., Phobius or TMHMM
+        prot_name : str
+            name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
+        seq_chain : str
+            chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb) (biological purpose).
+        pdbid_map
+            Dictionary mapping PDB residue IDs to amino acid symbols.
+        fasid_map
+            A dictionary of FASTA IDs and their corresponding sequences.
+        xml_fp
+            path where a target XML file is placed.
+        Returns
+        -------
+
+        """
         fasta_lower_nontmh, fasta_upper_nontmh = toFastaId().nontmh(
             pdbid_map=pdbid_map,
             fasid_map=fasid_map,
@@ -39,7 +61,7 @@ class determine:
         )
         # print(fasta_lower_tmh)
         # print(fasta_upper_tmh)
-        w = phobius()
+        w = Phobius()
         df = w.format(phobius_fpn=pred_fp)
         pred_seg = w.extract(df=df)
         # print(pred_seg)

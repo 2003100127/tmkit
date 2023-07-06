@@ -1,8 +1,10 @@
 name: testpypi-publish
+
 on:
   push:
     tags:
-      - "build*"
+      - "v*"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,9 +13,9 @@ jobs:
       - name: Build and publish to pypi
         uses: JRubics/poetry-publish@v1.17
         with:
-          python_version: "3.8"
+          python_version: "3.10"
           poetry_version: "==1.5.1" # (PIP version specifier syntax)
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          pypi_token: ${{ secrets.PYPI_TOKEN_TEST }}
           build_format: "sdist"
           allow_poetry_pre_release: "yes"
           ignore_dev_requirements: "yes"

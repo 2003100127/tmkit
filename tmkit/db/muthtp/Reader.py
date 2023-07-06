@@ -5,11 +5,14 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from typing import Dict, Any
-from tmkit.util.Reader import reader as greader
+from typing import Dict
+
+import pandas as pd
+
+from tmkit.util.Reader import Reader as greader
 
 
-class reader:
+class Reader:
     def __init__(self) -> None:
         self.greader = greader()
 
@@ -98,18 +101,18 @@ class reader:
         )
         return "Finished!"
 
-    def full(self, muthtp_fpn: str) -> Any:
+    def full(self, muthtp_fpn: str) -> pd.DataFrame:
         """
         Read the MutHTP database from a file.
 
         Parameters
         ----------
         muthtp_fpn : str
-            The file path of the MutHTP database.
+            The path to the MutHTP database file.
 
         Returns
         -------
-        Any
+        pd.DataFrame
             A pandas DataFrame containing the MutHTP database.
         """
         print("======>reading MutHTP...")

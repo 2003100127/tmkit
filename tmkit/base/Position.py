@@ -5,14 +5,15 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import List, Tuple, Union
+
 import numpy as np
 
 
-from typing import List, Tuple
-
-
 class Position:
-    def __init__(self, seq_sep_inferior: int = None, seq_sep_superior: int = None) -> None:
+    def __init__(
+        self, seq_sep_inferior: Union[int, float] = None, seq_sep_superior: Union[int, float] = None
+    ) -> None:
         """
         Parameters
         ----------
@@ -24,7 +25,9 @@ class Position:
         self.seq_sep_inferior = seq_sep_inferior
         self.seq_sep_superior = seq_sep_superior
 
-    def interv2combi(self, inf_arr: List[int], sup_arr: List[int]) -> List[Tuple[int, int]]:
+    def interv2combi(
+        self, inf_arr: List[int], sup_arr: List[int]
+    ) -> List[Tuple[int, int]]:
         """
         Convert two arrays of inferior and superior sequence separations into a list of tuples representing all possible combinations.
 

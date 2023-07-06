@@ -7,12 +7,23 @@ __maintainer__ = "Jianfeng Sun"
 
 from functools import wraps
 
-from tmkit.id.Mapping import mapping as pdbid
-from tmkit.topology.pdbtm.Component import component
+from tmkit.id.Mapping import Mapping as pdbid
+from tmkit.topology.pdbtm.Component import Component
 
 
-class segment:
-    def __init__(self, type="tmh"):
+class Segment:
+    def __init__(self, type: str="tmh"):
+        """
+
+        Parameters
+        ----------
+        type: str
+            A topology code. It can be one of side1, side2, strand,
+            tmh, coil, inside, loop, interfacial, and Unknown,
+            which correspond to Side1, Side2, Beta strand, Alpha
+            helix, Coil, Membrane-inside, Membrane-loop,
+            Interfacial, Unknown topologies.
+        """
         self.type = type
 
     def __call__(self, deal):
@@ -61,46 +72,145 @@ class segment:
 
         return switch
 
-    @component(type="side1")
+    @Component(type="side1")
     def side1(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of side1 topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="side2")
+    @Component(type="side2")
     def side2(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of side2 topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="alpha-helix")
+    @Component(type="alpha-helix")
     def tmh(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of helical topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="non-alpha-helix")
+    @Component(type="non-alpha-helix")
     def nontmh(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of non-helical topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="beta-strand")
+    @Component(type="beta-strand")
     def strand(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of b-strand topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="coil")
+    @Component(type="coil")
     def coil(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of coil topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="membrane-inside")
+    @Component(type="membrane-inside")
     def inside(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of inside topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="membrane-loop")
+    @Component(type="membrane-loop")
     def loop(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of loop topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="interfacial-helix")
+    @Component(type="interfacial-helix")
     def interfacial(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of interfacial topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="unknown")
+    @Component(type="unknown")
     def unknown(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of unknown topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id
 
-    @component(type="all")
+    @Component(type="all")
     def all(self, start_id, last_id, xml_fp="", prot_name="", seq_chain=""):
+        """Return output of all topology, lower bounds (start_id) are the set of
+        starting positions of residues in the PDB structure
+        while upper bounds (last_id) are the set of ending positions
+        of residues in the PDB structure. They match
+        each other this way. For example, for topology
+        Side2, the first continuous segment is from
+        residue 3 to residue 14, and the second one is
+        from residue 65 to residue 101, ..., and the last
+        one is from residue 333 to residue 352."""
         return start_id, last_id

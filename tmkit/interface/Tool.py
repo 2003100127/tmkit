@@ -23,6 +23,7 @@ class Tool(metaclass=ABCMeta):
     execute()
         Abstract method to execute the tool.
     """
+
     @abstractmethod
     def initializer(self) -> None:
         """

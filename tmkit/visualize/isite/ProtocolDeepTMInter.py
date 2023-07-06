@@ -5,11 +5,11 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from typing import List, Tuple
-from pymol import cmd, finish_launching
-from tmkit.chain.PDB import pdb as cpdb
-from tmkit.visualize.component.Color import color as libcolor
-from tmkit.visualize.component.Select import select as libsel
+from typing import List
+
+from tmkit.chain.PDB import PDB as cpdb
+from tmkit.visualize.component.Color import Color as libcolor
+from tmkit.visualize.component.Select import Select as libsel
 from tmkit.visualize.isite.Labelling import labelling
 
 
@@ -24,7 +24,7 @@ class ProtocolDeepTMInter:
         isite_fp: str,
         dist_fp: str,
         sv_bfactor_fp: str,
-        pymol_bg_chain_ids: List[str],
+        pymol_bg_chain_ids: str,
         draw_type: str = "label_actual",
         bg_chain_name: str = "all",
         bg_chain_color: str = "sulfur",
@@ -39,17 +39,19 @@ class ProtocolDeepTMInter:
         Parameters
         ----------
         prot_name : str
-            A pdb entry name.
+            name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
         prot_chain : str
-            Protein chain.
+            chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb).
         pdb_chain_fp : str
-            The pdb file of the protein chain.
+            path where a target PDB file is place.
+        dist_fp : str
+            path where a file containing real distances between residues is placed (please check the file at ./data/rrc in the example dataset).
         pdb_complex_fp : str
-            The pdb file of the protein complex.
+            path where a PDB file showing a protein complex is placed.
         tool : str
-            Prediction tool name. Can be one of "mbpred", "delphi", or "deeptminter".
+            tool name. Currently, the reading of DeepTMInter, DELPHI, and MBPred files is supported.
         isite_fp : str
-            File path to the isite.
+            path where a file showing interaction sites and the interaction likelihoods is placed.
         dist_fp : str
             File path to the distance.
         sv_bfactor_fp : str
@@ -63,7 +65,7 @@ class ProtocolDeepTMInter:
         bg_chain_color : str, optional
             ckground chain. Can be one of "chromium", "sulfur", "xenon", "technetium", or "germanium", by default "sulfur".
         focus_chain_name : str, optional
-        f the focus chain, by default "focus".
+            the focus chain, by default "focus".
         focus_representation : str, optional
             Representation of the focus chain. Can be one of "surface", "cartoon", "lines", "sticks", or "spheres", by default "surface".
         color_list : str, optional
@@ -71,6 +73,8 @@ class ProtocolDeepTMInter:
         bg_color : str, optional
             Background color. Can be any valid PyMOL color, by default "black".
         """
+        from pymol import cmd, finish_launching
+
         finish_launching()
 
         self.type = {

@@ -1,8 +1,14 @@
-# Usage: docker-compose run --name tmkit-dev2 tmkit
+# Usage: docker-compose run --name tmkit-dev tmkit
 version: '3'
 services:
-  tmkit:
-    image: "jinlongru/tmkit:docker2"
+  tmkit-arm64:
+    image: "2003100127/tmkit:v0.0.2.1"
     platform: linux/arm64
+    volumes:
+      - ./:/workspace
+
+  tmkit:
+    image: "2003100127/tmkit:v0.0.2.1"
+    platform: linux/amd64
     volumes:
       - ./:/workspace

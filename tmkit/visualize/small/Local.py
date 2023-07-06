@@ -6,15 +6,15 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import List, Tuple
-from pymol import cmd, finish_launching, preset
-from tmkit.chain.PDB import pdb as cpdb
-from tmkit.visualize.small.Label import label as pppmlabel
-from tmkit.visualize.small.Palette import palette as pppmpalette
-from tmkit.visualize.small.Select import select as pppmselect
-from tmkit.visualize.small.Style import style as pppmstyle
+
+from tmkit.chain.PDB import PDB as cpdb
+from tmkit.visualize.small.Label import Label as pppmlabel
+from tmkit.visualize.small.Palette import Palette as pppmpalette
+from tmkit.visualize.small.Select import Select as pppmselect
+from tmkit.visualize.small.Style import Style as pppmstyle
 
 
-class local:
+class Local:
     def __init__(
         self,
         prot_name: str,
@@ -45,6 +45,14 @@ class local:
         pocket_rep : str, optional
             The representation of the pocket, by default "surface".
         """
+        from pymol import cmd, finish_launching, preset
+
+        from tmkit.chain.PDB import PDB as cpdb
+        from tmkit.visualize.small.Label import Label as pppmlabel
+        from tmkit.visualize.small.Palette import Palette as pppmpalette
+        from tmkit.visualize.small.Select import Select as pppmselect
+        from tmkit.visualize.small.Style import Style as pppmstyle
+
         finish_launching()
 
         cmd.bg_color(

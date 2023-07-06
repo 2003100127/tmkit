@@ -16,12 +16,19 @@ poetry-download:
 poetry-remove:
 	curl -sSL https://install.python-poetry.org | $(PYTHON) - --uninstall
 
+.PHONY: create-venv
+create-venv:
+	poetry config virtualenvs.in-project true
+	poetry config virtualenvs.create true
+	poetry shell
+	poetry install
+
 #* Installation
 .PHONY: install
 install:
 	poetry lock -n && poetry export --without-hashes > requirements.txt
 	poetry install -n
-	-poetry run mypy --install-types --non-interactive ./
+
 
 .PHONY: pre-commit-install
 pre-commit-install:
@@ -40,7 +47,7 @@ formatting: codestyle
 #* Linting
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=tmkit tests/
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=tmkit tests
 	poetry run coverage-badge -o assets/images/coverage.svg -f
 
 .PHONY: check-codestyle
@@ -64,8 +71,8 @@ lint: test check-codestyle mypy check-safety
 
 .PHONY: update-dev-deps
 update-dev-deps:
-	poetry add -D bandit@latest pydoclint@latest "isort[colors]@latest" mypy@latest pre-commit@latest pydocstyle@latest pylint@latest pytest@latest pyupgrade@latest safety@latest coverage@latest coverage-badge@latest pytest-html@latest pytest-cov@latest
-	poetry add -D --allow-prereleases black@latest
+	poetry add --group dev bandit@latest pydoclint@latest "isort[colors]@latest" mypy@latest pre-commit@latest pydocstyle@latest pylint@latest pytest@latest pyupgrade@latest safety@latest coverage@latest coverage-badge@latest pytest-html@latest pytest-cov@latest
+	poetry add --group dev --allow-prereleases black@latest
 
 #* Docker
 # Example: make docker-build VERSION=latest

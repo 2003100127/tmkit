@@ -8,17 +8,11 @@ __maintainer__ = "Jianfeng Sun"
 import time
 
 
-class pair:
+class Pair:
     """
-    Methods
-    -------
-        mid(), mname(), bipartite(), make().
-
-    Notes
-    -----
-        window.pair class offers methods to perform a sliding
-        window op for each of central residue pairs for a
-        given sequence.
+    window.pair class offers methods to perform a sliding
+    window op for each of central residue pairs for a
+    given sequence.
 
     """
 
@@ -36,10 +30,7 @@ class pair:
 
     def mid(self):
         """
-        Notes
-        -----
-            mid() gets all of residues around central residues with
-            a window size.
+        Gets all of residues around central residues with a window size.
 
         Methods
         -------
@@ -68,7 +59,8 @@ class pair:
 
         Returns
         -------
-            oder number of pairs and name of pairs
+        List
+            oder number of pairs and name of pairs.
 
         """
         start_time = time.time()
@@ -121,9 +113,7 @@ class pair:
 
     def mname(self, window_m_ids):
         """
-        Notes
-        -----
-            mname() gets all residues names corresponding to mid().
+        Gets all residues names corresponding to mid().
 
         Methods
         -------
@@ -133,6 +123,11 @@ class pair:
 
             What kind of residues and how many residues the window
             includes, see method mid().
+
+        Returns
+        -------
+        List
+            name of pairs.
 
         """
         num_pairs = len(window_m_ids)

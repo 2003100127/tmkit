@@ -6,10 +6,7 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
-from typing import List
-
-
-class l:
+class Label:
     """
     A class for labeling residues in PyMOL.
 

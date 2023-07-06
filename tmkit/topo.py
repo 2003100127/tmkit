@@ -5,16 +5,14 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.id.Fasta import fasta as idfasta
-from tmkit.id.PDB import pdb as idpdb
+from typing import List, Tuple, Dict
+
+from tmkit.id.Fasta import Fasta as idfasta
+from tmkit.id.PDB import PDB as idpdb
 from tmkit.topology.pdbtm.Determine import determine
-from tmkit.topology.pdbtm.Segment import segment
-from tmkit.topology.Phobius import phobius
-from tmkit.topology.TMHMM import tmhmm
-
-
-from typing import Tuple, List, Union
-import numpy as np
+from tmkit.topology.pdbtm.Segment import Segment
+from tmkit.topology.Phobius import Phobius
+from tmkit.topology.TMHMM import TMHMM
 
 
 def from_pdbtm(
@@ -22,7 +20,7 @@ def from_pdbtm(
     prot_name: str,
     seq_chain: str,
     topo: str = "tmh",
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Tuple[List, List]:
     """
     Extracts topology information from PDBTM XML file.
 
@@ -31,39 +29,43 @@ def from_pdbtm(
     xml_fp : str
         The file path of the PDBTM XML file.
     prot_name : str
-        The name of the protein.
+        name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
     seq_chain : str
-        The chain ID of the protein sequence.
+        chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb) (biological purpose).
     topo : str, optional
-        The type of topology to extract, by default "tmh".
+        A topology code. It can be one of side1, side2, strand,
+        tmh, coil, inside, loop, interfacial, and Unknown,
+        which correspond to Side1, Side2, Beta strand, Alpha
+        helix, Coil, Membrane-inside, Membrane-loop,
+        Interfacial, Unknown topologies.
 
     Returns
     -------
-    Tuple[np.ndarray, np.ndarray]
-        A tuple of two numpy arrays representing the lower and upper bounds of the topology.
+    Tuple[List, List]
+        A tuple of two Lists representing the lower and upper bounds of the topology.
     """
     if topo == "side1":
-        w = segment().side1
+        w = Segment().side1
     elif topo == "side2":
-        w = segment().side2
+        w = Segment().side2
     elif topo == "tmh":
-        w = segment().tmh
+        w = Segment().tmh
     elif topo == "nontmh":
-        w = segment().nontmh
+        w = Segment().nontmh
     elif topo == "strand":
-        w = segment().strand
+        w = Segment().strand
     elif topo == "coil":
-        w = segment().coil
+        w = Segment().coil
     elif topo == "inside":
-        w = segment().inside
+        w = Segment().inside
     elif topo == "loop":
-        w = segment().loop
+        w = Segment().loop
     elif topo == "interfacial":
-        w = segment().interfacial
+        w = Segment().interfacial
     elif topo == "unknown":
-        w = segment().unknown
+        w = Segment().unknown
     else:
-        w = segment().all
+        w = Segment().all
     return w(
         xml_fp=xml_fp,
         prot_name=prot_name,
@@ -78,7 +80,7 @@ def from_phobius(
     fasta_fpn: str = None,
     sv_fp: str = None,
     tag: str = None,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Tuple[List, List]:
     """
     Extracts topology information from Phobius output.
 
@@ -99,14 +101,13 @@ def from_phobius(
 
     Returns
     -------
-    Tuple[np.ndarray, np.ndarray]
+    Tuple[List, List]
         A tuple of two numpy arrays representing the lower and upper bounds of the topology.
     """
-    w = phobius()
+    w = Phobius()
     if from_fasta:
         w.run(fasta_fpn=fasta_fpn, sv_fpn=sv_fp + tag)
-    df = w.format(phobius_fpn=sv_fp + tag +
-                  ".jphobius" if from_fasta else phobius_fpn)
+    df = w.format(phobius_fpn=sv_fp + tag + ".jphobius" if from_fasta else phobius_fpn)
     ptopos = w.extract(df)
     return ptopos[topo + "_lower"], ptopos[topo + "_upper"]
 
@@ -123,7 +124,7 @@ def from_tmhmm(
     decodeanhmm: str = None,
     options: List[str] = None,
     modelfile: str = None,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Tuple[List, List]:
     """
     Extracts topology information from TMHMM output.
 
@@ -136,7 +137,7 @@ def from_tmhmm(
     tmhmm_fpn : str, optional
         The file path of the TMHMM output file, by default None.
     from_fasta : bool, optional
-    from a fasta file, by default True.
+        from a fasta file, by default True.
     file_kind : str, optional
         The type of file to extract from, by default "inline".
     fasta_fpn : str, optional
@@ -154,10 +155,10 @@ def from_tmhmm(
 
     Returns
     -------
-    Tuple[np.ndarray, np.ndarray]
+    Tuple[List, List]
         A tuple of two numpy arrays representing the lower and upper bounds of the topology.
     """
-    w = tmhmm()
+    w = TMHMM()
     if from_fasta:
         assert sv_fpn != None
         if file_kind == "inline":
@@ -195,18 +196,18 @@ def cepdbtm(
     fasta_fp: str,
     topo_fp: str,
     xml_fp: str,
-) -> np.ndarray:
+) -> Tuple[Dict, Dict]:
     """
-    Determines the topology of a protein from PDB and FASTA files.
+    Determines structure-derived intra- and extra-cellular topology of a protein.
 
     Parameters
     ----------
     prot_name : str
-        The name of the protein.
+        name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
     seq_chain : str
-        The chain ID of the protein sequence.
+        chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb) (biological purpose).
     file_chain : str
-        The chain ID of the PDB file.
+        chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb) (technical purpose).
     pdb_fp : str
         The file path of the PDB file.
     fasta_fp : str
@@ -218,8 +219,8 @@ def cepdbtm(
 
     Returns
     -------
-    np.ndarray
-        A numpy array representing the topology of the protein.
+    Tuple
+        Two dictionaries (structure and prediction) the topology of the protein.
     """
     pdbids = idpdb(
         pdb_fp=pdb_fp,

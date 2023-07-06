@@ -8,25 +8,9 @@ __maintainer__ = "Jianfeng Sun"
 import time
 
 
-class single:
-    """
-    Methods
-    -------
-       mid(), mname(), bipartite(), make().
-
-    Notes
-    -----
-       window class offers methods to perform a sliding window op for each of central
-       residue pairs for a given sequence.
-
-    See Also
-    --------
-       It was introduced since v1.0.
-       Change Log:
-       1>. It has been revised since the end of June, 2018.
-       2>. It has been revised since Oct. 10th, 2018.
-
-    """
+class Single:
+    """It offers methods to perform a sliding window op for each of central
+       residue pairs for a given sequence."""
 
     def __init__(
         self,
@@ -41,10 +25,7 @@ class single:
 
     def mid(self):
         """
-
-        Notes
-        -----
-           mid() gets all of residues around central residues with a window size.
+        Gets all of residues around central residues with a window size.
 
         Methods
         -------
@@ -57,16 +38,10 @@ class single:
            > block 1: assigning central residues to residues around them.
            > block 2: assigning only None for window_m_id.
 
-        See Also
-        --------
-           It was introduced since v1.0.
-           Change Log:
-           1>. It has been revised since the end of June, 2018.
-           2>. It has been revised since Oct. 10th, 2018.
-
         Returns
         -------
-            oder number of pairs and name of pairs.
+        List
+            oder number of residues
 
         """
         start_time = time.time()
@@ -97,10 +72,7 @@ class single:
 
     def mname(self, m_idices):
         """
-
-        Notes
-        -----
-           mname() gets all residues names corresponding to mid().
+        Gets all residues names corresponding to mid().
 
         Methods
         -------
@@ -112,20 +84,14 @@ class single:
            what kind of residues and how many residues the window includes, see method
            mid().
 
-        References
-        ----------
-           It was introduced since v1.0.
-           Change Log:
-           1>. It has been revised since the end of June, 2018.
-           2>. It has been revised since Oct. 10th, 2018.
-
         Parameters
         ----------
         m_idices
 
         Returns
         -------
-            2d array (list)
+        List
+            names of residues
 
         """
         num_m = len(m_idices)

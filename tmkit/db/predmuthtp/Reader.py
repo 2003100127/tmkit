@@ -5,11 +5,13 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.util.Reader import reader as greader
-from tmkit.util.Writer import writer as gwriter
+import pandas as pd
+
+from tmkit.util.Reader import Reader as greader
+from tmkit.util.Writer import Writer as gwriter
 
 
-class reader:
+class Reader:
     def __init__(
         self,
     ):
@@ -18,8 +20,21 @@ class reader:
 
     def fetch(
         self,
-        sv_fp,
-    ):
+        sv_fp: str,
+    ) -> str:
+        """
+        Download the Pred-MutHTP database.
+
+        Parameters
+        ----------
+        sv_fp : str
+            The path to the directory where the database will be saved.
+
+        Returns
+        -------
+        str
+            A message indicating the download is finished.
+        """
         from tmkit.util.Kit import urlliby
 
         print("===>The Pred-MutHTP database is being downloaded...")
@@ -36,7 +51,20 @@ class reader:
         print("===>The Pred-MutHTP database is successfully decompressed!")
         return "Finished!"
 
-    def readall(self, pred_muthtp_fpn):
+    def readall(self, pred_muthtp_fpn: str) -> pd.DataFrame:
+        """
+        Read the Pred-MutHTP database.
+
+        Parameters
+        ----------
+        pred_muthtp_fpn : str
+            The path to the Pred-MutHTP database file.
+
+        Returns
+        -------
+        pd.DataFrame
+            A pandas DataFrame Pred-MutHTP the MutHTP database.
+        """
         print("======>reading Pred-MutHTP...")
         all = self.greader.generic(pred_muthtp_fpn, df_sep=",")
         all = all.rename(
@@ -53,21 +81,39 @@ class reader:
             print(f"=========>No.{i + 1}: {e}")
         return all
 
-    def readsingle(self, pred_split_muthtp_fpn):
+    def readsingle(self, pred_split_muthtp_fpn: str) -> pd.DataFrame:
+        """
+        Read the split Pred-MutHTP database.
+
+        Parameters
+        ----------
+        pred_split_muthtp_fpn : str
+            The path to the split Pred-MutHTP database file.
+
+        Returns
+        -------
+        pd.DataFrame
+            A pandas DataFrame Pred-MutHTP the MutHTP database.
+        """
         print("======>reading split Pred-MutHTP...")
         all = self.greader.generic(pred_split_muthtp_fpn, header=0)
         return all
 
-    def split(self, pred_muthtp_df, sv_fp):
+    def split(self, pred_muthtp_df: pd.DataFrame, sv_fp: str) -> str:
         """
+        Split the Pred-MutHTP database.
 
         Parameters
         ----------
-        pred_muthtp_df
-        sv_fp
+        pred_muthtp_df : pd.DataFrame
+            A list of dictionaries containing the Pred-MutHTP database.
+        sv_fp : str
+            The path to the directory where the split database will be saved.
 
         Returns
         -------
+        str
+            A message indicating the download is finished.
 
         """
         pred_muthtp_df = pred_muthtp_df[
@@ -90,4 +136,4 @@ class reader:
                 sv_fpn=sv_fp + prot_id + ".predmuthtp",
                 header=True,
             )
-        return 0
+        return 'Finished'

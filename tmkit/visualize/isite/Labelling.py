@@ -8,11 +8,11 @@ __maintainer__ = "Jianfeng Sun"
 import numpy as np
 import pandas as pd
 
-from tmkit.db.Reader import reader as ppireader
-from tmkit.structure.PDB import pdb as spdb
-from tmkit.structure.ppi.Label import label as dlable
+from tmkit.db.Reader import Reader as ppireader
+from tmkit.structure.PDB import PDB as spdb
+from tmkit.structure.ppi.Label import Label as dlable
 from tmkit.util.Kit import chainid, create, seqchainid, tactic8
-from tmkit.util.Writer import writer
+from tmkit.util.Writer import Writer
 
 
 class labelling:
@@ -26,24 +26,24 @@ class labelling:
         sv_fp: str,
     ) -> None:
         """
-        Initialize the labelling class.
+        Labelling a protein.
 
         Parameters
         ----------
         tool : str
             The tool to use for fetching data.
         prot_name : str
-            The name of the protein.
+            name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
         prot_chain : str
-            The chain of the protein.
+            chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb).
         pdb_fp : str
             The filepath of the PDB file.
         isite_fp : str
-            The filepath of the iSite file.
+            Path where a file showing interaction sites and the interaction likelihoods is placed.
         sv_fp : str
             The filepath of the saved file.
         """
-        self.writer = writer()
+        self.writer = Writer()
         self.ppireader = ppireader()
         self.tool = tool
         self.prot_name = prot_name
@@ -149,18 +149,17 @@ class labelling:
         self,
     ) -> pd.DataFrame:
         """
-        Get the probabilities.
+        Get the interaction probabilities.
 
         Returns
         -------
         pd.DataFrame
-            The probabilities.
+            DataFrame of the interaction probabilities.
         """
         df = pd.concat(
             [pd.DataFrame(self.pdb_ids), self.isite_pred["probability"]], axis=1
         )
-        self.writer.generic(df=df, df_sep="\t",
-                            sv_fpn=self.sv_fp + "probs_bf.txt")
+        self.writer.generic(df=df, df_sep="\t", sv_fpn=self.sv_fp + "probs_bf.txt")
         return df
 
     def predictedLabels(
@@ -173,12 +172,12 @@ class labelling:
         Parameters
         ----------
         dist_fp : str
-            The filepath of the distance file.
+            path where a file containing real distances between residues is placed (please check the file at ./data/rrc in the example dataset).
 
         Returns
         -------
         pd.DataFrame
-            The predicted labels.
+            The predicted interaction labels.
         """
         self.isite_pred["is_interaction"] = -1
         ni_ids = self.isite_pred.loc[self.isite_pred["probability"] < 0.5].index
@@ -224,12 +223,12 @@ class labelling:
         dist_fp: str,
     ) -> pd.DataFrame:
         """
-        Get the actual labels.
+        Get the actual interaction labels.
 
         Parameters
         ----------
         dist_fp : str
-            The filepath of the distance file.
+            path where a file containing real distances between residues is placed (please check the file at ./data/rrc in the example dataset).
 
         Returns
         -------
@@ -243,8 +242,7 @@ class labelling:
             cutoff=6,
         ).attach()
         create(DIRECTORY=self.sv_fp, mode="dir")
-        df = pd.concat([pd.DataFrame(self.pdb_ids),
-                       dist_df["is_contact"]], axis=1)
+        df = pd.concat([pd.DataFrame(self.pdb_ids), dist_df["is_contact"]], axis=1)
         self.writer.generic(
             df=df, df_sep="\t", sv_fpn=self.sv_fp + "actual_label_bf.txt"
         )

@@ -8,34 +8,39 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.util.Kit import urlliby
 
 
-from typing import List
-from tmkit.util.Kit import urlliby
-
-
-def tmkit_data(url: str, sv_fpn: str) -> None:
-    """_summary_
+def tmkit_data(
+    sv_fpn: str,
+    url: str = 'https://sandbox.zenodo.org/record/1219139/files/data.zip?download=1',
+) -> None:
+    """
+    Download TMKit example dataset.
 
     Parameters
     ----------
     url : str
-        _description_
+        URL to download the TMKit example dataset
     sv_fpn : str
-        _description_
+        path to save the TMKit example dataset
     """
+    print("===>Dowloading TMKit example dataset...")
     urlliby(url=url, fpn=sv_fpn)
+    print("===>Dowloaded!")
 
 
 def unzip(in_fpn: str, out_fp: str) -> None:
-    """_summary_
+    """
+    Decompressing TMKit example dataset
 
     Parameters
     ----------
     in_fpn : str
-        _description_
+        path to save the TMKit example dataset
     out_fp : str
-        _description_
+        path where the TMKit example dataset is decompressed
     """
     import zipfile
 
+    print("===>Decompressing TMKit example dataset...")
     with zipfile.ZipFile(in_fpn, "r") as zip_ref:
         zip_ref.extractall(out_fp)
+    print("===>Decompressed!")

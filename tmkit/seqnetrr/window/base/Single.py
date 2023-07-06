@@ -5,10 +5,10 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.seqnetrr.ComputLib import computLib
+from tmkit.seqnetrr.ComputLib import ComputLib
 
 
-class single:
+class Single:
     def __init__(self, sequence, window_size, window_m_ids):
         """
 
@@ -39,4 +39,4 @@ class single:
         self.stretch_window = int(
             (self.window_size * 2 + 1) * (self.window_size * 2) / 2
         )
-        self.computlib = computLib()
+        self.computlib = ComputLib()

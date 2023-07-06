@@ -6,7 +6,7 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
-class computLib:
+class ComputLib:
     def interv2single(self, inf_arr, sup_arr):
         """
 

@@ -5,12 +5,13 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Dict, List, Union
+
 import numpy as np
 import pandas as pd
 from sklearn import metrics
-from typing import List, Union, Dict
 
-from tmkit.contact.Reader import reader as rrcreader
+from tmkit.contact.Reader import Reader as rrcreader
 
 
 class evaluator:
@@ -20,10 +21,10 @@ class evaluator:
         file_chain: str,
         dist_df: pd.DataFrame,
         pair_list: List,
-        dist_limit: Union[int, None] = None,
+        dist_limit: Union[float, None] = None,
         tool: Union[str, None] = None,
         tool_fp: Union[str, None] = None,
-        sort_: Union[bool, None] = None,
+        sort_: Union[int, None] =None,
         seq_sep_inferior: Union[int, None] = None,
         seq_sep_superior: Union[int, None] = None,
     ) -> None:
@@ -82,6 +83,15 @@ class evaluator:
         print(f"======>Evaluating protein {prot_name + file_chain}")
 
     def fetch(self):
+        """
+        Fetch results of a contact method prediction.
+
+        Returns
+        -------
+        pd.DataFrame
+            Contact prediction results.
+
+        """
         switch = {
             "psicov": self.psicov,
             "freecontact": self.freecontact,
@@ -137,8 +147,7 @@ class evaluator:
             ).astype(np.int64)
         )
         # #/*** block precision ***/
-        precision = metrics.precision_score(
-            y_true=y_true_all, y_pred=y_pred_all)
+        precision = metrics.precision_score(y_true=y_true_all, y_pred=y_pred_all)
         print(f"=========>precision: {precision}")
         # #/*** block recall ***/
         recall = metrics.recall_score(y_true=y_true_all, y_pred=y_pred_all)
@@ -322,8 +331,8 @@ class evaluator:
         pd.DataFrame
             The concatenated DataFrame of Tma165 distances and chain distances.
         """
-        tma165_dist, chain_dist_all = self.rrcreader.tma165(
-            tma165_path=self.tool_fp,
+        tma165_dist, chain_dist_all = self.rrcreader.deephelicon(
+            deephelicon_path=self.tool_fp,
             file_name=self.prot_name,
             file_chain=self.file_chain,
             pair_list=self.pair_list,

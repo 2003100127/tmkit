@@ -5,7 +5,7 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.topology.pdbtm.Segment import segment as fetchfasids
+from tmkit.topology.pdbtm.Segment import Segment as fetchfasids
 
 
 class toFastaId:

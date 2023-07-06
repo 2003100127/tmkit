@@ -6,7 +6,8 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import Optional
-from tmkit.seqnetrr.ComputLib import computLib
+
+from tmkit.seqnetrr.ComputLib import ComputLib
 
 
 class Param:
@@ -28,7 +29,11 @@ class Param:
         Initializes a new instance of the Param class.
     """
 
-    def __init__(self, seq_sep_inferior: Optional[int] = None, seq_sep_superior: Optional[int] = None) -> None:
+    def __init__(
+        self,
+        seq_sep_inferior: Optional[int] = None,
+        seq_sep_superior: Optional[int] = None,
+    ) -> None:
         """
         Initializes a new instance of the Param class.
 
@@ -41,4 +46,4 @@ class Param:
         """
         self.seq_sep_inferior = seq_sep_inferior
         self.seq_sep_superior = seq_sep_superior
-        self.computlib = computLib()
+        self.computlib = ComputLib()

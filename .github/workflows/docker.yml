@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - "v*"
-      - "d*"
+      - "docker*"
 
 jobs:
   push_to_registry:
@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: Dockerfile.dev
-            image: jinlongru/tmkit-dev
+          # - dockerfile: Dockerfile.dev
+          #   image: jinlongru/tmkit-dev
           - dockerfile: Dockerfile
             image: jinlongru/tmkit
     permissions:

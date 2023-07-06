@@ -5,13 +5,14 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from functools import wraps
 from typing import Any, Dict, List, Tuple, Union
+
+from functools import wraps
 
 import pandas as pd
 
 
-class writer:
+class Writer:
     """
     A class that provides methods for writing data to files.
 
@@ -101,8 +102,15 @@ class writer:
 
         return write
 
-    def generic(self, df: Union[pd.DataFrame, List[List[Any]]], sv_fpn: str, df_sep: str = "\t",
-                header: Union[None, bool, List[str]] = None, index: bool = False, id_from: int = 0) -> None:
+    def generic(
+        self,
+        df: Union[pd.DataFrame, List[List[Any]]],
+        sv_fpn: str,
+        df_sep: str = "\t",
+        header: Union[None, bool, List[str]] = None,
+        index: bool = False,
+        id_from: int = 0,
+    ) -> None:
         """
         Writes a DataFrame or a 2D list to a file in generic format.
 
@@ -129,8 +137,15 @@ class writer:
         df_.index = df_.index + id_from
         return df_.to_csv(sv_fpn, sep=df_sep, header=header, index=index)
 
-    def excel(self, df: Union[pd.DataFrame, List[List[Any]]], sv_fpn: str, sheet_name: str = "Sheet1",
-              header: Union[None, bool, List[str]] = None, index: bool = False, id_from: int = 0) -> None:
+    def excel(
+        self,
+        df: Union[pd.DataFrame, List[List[Any]]],
+        sv_fpn: str,
+        sheet_name: str = "Sheet1",
+        header: Union[None, bool, List[str]] = None,
+        index: bool = False,
+        id_from: int = 0,
+    ) -> None:
         """
         Writes a DataFrame or a 2D list to an Excel file.
 

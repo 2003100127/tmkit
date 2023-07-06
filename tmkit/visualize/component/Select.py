@@ -6,8 +6,9 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
-class select:
+class Select:
     def chain(self, chain_name, chains="A+B+C+D+E+F+G+H+I+J+K"):
+        """PyMOL select a chain"""
         from pymol import cmd
 
         cmd.select(name=chain_name, selection="c. " + chains)

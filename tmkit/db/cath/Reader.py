@@ -5,27 +5,28 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import json
 from typing import Dict, List, Union
+
+import json
 
 import pandas as pd
 import requests
 
 from tmkit.util.Kit import tactic7
-from tmkit.util.Reader import reader as greader
-from tmkit.util.Writer import writer
+from tmkit.util.Reader import Reader as greader
+from tmkit.util.Writer import Writer
 
 
-class reader:
+class Reader:
     def __init__(
         self,
     ) -> None:
         self.greader = greader()
-        self.writer = writer()
+        self.writer = Writer()
 
     def api(self, identifier: str) -> Dict[str, str]:
         """
-        Returns the API endpoints for the given identifier.
+        Get the API endpoints (links) for the given identifier.
 
         Parameters
         ----------
@@ -48,14 +49,14 @@ class reader:
 
     def download(self, sv_fp: str, version: str = "newest") -> str:
         """
-        Downloads the CATH database of the given version.
+        Download the CATH database of the given version.
 
         Parameters
         ----------
         sv_fp : str
-            The file path to save the downloaded file.
+            File path to save the downloaded file.
         version : str, optional
-            The version of the CATH database to download, by default "newest".
+            Version of the CATH database to download, by default "newest".
 
         Returns
         -------
@@ -64,8 +65,7 @@ class reader:
         """
         from tmkit.util.Kit import urlliby
 
-        print("===>The CATH database of version " +
-              version + " is being downloaded...")
+        print("===>The CATH database of version " + version + " is being downloaded...")
         urlliby(
             url="ftp://orengoftp.biochem.ucl.ac.uk/cath/releases/daily-release/"
             + version
@@ -99,19 +99,19 @@ class reader:
 
     def fetch(self, domain_id: str, sort: str) -> Dict[str, Union[str, Dict[str, str]]]:
         """
-        Fetches the data for the given domain ID and sort type.
+        Fetch the data for the given domain ID and the sort type.
 
         Parameters
         ----------
         domain_id : str
             The domain ID to fetch data for.
         sort : str
-            The sort type to use.
+            The sort type to use, in the current version (TMKit 0.0.2), we have only "domain".
 
         Returns
         -------
         Dict[str, Union[str, Dict[str, str]]]
-            A dictionary containing the fetched data.
+            A dictionary containing the fetched data according to the CATH database.
         """
         json_data = requests.get(self.api(domain_id)[sort]).json()
         if "data" in json_data:
@@ -121,9 +121,11 @@ class reader:
         else:
             return {}
 
-    def domain(self, cath_fpn: str, groupby: str = "version", group: str = "v4_2_0") -> pd.DataFrame:
+    def domain(
+        self, cath_fpn: str, groupby: str = "version", group: str = "v4_2_0"
+    ) -> pd.DataFrame:
         """
-        Reads the CATH database and returns the domain information.
+        Read the CATH database and return the domain information.
 
         Parameters
         ----------
@@ -137,7 +139,8 @@ class reader:
         Returns
         -------
         pd.DataFrame
-            A DataFrame containing the domain information.
+            A DataFrame containing the domain information, including
+            'domain', 'version', 'superfamily', and 'bound'.
         """
         print("======>reading CATH...")
         df_domain = self.greader.generic(df_fpn=cath_fpn, df_sep=r"\s+")
@@ -156,10 +159,15 @@ class reader:
         return domain_info_grouped
 
     def funfamsToJson(
-        self, df_prot: pd.DataFrame, df_domain: pd.DataFrame, sv_fpn: str = "./results.json", targets: List[str] = ["funfam_number"]
+        self,
+        df_prot: pd.DataFrame,
+        df_domain: pd.DataFrame,
+        sv_fpn: str = "./results.json",
+        targets: List[str] = ["funfam_number"],
     ) -> Dict[str, Dict[str, Dict[str, Dict[str, str]]]]:
         """
-        Converts the given protein and domain DataFrames to a JSON file containing funfam information.
+        Convert the given protein and domain DataFrame to
+        a JSON file containing funfam information.
 
         Parameters
         ----------

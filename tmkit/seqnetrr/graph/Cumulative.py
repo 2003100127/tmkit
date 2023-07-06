@@ -5,38 +5,18 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Dict, List, Union
+
 import time
-from typing import List, Dict, Union
+
 import numpy as np
 
-from tmkit.seqnetrr.net.Reader import reader as prrcreader
+from tmkit.seqnetrr.net.Reader import Reader as prrcreader
 from tmkit.seqnetrr.window.base import Single as ecabSgl
 
 
-class cumulative(ecabSgl.single):
-    """
-    A class used to represent cumulative scores for a given sequence.
-
-    Attributes
-    ----------
-    sequence : str
-        A string representing the amino acid sequence.
-    window_size : int
-        An integer representing the size of the window.
-    window_m_ids : List[List[Union[int, None]]]
-        A list of lists containing integers or None values representing the window indices.
-    input_kind : str
-        A string representing the type of input.
-    prrcreader : tmkit.seqnetrr.net.Reader.reader
-        An instance of the reader class.
-
-    Methods
-    -------
-    sigmoid(value: float) -> float
-        Returns the sigmoid value of the input.
-    assign(list_2d: List[List[float]], L: int, simu_seq_len: int = 100, fpn: str = None, is_activate: bool = False) -> List[List[float]]
-        Assigns cumulative scores to a 2D list of floats.
-    """
+class Cumulative(ecabSgl.Single):
+    """A class used to represent cumulative scores for a given sequence."""
 
     def __init__(
         self,
@@ -53,9 +33,9 @@ class cumulative(ecabSgl.single):
         window_size : int
             An integer representing the size of the window.
         window_m_ids : List[List[Union[int, None]]]
-            A list of lists containing integers or None values representing the window indices.
-        input_kind : str, optional
-            A string representing the type of input, by default "general".
+            A list of lists containing integers or None (beyond residue IDs) values representing the window indices.
+        input_kind : str
+            Input kind for relationships of a network file: general | simulate | freecontact | gdca | cmmpred | plmc
         """
         super().__init__(sequence, window_size, window_m_ids)
         self.prrcreader = prrcreader()
@@ -112,7 +92,7 @@ class cumulative(ecabSgl.single):
         Parameters
         ----------
         list_2d : List[List[float]]
-            A 2D list of floats.
+            A 2D list.
         L : int
             An integer representing the length of the sequence.
         simu_seq_len : int, optional
@@ -125,7 +105,7 @@ class cumulative(ecabSgl.single):
         Returns
         -------
         List[List[float]]
-            A 2D list of floats representing the cumulative scores.
+            A 2D list.
         """
         start_time = time.time()
         list_2d_ = list_2d

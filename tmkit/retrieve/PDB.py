@@ -5,28 +5,37 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from typing import List
+import pandas as pd
+
 from Bio.PDB import PDBList
 
 from tmkit.util.Kit import batchRename, delete, ungz, urlliby
 
 
-class pdb:
+class PDB:
     def __init__(
         self,
-        prot_series: List[str],
+        prot_series: pd.Series,
     ) -> None:
         """
         Parameters
         ----------
-        prot_series : List[str]
-            A list of protein names.
+        prot_series : pd.Series
+            A Pandas series of protein names.
         """
         self.prot_dedup = prot_series.unique()
 
-    def rcsb(self, sv_fp: str, route: str = "biopython") -> int:
+    def rcsb(self, sv_fp: str, route: str = "biopython") -> str:
         """
-        Download PDB files from RCSB PDB.
+        Downloading a PDB file from RCSB PDB.
+
+        file_format is specified with 'structure' to download a file
+        with suffix of 'ent', which is totally the same with original
+        format of file with suffix of 'structure', 'pdb'.
+
+        See Also
+        --------
+        https://biopython.org/DIST/docs/api/Bio.PDB.PDBList%27-pysrc.html
 
         Parameters
         ----------
@@ -37,20 +46,8 @@ class pdb:
 
         Returns
         -------
-        int
-            0 if successful.
-
-        Notes
-        -----
-        Downloading a PDB file from RCSB PDB.
-
-        file_format is specified with 'structure' to download a file
-        with suffix of 'ent', which is totally the same with original
-        format of file with suffix of 'structure', 'pdb'.
-
-        See Also
-        --------
-        https://biopython.org/DIST/docs/api/Bio.PDB.PDBList%27-pysrc.html
+        str
+            'Finished' if a PDB file is downloaded
         """
         pdb_list = PDBList()
         if route == "biopython":
@@ -75,9 +72,9 @@ class pdb:
                     url=url,
                     fpn=sv_fp + str(prot_name) + ".pdb",
                 )
-        return 0
+        return 'Finished'
 
-    def pdbtm(self, sv_fp: str, kind: str = "tr") -> int:
+    def pdbtm(self, sv_fp: str, kind: str = "tr") -> str:
         """
         Download PDB files from PDBTM.
 
@@ -88,14 +85,14 @@ class pdb:
         kind : str, optional
             'tr' for 'transformed proteins', '' for 'rcsb', by default 'tr'
 
-        Returns
-        -------
-        int
-            0 if successful.
-
         Notes
         -----
         Downloading a PDB file from PDBTM.
+
+        Returns
+        -------
+        str
+            'Finished' if a PDB file is successfully retrieved.
         """
         count = 0
         for i, prot_name in enumerate(self.prot_dedup):
@@ -120,9 +117,9 @@ class pdb:
                 count = count + 1
                 # print(count)
                 continue
-        return 0
+        return 'Finished'
 
-    def alphafold(self, sv_fp: str) -> None:
+    def alphafold(self, sv_fp: str) -> str:
         """
         Download a PDB file of a protein from the AlphaFold database.
 
@@ -134,6 +131,11 @@ class pdb:
         Examples
         --------
         >>> alphafold("Q5VSL9", "Q5VSL9.pdb")
+
+        Returns
+        -------
+        str
+            'Finished' if a PDB file is successfully retrieved.
         """
         import requests
 
@@ -144,5 +146,5 @@ class pdb:
                 with open(sv_fp + uniprot_acc + ".pdb", "wb") as f:
                     f.write(result.content)
             else:
-                print(
-                    f"Failed to download. HTTP status code: {result.status_code}")
+                print(f"Failed to download. HTTP status code: {result.status_code}")
+        return 'Finished'

@@ -1,12 +1,22 @@
-from typing import List, Tuple
+__author__ = "Jianfeng Sun"
+__version__ = "v1.0"
+__copyright__ = "Copyright 2023"
+__license__ = "GPL v3.0"
+__email__ = "jianfeng.sunmt@gmail.com"
+__maintainer__ = "Jianfeng Sun"
+
+from typing import Tuple
+
 import pandas as pd
 
-__author__: str = "Jianfeng Sun"
-__version__: str = "v1.0"
-__copyright__: str = "Copyright 2023"
-__license__: str = "GPL v3.0"
-__email__: str = "jianfeng.sunmt@gmail.com"
-__maintainer__: str = "Jianfeng Sun"
+from tmkit.contact.Evaluator import evaluator
+from tmkit.contact.Reader import Reader as rrcreader
+from tmkit.id.Fasta import Fasta as idfasta
+from tmkit.id.PDB import PDB as idpdb
+from tmkit.position.scenario.Segment import Segment as ppssegment
+from tmkit.structure.rrc.Label import Label as dlable
+from tmkit.topology.pdbtm.ToFastaId import toFastaId
+from tmkit.util.Kit import chainid
 
 
 def read(
@@ -20,32 +30,36 @@ def read(
     tool_fp: str,
     seq_sep_superior: int,
     seq_sep_inferior: int = 0,
-) -> pd.DataFrame:
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
     Read data from files and return a pandas DataFrame.
 
     Parameters
     ----------
     prot_name : str
-        Name of the protein.
+        name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
     seq_chain : str
-        Chain ID of the protein.
+        chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb). Parameter file_chain will be converted within the function.
     fasta_fp : str
-        File path of the fasta file.
+        path where a target Fasta file is placed.
     pdb_fp : str
-        File path of the pdb file.
+        path where a target PDB file is placed.
     dist_fp : str
-        File path of the distance file.
+        path where a file containing real distances between residues is placed (please check the file at ./data/rrc in the example dataset).
     xml_fp : str
-        File path of the xml file.
-    tool : str
-    the tool to use.
+        path where a target XML file is placed.
+    cutoff : float
+        distance cutoff to see whether two residues are in spatial contact (e.g., 5.5 angstrom).
     tool_fp : str
-        File path of the tool.
+        path where a protein residue contact map file is placed.
+    tool : str
+        name of a contact prediction tool. It can be one of PSICOV, FreeContact, CCMPred, Gremlin, GDCA, PlmDCA, MemConP, Membrain2, and DeepHelicon.
+    seq_sep_inferior : int
+        The lower bounds of how far any two residues are in pairs.
     seq_sep_superior : int
-        Superior sequence separation.
-    seq_sep_inferior : int, optional
-        Inferior sequence separation, by default 0.
+        The upper bounds of how far any two residues are in pairs.
+    sort : int, optional
+        Sorting method, by default 2.
 
     Returns
     -------
@@ -98,9 +112,9 @@ def read(
         prot_name=prot_name,
         seq_chain=seq_chain,
     )
-    pair_arr = ppssegment().toPair(fasta_lower_tmh, fasta_upper_tmh)
+    pair_arr = ppssegment().to_pair(fasta_lower_tmh, fasta_upper_tmh)
 
-    sdist, _ = m(
+    sdist, sdist_true = m(
         tool_fp,
         file_name=prot_name,
         file_chain=seq_chain,
@@ -108,7 +122,7 @@ def read(
         dist_df=dist_df,
         sort_=2,
     )
-    return sdist
+    return (sdist, sdist_true)
 
 
 def evaluate(
@@ -131,27 +145,27 @@ def evaluate(
     Parameters
     ----------
     prot_name : str
-        Name of the protein.
+        name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb).
     seq_chain : str
-        Chain ID of the protein.
+        chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb). Parameter file_chain will be converted within the function.
     fasta_fp : str
-        File path of the fasta file.
+        path where a target Fasta file is placed.
     pdb_fp : str
-        File path of the pdb file.
+        path where a target PDB file is placed.
     dist_fp : str
-        File path of the distance file.
+        path where a file containing real distances between residues is placed (please check the file at ./data/rrc in the example dataset).
     xml_fp : str
-        File path of the xml file.
+        path where a target XML file is placed.
     cutoff : float
-        Cutoff value.
+        distance cutoff to see whether two residues are in spatial contact (e.g., 5.5 angstrom).
     tool_fp : str
-        File path of the tool.
+        path where a protein residue contact map file is placed.
     tool : str
-        Name of the tool to use.
+        name of a contact prediction tool. It can be one of PSICOV, FreeContact, CCMPred, Gremlin, GDCA, PlmDCA, MemConP, Membrain2, and DeepHelicon.
     seq_sep_inferior : int
-        Inferior sequence separation.
+        The lower bounds of how far any two residues are in pairs.
     seq_sep_superior : int
-        Superior sequence separation.
+        The upper bounds of how far any two residues are in pairs.
     sort : int, optional
         Sorting method, by default 2.
     """
@@ -180,7 +194,7 @@ def evaluate(
         prot_name=prot_name,
         seq_chain=seq_chain,
     )
-    pair_arr = ppssegment().toPair(fasta_lower_tmh, fasta_upper_tmh)
+    pair_arr = ppssegment().to_pair(fasta_lower_tmh, fasta_upper_tmh)
 
     p = evaluator(
         prot_name=prot_name,
@@ -196,4 +210,3 @@ def evaluate(
     )
     tool_results = p.fetch()
     p.compare(target=tool_results, cut_off=110)
-    # TODO: add return

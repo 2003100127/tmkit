@@ -5,23 +5,18 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Dict, List, Union
+
 import warnings
 
+import pandas as pd
 from Bio import BiopythonWarning
 
-from tmkit.sequence.PDB import pdb as spdb
+from tmkit.sequence.PDB import PDB as spdb
 from tmkit.util.Kit import seqchainid, tactic5
 
 
-from typing import Dict, List, Union
-import pandas as pd
-
-
-from typing import Dict, List, Union
-import pandas as pd
-
-
-class collateBatch:
+class CollateBatch:
     """
     Class for collating protein data from PDBTM and RCSB databases.
 
@@ -74,10 +69,7 @@ class collateBatch:
         print(f"======>basic info: \n{self.prot_collated_df}")
 
     def rcsb(
-        self,
-        prot_pdbtm_df: pd.DataFrame,
-        prot_rcsb_df: pd.DataFrame,
-        strategy: str
+        self, prot_pdbtm_df: pd.DataFrame, prot_rcsb_df: pd.DataFrame, strategy: str
     ) -> pd.DataFrame:
         """
         Collates protein data from PDBTM and RCSB databases.
@@ -162,9 +154,7 @@ class collateBatch:
         return self.prot_df
 
     def throwback(
-        self,
-        prot_collated_df: pd.DataFrame,
-        symbol: str = "."
+        self, prot_collated_df: pd.DataFrame, symbol: str = "."
     ) -> Dict[str, str]:
         """
         Throws back collated protein data.
@@ -195,7 +185,7 @@ class collateBatch:
             if prot_collated_df.loc[id, "source"] == "rcsb":
                 throw_backs[prot_name + symbol + prot_chain] = "untransformed"
             else:
-                chain_collated_dict = self.areSameSeqs(
+                chain_collated_dict = self.are_same_seqs(
                     prot_name=prot_name,
                     chain_to_be_collated=[prot_chain],
                     rcsb_chains=list(prot_collated_df["rcsb"][id]),
@@ -207,18 +197,17 @@ class collateBatch:
                             [*chain_collated_dict.values()][0]
                         )
                     )
-                    throw_backs[[*chain_collated_dict.values()][0]
-                                ] = "collated"
+                    throw_backs[[*chain_collated_dict.values()][0]] = "collated"
                 else:
                     throw_backs[[*chain_collated_dict]] = "transformed"
         return throw_backs
 
-    def areSameSeqs(
+    def are_same_seqs(
         self,
         prot_name: str,
         chain_to_be_collated: List[str],
         rcsb_chains: List[str],
-        symbol: str = "."
+        symbol: str = ".",
     ) -> Dict[str, List[str]]:
         """
         Checks if protein sequences are the same.
@@ -243,8 +232,7 @@ class collateBatch:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", BiopythonWarning)
             for chain_pdbtm in chain_to_be_collated:
-                chain_collated_dict[prot_name +
-                                    symbol + seqchainid(chain_pdbtm)] = []
+                chain_collated_dict[prot_name + symbol + seqchainid(chain_pdbtm)] = []
                 seq_pdbtm = spdb(
                     pdb_fp=self.pdb_pdbtm_fp,
                     prot_name=prot_name,

@@ -6,10 +6,10 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 
-import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Union
 
-import pypdb
+import xml.etree.ElementTree as ET
+
 import requests
 
 
@@ -31,7 +31,7 @@ class Mapping:
         ids2map: Union[List[str], str],
         source_fmt: str = "ACC+ID",
         target_fmt: str = "ACC",
-        output_fmt: str = "list"
+        output_fmt: str = "list",
     ) -> str:
         """
         Maps IDs from one format to another using the UniProt API.
@@ -85,8 +85,7 @@ class Mapping:
         str
             The UniProt ID extracted from the XML string.
         """
-        root = ET.fromstring(
-            response_xml, parser=ET.XMLParser(encoding="utf-8"))
+        root = ET.fromstring(response_xml, parser=ET.XMLParser(encoding="utf-8"))
         return next(
             el
             for el in root.getchildren()[0].getchildren()
@@ -145,30 +144,4 @@ class Mapping:
             except:
                 mapping_ids[id] = "no accession"
                 # uniprot_name = self.uniprot_name(uniprot_id)
-        return mapping_ids
-
-    def pypdb(self, pdb_ids: List[str] = ["1aij.L", "1aij.M"]) -> Dict[str, str]:
-        """
-        Maps PDB IDs to UniProt IDs using the pypdb library.
-
-        Parameters
-        ----------
-        pdb_ids : List[str], optional
-            The list of PDB IDs to convert, by default ["1aij.L", "1aij.M"].
-
-        Returns
-        -------
-        Dict[str, str]
-            A dictionary mapping PDB IDs to UniProt IDs.
-        """
-        mapping_ids = {}
-        for id in pdb_ids:
-            try:
-                mapping_ids[id] = pypdb.get_all_info(id)["polymer"]["macroMolecule"][
-                    "accession"
-                ]["@id"]
-            except:
-                mapping_ids[id] = "no accession"
-            # else:
-            #     print(mapping_ids[id])
         return mapping_ids

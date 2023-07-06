@@ -5,13 +5,16 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-import time
 from typing import List
+
+import time
+
 import pandas as pd
-from tmkit.util.Reader import reader
+
+from tmkit.util.Reader import Reader
 
 
-class label:
+class Label:
     """
     Class for labeling protein-protein interaction data based on distance cutoff.
 
@@ -46,7 +49,9 @@ class label:
 
     """
 
-    def __init__(self, dist_path: str, prot_name: str, file_chain: str, cutoff: int = 6) -> None:
+    def __init__(
+        self, dist_path: str, prot_name: str, file_chain: str, cutoff: int = 6
+    ) -> None:
         """
         Parameters
         ----------
@@ -63,7 +68,7 @@ class label:
         self.file_chain: str = file_chain
         self.dist_fpn: str = dist_path + self.prot_name + self.file_chain + ".dist"
         self.cutoff: int = cutoff
-        self.read: reader = reader()
+        self.read = Reader()
 
     def attach(self) -> pd.DataFrame:
         """
@@ -78,10 +83,8 @@ class label:
         dist_df: pd.DataFrame = self.read.generic(self.dist_fpn)
         dists: pd.DataFrame = dist_df.iloc[:, 3:]
         dist_mins: pd.Series = dists.min(axis=1)
-        inter_ids: List[int] = dist_mins.loc[dist_mins <
-                                             self.cutoff].index.tolist()
-        noninter_ids: List[int] = dist_mins.loc[dist_mins >=
-                                                self.cutoff].index.tolist()
+        inter_ids: List[int] = dist_mins.loc[dist_mins < self.cutoff].index.tolist()
+        noninter_ids: List[int] = dist_mins.loc[dist_mins >= self.cutoff].index.tolist()
         dist_df["is_contact"] = -1
         dist_df.loc[inter_ids, "is_contact"] = 1
         dist_df.loc[noninter_ids, "is_contact"] = 0

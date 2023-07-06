@@ -5,13 +5,14 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from functools import wraps
 from typing import Any, Dict, List, Optional, Union
+
+from functools import wraps
 
 import pandas as pd
 
 
-class reader:
+class Reader:
     def __call__(self, deal: Any) -> Any:
         """
         A decorator that reads data from a file and passes it to the decorated function.

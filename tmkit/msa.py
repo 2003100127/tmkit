@@ -1,12 +1,11 @@
-__author__: str = "Jianfeng Sun"
-__version__: str = "v1.0"
-__copyright__: str = "Copyright 2023"
-__license__: str = "GPL v3.0"
-__email__: str = "jianfeng.sunmt@gmail.com"
-__maintainer__: str = "Jianfeng Sun"
+__author__ = "Jianfeng Sun"
+__version__ = "v1.0"
+__copyright__ = "Copyright 2023"
+__license__ = "GPL v3.0"
+__email__ = "jianfeng.sunmt@gmail.com"
+__maintainer__ = "Jianfeng Sun"
 
-from typing import List, Union
-from tmkit.retrieve.MSA import msa as remsa
+from tmkit.retrieve.MSA import MSA as remsa
 
 
 def run_hhblits(
@@ -21,47 +20,49 @@ def run_hhblits(
     maxfilter: int,
     realign_max: int,
     all: bool,
-    B: Union[bool, str],
-    Z: Union[bool, str],
+    B: int,
+    Z: int,
     e: float,
 ) -> str:
-    """_summary_
+    """
+    Generate a HHblits command.
 
     Parameters
     ----------
+    fasta_fp : str
+        path where a protein Fasta file is placed.
     hhblits_fp : str
-        _description_
-    send2cloud : bool
-        _description_
-    cloud_cmd : str
-        _description_
-    fasta_fpn : str
-        _description_
-    sv_fpn : str
-        _description_
+        path where an executable of HHblits is placed (normally it is in hhblits/bin).
     db_path : str
-        _description_
+        path where a protein sequence database is placed.
+    sv_fp : str
+        path to where you want to save the MSAs in a3m format.
     cpu : int
-        _description_
+        number of CPUs.
     iteration : int
-        _description_
+        number of iterations by a hidden Markov model.
     maxfilter : int
-        _description_
-    realign_max : int
-        _description_
-    all : bool
-        _description_
-    B : Union[bool, str]
-        _description_
-    Z : Union[bool, str]
-        _description_
+        max number of hits allowed to pass 2nd prefilter (default=20000).
+    realign_max :
+        realign maximum hits displayed hits with the max accuracy algorithm.
+    all :
+        do not filter the resulting MSA. '' by default.
+    B : int
+        maximum number of alignments in alignment list (default=500).
+    Z : int
+        maximum number of lines in summary hit list (default=500).
     e : float
-        _description_
+        maximum E-value in summary and alignment list (default=1E+06).
+
+        # if you won't do it on clusters, please give False to the parameter send2cloud
+    send2cloud : bool
+        If in cluster running. False or True
+    cloud_cmd :str
 
     Returns
     -------
     str
-        _description_
+        'Finished' if this operation is passed.
     """
     return remsa(
         tool="hhblits",
@@ -86,31 +87,33 @@ def run_hhfilter(
     hhfilter_fp: str,
     send2cloud: bool,
     cloud_cmd: str,
-    id: float,
+    id: int,
     a3m_fpn: str,
     new_a3m_fpn: str,
 ) -> str:
-    """_summary_
+    """
+    Generate a HHfilter command.
 
     Parameters
     ----------
-    hhfilter_fp : str
-        _description_
+    hhfilter_fp :
+        path where an executable of HHfilter is placed (normally it is in hhblits/bin).
+    a3m_path :
+        path where a protein a3m file is placed.
+    new_a3m_path :
+        path to where you want to save a filtered MSA in a3m format.
+    id :
+        maximum pairwise sequence identity (def=90).
+
+        # if you won't do it on clusters, please give False to the parameter send2cloud
     send2cloud : bool
-        _description_
-    cloud_cmd : str
-        _description_
-    id : float
-        _description_
-    a3m_fpn : str
-        _description_
-    new_a3m_fpn : str
-        _description_
+        If in cluster running. False or True
+    cloud_cmd :str
 
     Returns
     -------
     str
-        _description_
+        'Finished' if this operation is passed.
     """
     return remsa(
         tool="hhfilter",
@@ -130,43 +133,45 @@ def run_jackhmmer(
     db_path: str,
     cpu: int,
     iteration: int,
-    jhm_E: float,
+    jhm_E: int,
     incE: float,
-    noali: bool,
+    noali: str,
     send2cloud: bool,
     cloud_cmd: str,
 ) -> str:
-    """_summary_
+    """
+    Generate a Jackhmmer command.
 
     Parameters
     ----------
+    fasta_fp : str
+        Path where a protein Fasta file is placed.
     jackhmmer_fp : str
-        _description_
-    fasta_fpn : str
-        _description_
-    sv_fpn : str
-        _description_
+        Path where an executable of JackHmmer is placed (normally it is in hmmer3.1b2/bin).
     db_path : str
-        _description_
+        Path where a protein sequence database is placed.
+    sv_fp : str
+        Path to where you want to save the MSAs in a3m format.
     cpu : int
-        _description_
+        Number of CPUs.
     iteration : int
-        _description_
-    jhm_E : float
-        _description_
+        Number of iterations by a hidden Markov model.
+    jhm_E : int
+        In the per-target output, report target sequences with an E-value of <= . The default is 10.0, meaning that on average, about 10 false positives will be reported per query, so you can see the top of the noise and decide for yourself if it’s really noise.
     incE : float
-        _description_
-    noali : bool
-        _description_
+        Use an E-value as the per-target inclusion threshold. The default is 0.01, meaning that on average, about 1 false positive would be expected in every 100 searches with different query sequences.
+    noali :
+        Omit the alignment section from the main output. This can greatly reduce the output volume.
+
+        # if you won't do it on clusters, please give False to the parameter send2cloud
     send2cloud : bool
-        _description_
-    cloud_cmd : str
-        _description_
+        If in cluster running. False or True
+    cloud_cmd :str
 
     Returns
     -------
     str
-        _description_
+        'Finished' if this operation is passed.
     """
     return remsa(
         tool="jackhmmer",
@@ -195,29 +200,31 @@ def run_format(
     input_fpn: str,
     output_fpn: str,
 ) -> str:
-    """_summary_
+    """
+    Generate a HHBlits reformat command.
 
     Parameters
     ----------
-    reformat_fp : str
-        _description_
-    send2cloud : bool
-        _description_
-    cloud_cmd : str
-        _description_
-    max_length_per_name_line : int
-        _description_
-    aa_per_line : int
-        _description_
-    input_format : str
-        _description_
-    output_format : str
-        _description_
-    input_fpn : str
-        _description_
-    output_fpn : str
-        _description_
 
+    reformat_fp : str
+        path where an executable of Reformat is placed.
+    input_fp : str
+        path where a protein sequence database is placed.
+    sv_fp : str
+        path to where you want to save the MSAs in a3m format.
+    input_format : str
+        input format, e.g., .sto for Stockholm format.
+    output_format : str
+        output format, e.g., .a3m for a3m format.
+    max_length_per_name_line : int
+        maximum number of characers in nameline (default=1000)
+    aa_per_line : int
+        number of residues per line (for Clustal, FASTA, A2M, A3M formats) (default=100)
+
+        # if you won't do it on clusters, please give False to the parameter send2cloud
+    send2cloud : bool
+        If in cluster running. False or True
+    cloud_cmd :str
     Returns
     -------
     str

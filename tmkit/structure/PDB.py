@@ -6,18 +6,20 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from typing import Optional
-from tmkit.base import PDB
-from tmkit.util.Kit import ungz
-import warnings
-from Bio import BiopythonWarning
-from biopandas.pdb import PandasPdb
+
 import sys
+import warnings
 from time import sleep
+
+import pandas as pd
 import requests
+from Bio import BiopythonWarning
+
+from tmkit.base import PDB as bpdb
 from tmkit.util.Kit import ungz
 
 
-class pdb(PDB.structure):
+class PDB(bpdb.Structure):
     def __init__(
         self,
         pdb_fp: str,
@@ -48,13 +50,13 @@ class pdb(PDB.structure):
         pd.DataFrame
             A pandas DataFrame containing the PDB file data.
         """
-
+        from biopandas.pdb import PandasPdb
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", BiopythonWarning)
             df = PandasPdb().read_pdb(self.pdb_fpn).df
         return df
 
-    def search_foldseek(self, sv_fp: str) -> dict:
+    def search_foldseek(self, sv_fp: str) -> str:
         """
         Search Foldseek database for a given PDB file.
 
@@ -65,8 +67,8 @@ class pdb(PDB.structure):
 
         Returns
         -------
-        dict
-            A dictionary containing the Foldseek search results.
+        str
+            'Finished' if the results are saved.
 
         Examples
         --------
@@ -88,30 +90,25 @@ class pdb(PDB.structure):
             pdb_content = pdb_file.read()
             ticket = requests.post(
                 "https://search.foldseek.com/api/ticket",
-                files={"q": (pdb_content, pdb_content,
-                             "application/octet-stream")},
+                files={"q": (pdb_content, pdb_content, "application/octet-stream")},
                 data={
                     "mode": "3diaa",
                     "database[]": databases,
                 },
             ).json()
-        # poll until the job was successful or failed
         repeat = True
         while repeat:
             status = requests.get(
                 "https://search.foldseek.com/api/ticket/" + ticket["id"]
             ).json()
             if status["status"] == "ERROR":
-                # handle error
                 sys.exit(0)
             # wait a short time between poll requests
             sleep(1)
             repeat = status["status"] != "COMPLETE"
-        # get all hits for the first query (0)
-        result = requests.get(
-            "https://search.foldseek.com/api/result/" + ticket["id"] + "/0"
-        ).json()
-        # download blast compatible result archive
+        # result = requests.get(
+        #     "https://search.foldseek.com/api/result/" + ticket["id"] + "/0"
+        # ).json()
         download = requests.get(
             "https://search.foldseek.com/api/result/download/" + ticket["id"],
             stream=True,
@@ -128,4 +125,4 @@ class pdb(PDB.structure):
             new_suffix=".csv",
         )
         print("===>Results have been saved!")
-        return result
+        return 'Finished'

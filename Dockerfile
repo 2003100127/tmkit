@@ -13,8 +13,10 @@ FROM python:3.10.12-bookworm
 # # Allow installing dev dependencies to run tests
 # ARG INSTALL_DEV=false
 # RUN bash -c "if [ $INSTALL_DEV == 'true' ] ; then poetry install --no-root ; else poetry install --no-root --no-dev ; fi"
+RUN pip install --upgrade pip
+RUN pip install tmkit==0.0.3
 
 RUN mkdir -p /workspace
 WORKDIR /workspace
 
-# CMD ["/bin/bash"]
+CMD ["/bin/bash"]
