@@ -8,19 +8,37 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.base import PDB
 
 
+from typing import List
+import numpy as np
+
+
 class pdb(PDB.chain):
+    """
+    A class representing a Protein Data Bank (PDB) file.
 
-    def __init__(self, pdb_fp, prot_name):
+    Parameters
+    ----------
+    pdb_fp : str
+        The file path to the PDB file.
+    prot_name : str
+        The name of the protein.
+
+    Attributes
+    ----------
+    structure : Bio.PDB.Structure.Structure
+        The structure object of the PDB file.
+    """
+
+    def __init__(self, pdb_fp: str, prot_name: str) -> None:
+        super().__init__(pdb_fp, prot_name)
+
+    def chains(self) -> List[str]:
         """
+        Get a list of chain IDs in the PDB file.
 
-        Parameters
-        ----------
-        pdb_fp
-            structure path
-        prot_name
-            structure name
+        Returns
+        -------
+        List[str]
+            A list of chain IDs.
         """
-        super(pdb, self).__init__(pdb_fp, prot_name)
-
-    def chains(self, ):
         return [chain.get_id() for chain in self.structure.get_chains()]

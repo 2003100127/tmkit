@@ -9,7 +9,6 @@ from tmkit.seqnetrr.ComputLib import computLib
 
 
 class single:
-
     def __init__(self, sequence, window_size, window_m_ids):
         """
 
@@ -37,5 +36,7 @@ class single:
         self.aa_in_window_size = 2 * window_size + 1
         self.window_m_ids = window_m_ids
         self.num_pairs = len(self.window_m_ids)
-        self.stretch_window = int((self.window_size * 2 + 1) * (self.window_size * 2) / 2)
+        self.stretch_window = int(
+            (self.window_size * 2 + 1) * (self.window_size * 2) / 2
+        )
         self.computlib = computLib()

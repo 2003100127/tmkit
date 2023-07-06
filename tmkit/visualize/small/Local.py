@@ -5,45 +5,46 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import List, Tuple
+from pymol import cmd, finish_launching, preset
+from tmkit.chain.PDB import pdb as cpdb
+from tmkit.visualize.small.Label import label as pppmlabel
 from tmkit.visualize.small.Palette import palette as pppmpalette
 from tmkit.visualize.small.Select import select as pppmselect
 from tmkit.visualize.small.Style import style as pppmstyle
-from tmkit.visualize.small.Label import label as pppmlabel
-from tmkit.chain.PDB import pdb as cpdb
 
 
 class local:
-
     def __init__(
-            self,
-            prot_name,
-            pdb_complex_fp,
-            prot_c,
-            sm_c,
-            sm_rep,
-            nby_rep,
-            pocket_rep='surface',
-    ):
+        self,
+        prot_name: str,
+        pdb_complex_fp: str,
+        prot_c: str,
+        sm_c: str,
+        sm_rep: str,
+        nby_rep: str,
+        pocket_rep: str = "surface",
+    ) -> None:
         """
+        Initialize a local object.
 
         Parameters
         ----------
-        prot_name
-            '6feq',
-        pdb_complex_fp
-            to('data/example/pymol/'),
-        sm_rep
-            "sticks",
-        nby_rep
-            'spheres',
-        prot_c
-            'blue_white_magenta', # 'blue_magenta' rainbow
-        sm_c
-            'blue_green',
+        prot_name : str
+            The name of the protein.
+        pdb_complex_fp : str
+            The filepath of the pdb complex.
+        prot_c : str
+            The color of the protein.
+        sm_c : str
+            The color of the small molecule.
+        sm_rep : str
+            The representation of the small molecule.
+        nby_rep : str
+            The representation of the nearby atoms.
+        pocket_rep : str, optional
+            The representation of the pocket, by default "surface".
         """
-        from pymol import cmd
-        from pymol import finish_launching
-        from pymol import preset
         finish_launching()
 
         cmd.bg_color(
@@ -57,7 +58,7 @@ class local:
         ).chains()
 
         cmd.load(
-            filename=pdb_complex_fp + prot_name + '.pdb',
+            filename=pdb_complex_fp + prot_name + ".pdb",
         )
 
         sel_op = pppmselect()
@@ -72,22 +73,21 @@ class local:
         pppmstyle(
             sm_style=sm_rep,
         )
-        preset.ball_and_stick(selection='sm', mode=1)
-        preset.ligand_sites_mesh(selection='sm')
+        preset.ball_and_stick(selection="sm", mode=1)
+        preset.ligand_sites_mesh(selection="sm")
 
-        cmd.select(
-            name='nby',
-            selection='n. CA and br. all within 5 of organic'
-        )
+        cmd.select(name="nby", selection="n. CA and br. all within 5 of organic")
 
         cmd.show(
-            selection='nby',
+            selection="nby",
             representation=nby_rep,
         )
         cmd.show(
-            selection='pocket',
+            selection="pocket",
             representation=pocket_rep,
         )
-        pppmlabel().putup(select='nby', )
+        pppmlabel().putup(
+            select="nby",
+        )
 
-        cmd.set(name='sphere_scale', value=1.5, selection='nby')
+        cmd.set(name="sphere_scale", value=1.5, selection="nby")

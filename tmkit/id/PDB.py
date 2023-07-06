@@ -5,39 +5,40 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
-from tmkit.base import PDB
+from typing import Dict, Any
+
 from Bio.PDB.Polypeptide import three_to_one
+
+from tmkit.base import PDB
 
 
 class pdb(PDB.id):
-
-    def __init__(self, pdb_fp, prot_name, seq_chain, file_chain=''):
+    def __init__(self, pdb_fp: str, prot_name: str, seq_chain: str, file_chain: str = "") -> None:
         """
-
         Parameters
         ----------
-        pdb_fp
+        pdb_fp : str
             structure path
-        prot_name
+        prot_name : str
             structure name
-        file_chain
-            file chain
-        seq_chain
+        file_chain : str, optional
+            file chain, by default ""
+        seq_chain : str
             sequence chain
         """
-        super(pdb, self).__init__(pdb_fp, prot_name, seq_chain, file_chain)
+        super().__init__(pdb_fp, prot_name, seq_chain, file_chain)
 
-    def chain(self):
+    def chain(self) -> Dict[int, str]:
         """
-
         Returns
         -------
-            dict: pdb id -> aa symbol
-
+        Dict[int, str]
+            Dictionary mapping residue IDs to amino acid symbols.
         """
-        ids = {}
+        ids: Dict[int, str] = {}
         for i, residue in enumerate(self.pdb_chain):
-            res_name = three_to_one(residue.get_resname())
+            res_name: str = three_to_one(residue.get_resname())
             ids[residue.id[1]] = res_name
-        # print([*ids.keys()])
+            # print([*ids.keys()])
+
         return ids

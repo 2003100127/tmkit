@@ -7,7 +7,6 @@ __maintainer__ = "Jianfeng Sun"
 
 
 class computLib:
-
     def interv2single(self, inf_arr, sup_arr):
         """
 
@@ -80,7 +79,7 @@ class computLib:
         for i in range(length):
             for j in range(length):
                 if i < j:
-                    arr.append([i+1, j+1, 1])
+                    arr.append([i + 1, j + 1, 1])
         return arr
 
     def tactic1(self, arr_2d):

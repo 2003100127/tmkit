@@ -8,12 +8,47 @@ __maintainer__ = "Jianfeng Sun"
 from abc import ABCMeta, abstractmethod
 
 
-class tool(metaclass=ABCMeta):
+class Tool(metaclass=ABCMeta):
+    """
+    Abstract base class for all tools.
 
+    Attributes
+    ----------
+    None
+
+    Methods
+    -------
+    initializer()
+        Abstract method to initialize the tool.
+    execute()
+        Abstract method to execute the tool.
+    """
     @abstractmethod
-    def initializer(self):
+    def initializer(self) -> None:
+        """
+        Abstract method to initialize the tool.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
         pass
 
     @abstractmethod
-    def execute(self):
+    def execute(self) -> None:
+        """
+        Abstract method to execute the tool.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
         pass

@@ -6,14 +6,38 @@ __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
 from abc import ABCMeta, abstractmethod
+from typing import List
 
 
-class topology(metaclass=ABCMeta):
-
+class Topology(metaclass=ABCMeta):
+    """
+    Abstract base class for topology.
+    """
     @abstractmethod
-    def run(self, *args):
+    def run(self, *args: List) -> None:
+        """
+        Run the topology.
+
+        Parameters
+        ----------
+        args : List
+            List of arguments to be passed to the topology.
+        """
         pass
 
     @abstractmethod
-    def extract(self, arr_2d):
+    def extract(self, arr_2d: List[List]) -> List:
+        """
+        Extract the topology.
+
+        Parameters
+        ----------
+        arr_2d : List[List]
+            2D list of data to be extracted.
+
+        Returns
+        -------
+        List
+            List of extracted data.
+        """
         pass

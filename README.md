@@ -14,28 +14,35 @@
 ###### tags: `bioinformatics`, `protein-protein interfaces`
 
 ## Overview
+
 ```angular2html
- _____ __  __ _  ___ _   
-|_   _|  \/  | |/ (_) |_ 
+ _____ __  __ _  ___ _
+|_   _|  \/  | |/ (_) |_
   | | | |\/| | ' /| | __|
-  | | | |  | | . \| | |_ 
+  | | | |  | | . \| | |_
   |_| |_|  |_|_|\_\_|\__|
 ```
+
 TMKit is a scalable Python programming interface holding a bundle of function modules to allow a variety of transmembrane protein studies.
 
 ## Installation
-* ### PyPI
+
+- ### PyPI
+
 ```angular2html
 pip install tmkitx --upgrade
 ```
 
 ## Documentation
+
 Website: https://tmkit-guide.herokuapp.com/doc/overview
 
 Source: https://github.com/2003100127/tmkit-guide
 
 ## Citation
+
 Please cite our work if you use TMKit in your research.
 
 ## Contact
+
 Please report any questions on [issue](https://github.com/2003100127/tmkit/issues) pages.

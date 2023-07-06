@@ -16,10 +16,13 @@ contains the functions
    data2q_res(mol='',data_file='')
 """
 
-import sys, re
+import re
+import sys
+
 from pymol import stored
 
-comment = re.compile('^\s*$|^\s*#')
+comment = re.compile(r"^\s*$|^\s*#")
+
 
 def atom_data_extract(data_file):
     """
@@ -30,9 +33,9 @@ def atom_data_extract(data_file):
     These comment lines are ignored.
     """
     bdat = {}
-    chain = ''
+    chain = ""
 
-    data_lines = open(data_file, 'r')
+    data_lines = open(data_file)
     # data_lines = open(data_file, 'rU')
     count = 0
 
@@ -48,8 +51,8 @@ def atom_data_extract(data_file):
                 resi = words[1]
                 resn = words[2]
                 name = words[3]
-                if chain == '-':
-                    chain = ''
+                if chain == "-":
+                    chain = ""
                 ID = None
                 data = float(words[4])
             elif len(words) == 4:
@@ -66,17 +69,22 @@ def atom_data_extract(data_file):
                 ID = int(words[0])
                 data = float(words[1])
             else:
-                sys.stderr.write("\nError in reading data files -- check number of columns.\n")
-                sys.stderr.write("Number of columns: %d  on line number %d\n" % (len(words),count))
+                sys.stderr.write(
+                    "\nError in reading data files -- check number of columns.\n"
+                )
+                sys.stderr.write(
+                    "Number of columns: %d  on line number %d\n" % (len(words), count)
+                )
                 sys.exit(1)
 
             if ID is None:
                 bdat.setdefault(chain, {}).setdefault(resi, {})[name] = (data, resn)
             else:
                 # it seem `resn` is not used in anywhere
-                bdat.setdefault(chain, {})[ID] = (data, '')
+                bdat.setdefault(chain, {})[ID] = (data, "")
 
     return bdat
+
 
 def residue_data_extract(data_file):
     """
@@ -87,9 +95,9 @@ def residue_data_extract(data_file):
     These comment lines are ignored.
     """
     bdat = {}
-    chain = ''
+    chain = ""
 
-    data_lines = open(data_file, 'r')
+    data_lines = open(data_file)
     # data_lines = open(data_file, 'rU')
     count = 0
 
@@ -104,8 +112,8 @@ def residue_data_extract(data_file):
                 chain = words[0]
                 resi = words[1]
                 resn = words[2]
-                if chain == '-':
-                    chain = ''
+                if chain == "-":
+                    chain = ""
                 data = float(words[3])
             elif len(words) == 3:
                 resi = words[0]
@@ -114,15 +122,20 @@ def residue_data_extract(data_file):
             elif len(words) == 2:
                 resi = words[0]
                 data = float(words[1])
-                resn = ''
+                resn = ""
             else:
-                sys.stderr.write("\nError in reading data files -- check number of columns.\n")
-                sys.stderr.write("Number of columns: %d  on line number %d\n" % (len(words),count))
+                sys.stderr.write(
+                    "\nError in reading data files -- check number of columns.\n"
+                )
+                sys.stderr.write(
+                    "Number of columns: %d  on line number %d\n" % (len(words), count)
+                )
                 sys.exit(1)
 
             bdat.setdefault(chain, {})[resi] = (data, resn)
 
     return bdat
+
 
 ###########################################################################################
 # for testing purposes:
@@ -130,13 +143,17 @@ def residue_data_extract(data_file):
 # the command line and run residue_data_extract on it. (does not require
 # importing cmd from pymol
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     data_file_name = sys.argv[1]
     b_dict = residue_data_extract(data_file_name)
     for chain in sorted(b_dict):
         for resi in sorted(b_dict[chain]):
             b, resn = b_dict[chain][resi]
-            print("b-factors %s %s %s %s  new B='%s'" % (pdb_file, chain, resn, resi, b))
+            print(
+                "b-factors {} {} {} {}  new B='{}'".format(
+                    pdb_file, chain, resn, resi, b
+                )
+            )
     sys.exit()
 
 
@@ -145,45 +162,46 @@ if __name__ == '__main__':
 
 from pymol import cmd
 
-def data2b_atom(mol='', data_file='', property='b', quiet=0):
+
+def data2b_atom(mol="", data_file="", property="b", quiet=0):
     """
-DESCRIPTION
+    DESCRIPTION
 
-    Alters the B-factor data by atom.
+        Alters the B-factor data by atom.
 
-USAGE
+    USAGE
 
-    data2b_atom <mol>, <data_file>
+        data2b_atom <mol>, <data_file>
 
-    where <mol> is the molecular object whose B-factor data you wish to modify
-    and <data_file> is a file contain the data (one value for each atom)
-    The format of <data_file> should be:
+        where <mol> is the molecular object whose B-factor data you wish to modify
+        and <data_file> is a file contain the data (one value for each atom)
+        The format of <data_file> should be:
 
-         chain resi resn name data
-    or
-         resi resn name data
+             chain resi resn name data
+        or
+             resi resn name data
 
-    or
-         ID data
+        or
+             ID data
 
-    (i.e. "chain" is optional if all atoms are in one chain).
-    Lines beginning with '#' are ignored as comments.
+        (i.e. "chain" is optional if all atoms are in one chain).
+        Lines beginning with '#' are ignored as comments.
 
-    Example data lines:
+        Example data lines:
 
-      A ALA 1 N 3.5
-      A ALA 1 CA 3.0
-      A ALA 1 CB 3.14159
-      A ALA 1 C  6.23
-      A ALA 1 O    5.1
-      A GLY 2 N 10.3
-      A GLY 2 CA 1.714
-      A GLY 2 C -0.05
-      A GLY 2 O -3.12
+          A ALA 1 N 3.5
+          A ALA 1 CA 3.0
+          A ALA 1 CB 3.14159
+          A ALA 1 C  6.23
+          A ALA 1 O    5.1
+          A GLY 2 N 10.3
+          A GLY 2 CA 1.714
+          A GLY 2 C -0.05
+          A GLY 2 O -3.12
 
-SEE ALSO
+    SEE ALSO
 
-    data2b_res, data2q_atom, data2q_res
+        data2b_res, data2q_atom, data2q_res
     """
 
     b_dict = atom_data_extract(data_file)
@@ -196,44 +214,49 @@ SEE ALSO
             else:
                 # find data by ID
                 return b_dict[chain][int(ID)][0]
+
         try:
             if not chain in b_dict:
-                chain = ''
+                chain = ""
             b = _lookup(chain, resi, name, ID)
-            if not quiet: print('///%s/%s/%s new: %f' % (chain, resi, name, b))
+            if not quiet:
+                print(f"///{chain}/{resi}/{name} new: {b:f}")
         except KeyError:
-            if not quiet: print('///%s/%s/%s keeping: %f' % (chain, resi, name, b))
+            if not quiet:
+                print(f"///{chain}/{resi}/{name} keeping: {b:f}")
         return b
+
     stored.b = b_lookup
 
-    cmd.alter(mol, '%s=stored.b(chain, resi, name, ID, %s)' % (property, property))
+    cmd.alter(mol, f"{property}=stored.b(chain, resi, name, ID, {property})")
     cmd.rebuild()
 
-def data2b_res(mol='', data_file='', property='b', quiet=0):
+
+def data2b_res(mol="", data_file="", property="b", quiet=0):
     """
-DESCRIPTION
+    DESCRIPTION
 
-    Alters the B-factor data by residue.
+        Alters the B-factor data by residue.
 
-USAGE
+    USAGE
 
-    data2b_res <mol>, <data_file>
+        data2b_res <mol>, <data_file>
 
-    where <mol> is the molecular object whose B-factor data you wish to modify
-    and <data_file> is a file contain the data (one value for each residue)
-    The format of <data_file> should be:
+        where <mol> is the molecular object whose B-factor data you wish to modify
+        and <data_file> is a file contain the data (one value for each residue)
+        The format of <data_file> should be:
 
-         chain resi resn data
-    or
-         resi resn data
-    or
-         resi data
+             chain resi resn data
+        or
+             resi resn data
+        or
+             resi data
 
-    (i.e. "chain" is optional). Lines beginning with '#' are ignored as comments.
+        (i.e. "chain" is optional). Lines beginning with '#' are ignored as comments.
 
-SEE ALSO
+    SEE ALSO
 
-    data2b_atom, data2q_atom, data2q_res
+        data2b_atom, data2q_atom, data2q_res
     """
 
     b_dict = residue_data_extract(data_file)
@@ -244,49 +267,55 @@ SEE ALSO
             if chain in b_dict:
                 b = b_dict[chain][resi][0]
             else:
-                b = b_dict[''][resi][0]
-            if not quiet: print('///%s/%s/%s new: %f' % (chain, resi, name, b))
+                b = b_dict[""][resi][0]
+            if not quiet:
+                print(f"///{chain}/{resi}/{name} new: {b:f}")
         except KeyError:
-            if not quiet: print('///%s/%s/%s keeping: %f' % (chain, resi, name, b))
+            if not quiet:
+                print(f"///{chain}/{resi}/{name} keeping: {b:f}")
         return b
+
     stored.b = b_lookup
 
-    cmd.alter(mol, '%s=stored.b(chain, resi, name, %s)' % (property, property))
+    cmd.alter(mol, f"{property}=stored.b(chain, resi, name, {property})")
     cmd.rebuild()
 
-def data2q_atom(mol='',data_file=''):
+
+def data2q_atom(mol="", data_file=""):
     """
-DESCRIPTION
+    DESCRIPTION
 
-    Alters the occupancy data by atom.
+        Alters the occupancy data by atom.
 
-USAGE
+    USAGE
 
-    See data2b_atom
+        See data2b_atom
 
-SEE ALSO
+    SEE ALSO
 
-    data2q_res, data2b_atom, data2b_res
+        data2q_res, data2b_atom, data2b_res
     """
-    data2b_atom(mol, data_file, property='q')
+    data2b_atom(mol, data_file, property="q")
 
-def data2q_res(mol='',data_file=''):
+
+def data2q_res(mol="", data_file=""):
     """
-DESCRIPTION
+    DESCRIPTION
 
-    Alters the occupancy data by residue.
+        Alters the occupancy data by residue.
 
-USAGE
+    USAGE
 
-    See data2b_res
+        See data2b_res
 
-SEE ALSO
+    SEE ALSO
 
-    data2q_atom, data2b_atom, data2b_res
+        data2q_atom, data2b_atom, data2b_res
     """
-    data2b_res(mol, data_file, property='q')
+    data2b_res(mol, data_file, property="q")
 
-cmd.extend('data2b_res',data2b_res)
-cmd.extend('data2b_atom',data2b_atom)
-cmd.extend('data2q_res',data2q_res)
-cmd.extend('data2q_atom',data2q_atom)
+
+cmd.extend("data2b_res", data2b_res)
+cmd.extend("data2b_atom", data2b_atom)
+cmd.extend("data2q_res", data2q_res)
+cmd.extend("data2q_atom", data2q_atom)

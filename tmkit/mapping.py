@@ -8,15 +8,46 @@ __maintainer__ = "Jianfeng Sun"
 from tmkit.id.Mapping import mapping as idmap
 
 
+from typing import List
+
+
 def pdb2uniprot(
-        id,
-        ref_fpn='',
-):
-    return idmap().entryConvert(id=id, ref_fpn=ref_fpn, mode='pdb -> uniprot')
+    id: str,
+    ref_fpn: str = "",
+) -> List[str]:
+    """_summary_
+
+    Parameters
+    ----------
+    id : str
+        _description_
+    ref_fpn : str, optional
+        _description_, by default ""
+
+    Returns
+    -------
+    List[str]
+        _description_
+    """
+    return idmap().entryConvert(id=id, ref_fpn=ref_fpn, mode="pdb -> uniprot")
 
 
 def uniprot2pdb(
-        id,
-        ref_fpn='',
-):
-    return idmap().entryConvert(id=id, ref_fpn=ref_fpn, mode='uniprot -> pdb')
+    id: str,
+    ref_fpn: str = "",
+) -> List[str]:
+    """_summary_
+
+    Parameters
+    ----------
+    id : str
+        _description_
+    ref_fpn : str, optional
+        _description_, by default ""
+
+    Returns
+    -------
+    List[str]
+        _description_
+    """
+    return idmap().entryConvert(id=id, ref_fpn=ref_fpn, mode="uniprot -> pdb")

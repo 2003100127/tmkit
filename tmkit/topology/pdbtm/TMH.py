@@ -3,36 +3,40 @@ __version__ = "v1.0"
 __copyright__ = "Copyright 2023"
 __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
-__maintainer__ = "Jianfeng Sun"
-
+from typing import List, Tuple
 from tmkit.topology.pdbtm.Segment import segment
 
 
 class tmh:
+    def __init__(self, xml_fp: str, prot_name: str, seq_chain: str) -> None:
+        """
+        Initialize a TMH object.
 
-    def __init__(self, xml_fp, prot_name, seq_chain):
+        Parameters
+        ----------
+        xml_fp : str
+            The filepath of the XML file.
+        prot_name : str
+            The name of the protein.
+        seq_chain : str
+            The sequence chain of the protein.
+
+        Returns
+        -------
+        None
+        """
         self.xml_fp = xml_fp
         self.prot_name = prot_name
         self.seq_chain = seq_chain
 
-    def get(self):
+    def get(self) -> Tuple[List[int], List[int]]:
         """
-        ..  @description:
-            -------------
-            # tree = ET.parse(self.xml_fpn)
-            # parser_pdb = tree.getroot()
-            # start_id = []
-            # last_id = []
-            # for chains in parser_pdb:
-            #     # print(chains.tag)
-            #     if chains.tag == '{http://pdbtm.enzim.hu}CHAIN':
-            #         # print(chains.tag)
-            #         for regions in chains.iter('{http://pdbtm.enzim.hu}REGION'):
-            #             # print(chains.get('CHAINID'), len(regions.get('type')))
-            #             if chains.get('CHAINID') == self.seq_chain and regions.get('type') == 'H':
-            #                 start_id.append(int(regions.get('pdb_beg')))
-            #                 last_id.append(int(regions.get('pdb_end')))
-        :return:
+        Get the start and end positions of the transmembrane helices.
+
+        Returns
+        -------
+        Tuple[List[int], List[int]]
+            A tuple containing two lists: the start positions and the end positions of the transmembrane helices.
         """
         start_id, last_id = segment().tmh(
             xml_fp=self.xml_fp,
