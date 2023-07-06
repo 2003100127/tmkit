@@ -5,6 +5,7 @@ tmkit/data/
 tmkit/seqnetrr/Compare.py
 tmkit/seqnetrr/Plot.py
 tmkit/util/Console.py
+tmkit/topology/lib/TMHMM2.0.model
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
