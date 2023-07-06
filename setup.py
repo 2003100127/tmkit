@@ -25,7 +25,7 @@ setup(
         # 'tmhmm.py',
         'pypdb==2.2',
         'xmltramp2==3.1.1',
-        'biopython==1.79',
+        'biopython==1.81',
         'pyfiglet==0.8.post1',
     ],
 )
