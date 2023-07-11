@@ -5,12 +5,14 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+import os
+
 from tmkit.util.Kit import urlliby
 
 
 def tmkit_data(
     sv_fpn: str,
-    url: str = 'https://sandbox.zenodo.org/record/1219139/files/data.zip?download=1',
+    url: str = "https://sandbox.zenodo.org/record/1219139/files/data.zip?download=1",
 ) -> None:
     """
     Download TMKit example dataset.
@@ -23,6 +25,12 @@ def tmkit_data(
         path to save the TMKit example dataset
     """
     print("===>Dowloading TMKit example dataset...")
+
+    # create directory if not exist
+    sv_dir = os.path.dirname(sv_fpn)
+    if not os.path.exists(sv_dir):
+        os.makedirs(sv_dir)
+
     urlliby(url=url, fpn=sv_fpn)
     print("===>Dowloaded!")
 

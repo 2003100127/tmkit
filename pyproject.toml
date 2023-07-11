@@ -45,7 +45,7 @@ pre-commit = "^3.3.3"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.5"
-black = {version = "^23.3.0", allow-prereleases = true}
+black = {version = "^23.7.0", allow-prereleases = true}
 isort = {extras = ["colors"], version = "^5.12.0"}
 pydocstyle = "^6.3.0"
 pylint = "^2.17.4"
@@ -57,7 +57,7 @@ coverage-badge = "^1.1.0"
 pytest-html = "^3.2.0"
 pytest-cov = "^4.1.0"
 mypy = "^1.4.1"
-pydoclint = "^0.0.14"
+pydoclint = "^0.0.15"
 pynguin = "^0.33.0"
 monkeytype = "^23.3.0"
 ipykernel = "^6.24.0"

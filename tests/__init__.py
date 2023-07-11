@@ -12,4 +12,4 @@ fin_pdb = os.path.join(dir_data, "1xqfA.pdb")
 
 # Jianfeng's example data
 exp_data = os.path.join(wd, "tests/example_data/")
-tmp_data = os.path.join(wd, "out/tmp_data/")
+tmp_data = os.path.join(wd, "tmp/")

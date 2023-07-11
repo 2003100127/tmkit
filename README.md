@@ -57,23 +57,22 @@ pip install tmkit==0.0.3
 
 If you want to install TMKit with some optional packages, including hh-suite, pymol, and hmmer, you can select the conda option. You should have [miniconda](https://docs.conda.io/en/latest/miniconda.html) installed first. Please run the following commands to create a new conda environment and install TMKit.
 
-```sh
+````sh
 # create a conda environment
 conda create --name tmkit python=3.11
 
 # activate the conda environment
 conda activate tmkit
 
-conda install -c rujinlong -c conda-forge -c bioconda tmkit  # TODO: change to 2003100127 channel
-```
+conda install -c 2003100127 -c conda-forge -c bioconda tmkit
 
 ### Using docker
 
 You can also use docker to run TMKit. You should have [docker](https://docs.docker.com/get-docker/) installed first. Then run the following commands to pull the docker image.
 
 ```sh
-docker pull 2003100127/tmkit
-```
+docker pull 2003100127/tmkit:latest
+````
 
 ## For developers
 
