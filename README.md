@@ -3,16 +3,17 @@
     <br>
 </h1>
 
-![](https://img.shields.io/badge/tmkit-executable-519dd9.svg)
-![](https://img.shields.io/badge/last_released-March._2023-green.svg)
-![](https://img.shields.io/pypi/v/tmkitx?logo=PyPI)
+![](https://img.shields.io/pypi/v/tmkit?logo=PyPI)
 ![Test](https://github.com/2003100127/tmkit/actions/workflows/test.yml/badge.svg)
+![](https://img.shields.io/badge/last_released-Jul14._2023-green.svg)
+![](https://img.shields.io/badge/tmkit-executable-519dd9.svg)
 ![Coverage Report](assets/images/coverage.svg)
-[![Downloads](https://pepy.tech/badge/tmkitx)](https://pepy.tech/project/tmkitx)
 [![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/2003100127/tmkit/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
+[![Anaconda](https://github.com/2003100127/tmkit/actions/workflows/conda.yml/badge.svg)](https://github.com/2003100127/tmkit/actions/workflows/conda.yml)
 [![run with docker](https://img.shields.io/badge/run%20with-Docker-0db7ed?logo=docker)](https://www.docker.com/2003100127/tmkit)
+[![Downloads](https://pepy.tech/badge/tmkitx)](https://pepy.tech/project/tmkitx)
 
 <!-- ![Build](https://github.com/2003100127/tmkit/actions/workflows/build.yml/badge.svg) -->
 
@@ -57,7 +58,7 @@ pip install tmkit==0.0.3
 
 If you want to install TMKit with some optional packages, including hh-suite, pymol, and hmmer, you can select the conda option. You should have [miniconda](https://docs.conda.io/en/latest/miniconda.html) installed first. Please run the following commands to create a new conda environment and install TMKit.
 
-````sh
+```sh
 # create a conda environment
 conda create --name tmkit python=3.11
 
@@ -65,6 +66,7 @@ conda create --name tmkit python=3.11
 conda activate tmkit
 
 conda install -c 2003100127 -c conda-forge -c bioconda tmkit
+```
 
 ### Using docker
 
@@ -72,7 +74,7 @@ You can also use docker to run TMKit. You should have [docker](https://docs.dock
 
 ```sh
 docker pull 2003100127/tmkit:latest
-````
+```
 
 ## For developers
 
