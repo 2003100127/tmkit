@@ -73,7 +73,7 @@ conda install -c 2003100127 -c conda-forge -c bioconda tmkit
 You can also use docker to run TMKit. You should have [docker](https://docs.docker.com/get-docker/) installed first. Then run the following commands to pull the docker image.
 
 ```sh
-docker pull 2003100127/tmkit:latest
+docker pull jinlongru/tmkit:latest
 ```
 
 ## For developers

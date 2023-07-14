@@ -15,9 +15,9 @@ jobs:
       matrix:
         include:
           # - dockerfile: Dockerfile.dev
-          #   image: jinlongru/tmkit-dev
+          #   image: 2003100127/tmkit-dev
           - dockerfile: Dockerfile
-            image: jinlongru/tmkit
+            image: 2003100127/tmkit
     permissions:
       contents: read
       packages: write
