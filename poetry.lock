@@ -2383,13 +2383,13 @@ files = [
 
 [[package]]
 name = "pydoclint"
-version = "0.0.15"
+version = "0.1.1"
 description = "A Python docstring linter that checks arguments, returns, yields, and raises sections"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pydoclint-0.0.15-py2.py3-none-any.whl", hash = "sha256:fa3491b7478cc7607cf81216578f8997aed50b5bedbd1639728ec20edabbb088"},
-    {file = "pydoclint-0.0.15.tar.gz", hash = "sha256:ad26e0ee05344c5455903891733dbf2aed7cef9046e1001ed5278bcf5591995d"},
+    {file = "pydoclint-0.1.1-py2.py3-none-any.whl", hash = "sha256:af84baca2e72107e53e77cbfb7a7dc20c2daec6ab94dd8bda8e5181b31f40e3d"},
+    {file = "pydoclint-0.1.1.tar.gz", hash = "sha256:1153baf4b38a428683f9ef55ae445002349c9146fef8d5645675ecb31e02a39f"},
 ]
 
 [package.dependencies]
@@ -3899,4 +3899,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "b618bcdc02def518c6996af1f2c1518014a5eb9cdcb3c87eee406cacc59421bd"
+content-hash = "76f7847d85fe6382d765e4f88068c4527e2b861cc8eea8ec2fd10f9b18130f77"
