@@ -2524,16 +2524,17 @@ diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pypdb"
-version = "2.2"
+version = "2.3"
 description = "A Python wrapper for the RCSB Protein Data Bank (PDB) API"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pypdb-2.2-py3-none-any.whl", hash = "sha256:782db2176db1ec2b732efe657f10d613a7ef806b0c70bb2241bb6b042da9b8ea"},
-    {file = "pypdb-2.2.tar.gz", hash = "sha256:771fe76382c10f26f1a1abd3cda2767b83d561c737194ea9d888cb1e712ef0d3"},
+    {file = "pypdb-2.3-py3-none-any.whl", hash = "sha256:a8abfe101ee732869903110042f744e994797e2690f87e040bfee03dc6842d24"},
+    {file = "pypdb-2.3.tar.gz", hash = "sha256:a14aa2b5e5ece60552178fe3d35bdb0b38d6b0e9e7216bcc9c174386904c249f"},
 ]
 
 [package.dependencies]
+pandas = "*"
 requests = "*"
 
 [[package]]
@@ -3898,4 +3899,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "76f7847d85fe6382d765e4f88068c4527e2b861cc8eea8ec2fd10f9b18130f77"
+content-hash = "9f6b3c326ced61188a41b4ddcd739eb1334cc16e9b35578c77f8dcff3896d711"
