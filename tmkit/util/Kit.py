@@ -85,6 +85,20 @@ def create(
             os.makedirs(DIRECTORY)
 
 
+def rename(
+    old_fp: str,
+    old_fn: str,
+    new_fn: str,
+    sv_fp: str,
+    old_suffix: str,
+    new_suffix: str,
+):
+    return os.rename(
+        old_fp + old_fn + old_suffix,
+        sv_fp + new_fn + new_suffix
+    )
+
+
 def batchRename(
     file_path: str,
     old_suffix: str,

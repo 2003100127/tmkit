@@ -49,10 +49,11 @@ class XML:
             print(f"===>No.{i} protein name: {prot_name}")
             try:
                 url = (
-                    "http://pdbtm.enzim.hu/data/database/"
-                    + str(prot_name[1])
-                    + str(prot_name[2])
-                    + "/"
+                    # "http://pdbtm.enzim.hu/data/database/"
+                    # + str(prot_name[1])
+                    # + str(prot_name[2])
+                    # + "/"
+                    "http://pdbtm.unitmp.org/api/v1/entry/"
                     + str(prot_name)
                     + ".xml"
                 )

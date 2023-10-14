@@ -5,6 +5,8 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+from typing import Optional
+
 import pandas as pd
 
 from tmkit.id.Fasta import Fasta as idfas
@@ -15,6 +17,96 @@ from tmkit.sequence import Fasta as sfasta
 from tmkit.sequence.PDB import PDB as spdb
 from tmkit.sequence.XML import XML as sxml
 from tmkit.structure.PDB import PDB as stpdb
+from tmkit.seqnetrr.combo.Length import length as plength
+from tmkit.seqnetrr.combo.Position import Position as pfasta
+from tmkit.seqnetrr.window.Single import Single as swin
+from tmkit.seqnetrr.window.Pair import Pair as pwin
+
+
+def pos_list_single(
+    len_seq : int,
+    seq_sep_inferior : Optional[float] = None,
+    seq_sep_superior : Optional[float] = None,
+) -> list:
+    return plength(
+        seq_sep_superior=seq_sep_superior,
+        seq_sep_inferior=seq_sep_inferior,
+    ).tosgl(len_seq)
+
+
+def pos_list_pair(
+    len_seq : int,
+    seq_sep_inferior : Optional[float] = None,
+    seq_sep_superior : Optional[float] = None,
+) -> list:
+    return plength(
+        seq_sep_superior=seq_sep_superior,
+        seq_sep_inferior=seq_sep_inferior,
+    ).to_pair(len_seq)
+
+
+def pos_single(
+    sequence : str,
+    pos_list : list,
+) -> list:
+    return pfasta(sequence).single(pos_list=pos_list)
+
+
+def pos_pair(
+    sequence : str,
+    pos_list : list,
+) -> list:
+    return pfasta(sequence).pair(pos_list=pos_list)
+
+
+def win_id_single(
+    sequence : str,
+    position : list,
+    window_size : int,
+) -> list:
+    return swin(
+        sequence=sequence,
+        position=position,
+        window_size=window_size,
+    ).mid()
+
+
+def win_name_single(
+    sequence: str,
+    position: list,
+    window_size: int,
+    mids : list,
+) -> list:
+    return swin(
+        sequence=sequence,
+        position=position,
+        window_size=window_size,
+    ).mname(mids)
+
+
+def win_id_pair(
+    sequence: str,
+    position: list,
+    window_size: int,
+) -> list:
+    return pwin(
+        sequence=sequence,
+        position=position,
+        window_size=window_size,
+    ).mid()
+
+
+def win_name_pair(
+    sequence: str,
+    position: list,
+    window_size: int,
+    mids : list,
+) -> list:
+    return pwin(
+        sequence=sequence,
+        position=position,
+        window_size=window_size,
+    ).mname(mids)
 
 
 def retrieve_pdb_from_rcsb(

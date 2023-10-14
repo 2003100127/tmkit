@@ -25,7 +25,9 @@ class Position:
         self.sequence = sequence
         self.len_seq = len(self.sequence)
 
-    def single(self, pos_list: List) -> List[List[int]]:
+    def single(
+        self, pos_list: List,
+    ) -> List[List[int]]:
         """
         Calculate the distance matrix for a single position.
 
@@ -47,7 +49,10 @@ class Position:
             dist_matrix.append([fas_id1, seq_dict[fas_id1], fas_id1, 0])
         return dist_matrix
 
-    def pair(self, pos_list: List) -> List[List[int]]:
+    def pair(
+        self,
+        pos_list: List,
+    ) -> List[List[int]]:
         """
         Calculate the distance matrix for a pair of positions.
 

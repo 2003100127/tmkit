@@ -5,11 +5,13 @@ __license__ = "GPL v3.0"
 __email__ = "jianfeng.sunmt@gmail.com"
 __maintainer__ = "Jianfeng Sun"
 
+import os
 import pandas as pd
 
 from Bio.PDB import PDBList
 
-from tmkit.util.Kit import batchRename, delete, ungz, urlliby
+from tmkit.util.Kit import batchRename, delete, ungz, urlliby, rename
+from tmkit.util.Writer import Writer
 
 
 class PDB:
@@ -23,6 +25,7 @@ class PDB:
         prot_series : pd.Series
             A Pandas series of protein names.
         """
+        self.write = Writer()
         self.prot_dedup = prot_series.unique()
 
     def rcsb(self, sv_fp: str, route: str = "biopython") -> str:
@@ -95,28 +98,41 @@ class PDB:
             'Finished' if a PDB file is successfully retrieved.
         """
         count = 0
+        fails = []
         for i, prot_name in enumerate(self.prot_dedup):
-            mark = str(prot_name[1] + prot_name[2])
+            # mark = str(prot_name[1] + prot_name[2])
             url = (
-                "http://pdbtm.enzim.hu/data/database/"
-                + mark
-                + "/"
+                # "http://pdbtm.enzim.hu/data/database/"
+                # + mark
+                # + "/"
+                "http://pdbtm.unitmp.org/api/v1/entry/"
                 + str(prot_name)
                 + "."
                 + kind
-                + "pdb.gz"
+                + "pdb"
             )
             print(f"===>No.{i + 1} protein name: {prot_name}")
             try:
-                urlliby(url=url, fpn=sv_fp + str(prot_name) + ".gz")
-                ungz(
-                    file_path=sv_fp, file_name=prot_name, sv_fp=sv_fp, new_suffix=".pdb"
-                )
-                delete(sv_fp + str(prot_name) + ".gz")
+                if not os.path.isfile(sv_fp + str(prot_name) + ".pdb"):
+                    urlliby(url=url, fpn=sv_fp + str(prot_name) + "." + kind + "pdb")
+                    rename(
+                        old_fp=sv_fp, old_fn=str(prot_name), old_suffix="." + kind + "pdb",
+                        sv_fp=sv_fp, new_fn=str(prot_name), new_suffix=".pdb",
+                    )
+                    ### +++++++++previous PDBTM version++++++++++
+                    # urlliby(url=url, fpn=sv_fp + str(prot_name) + ".gz")
+                    # ungz(
+                    #     file_path=sv_fp, file_name=prot_name, sv_fp=sv_fp, new_suffix=".pdb"
+                    # )
+                    # delete(sv_fp + str(prot_name) + ".gz")
+                else:
+                    print('===>PDB file exists')
             except:
                 count = count + 1
-                # print(count)
+                fails.append(prot_name)
+                print(f"===>number of xml that cannot be downloaded {count}")
                 continue
+        self.write.generic(fails, sv_fp + "log_fail_ids.txt")
         return 'Finished'
 
     def alphafold(self, sv_fp: str) -> str:

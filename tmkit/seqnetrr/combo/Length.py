@@ -30,7 +30,7 @@ class length(Param):
     def to_pair(self, length: int, kind: str = "standard") -> List:
         """
         Given length of a protein sequence, it gets fasta
-        ids of residue pairs of a protein regulated by
+        ids of residue pairs of a protein controlled by
         seq_sep_inferior and (or) seq_sep_superior.
 
         Parameters
@@ -65,7 +65,7 @@ class length(Param):
     def tosgl(self, length: int) -> List:
         """
         Given length of a protein sequence, it gets fasta
-        ids of residue pairs of a protein regulated by
+        ids of residue pairs of a protein controlled by
         seq_sep_inferior and (or) seq_sep_superior.
 
         Parameters
