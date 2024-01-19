@@ -1,7 +1,7 @@
 name: Docker
 
 on:
-  # after the pypi.yml workflow is done
+  # after the pypi.yml workflow is run successfully, run this workflow
   workflow_run:
     workflows: ["PyPI"]
     types:
