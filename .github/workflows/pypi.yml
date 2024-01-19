@@ -3,7 +3,7 @@ name: testpypi-publish
 on:
   push:
     tags:
-      - "zzz*"
+      - "v*"
 
 jobs:
   build:
