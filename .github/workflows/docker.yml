@@ -1,10 +1,11 @@
 name: Docker
 
 on:
-  push:
-    tags:
-      - "v*"
-      - "docker*"
+  # after the pypi.yml workflow is done
+  workflow_run:
+    workflows: ["PyPI"]
+    types:
+      - completed
 
 jobs:
   push_to_registry:

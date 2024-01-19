@@ -4,7 +4,7 @@ name: build
 on:
   push:
     tags:
-      - "v*"
+      - "build*"
 
 jobs:
   build:

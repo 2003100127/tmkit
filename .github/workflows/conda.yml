@@ -1,9 +1,10 @@
 name: Anaconda
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["PyPI"]
+    types:
+      - completed
 
 jobs:
   upload:

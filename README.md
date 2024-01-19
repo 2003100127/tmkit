@@ -45,13 +45,13 @@ We also provided a jupyter notebook (`examples.ipynb`) to demonstrate the usage 
 
 ```sh
 # create a conda environment
-conda create --name tmkit python=3.11
+conda create --name tmkit python=3.10
 
 # activate the conda environment
 conda activate tmkit
 
 # a stable version 0.0.2 and 0.0.3 (recommended)
-pip install tmkit==0.0.3
+pip install tmkit==0.0.4
 ```
 
 ### Using conda
@@ -60,7 +60,7 @@ If you want to install TMKit with some optional packages, including hh-suite, py
 
 ```sh
 # create a conda environment
-conda create --name tmkit python=3.11
+conda create --name tmkit python=3.10
 
 # activate the conda environment
 conda activate tmkit
