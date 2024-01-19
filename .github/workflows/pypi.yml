@@ -1,27 +1,15 @@
 name: PyPI
 
 on:
-  push:
-    tags:
-      - "v*"
+  # when a new release is created
+  release:
+    types: [created]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # - name: Build and publish to pypi
-      #   uses: JRubics/poetry-publish@v1.17
-      #   with:
-      #     python_version: "3.10"
-      #     poetry_version: "==1.5.1" # (PIP version specifier syntax)
-      #     pypi_token: ${{ secrets.PYPI_TOKEN_TEST }}
-      #     build_format: "sdist"
-      #     allow_poetry_pre_release: "yes"
-      #     ignore_dev_requirements: "yes"
-      #     repository_name: "pypi"
-      #     repository_url: "https://pypi.org/legacy/"
-
       - name: Build and publish to pypi
         uses: JRubics/poetry-publish@v1.17
         with:

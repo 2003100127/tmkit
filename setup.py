@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="tmkit",
-    version="0.0.4",
+    version="0.0.5",
     keywords=("pip", "tmkit"),
     description="TMKit",
     long_description="TMKit",

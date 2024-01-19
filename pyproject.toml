@@ -165,7 +165,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tmkit"
-version = "0.0.4"
+version = "0.0.5"
 description = "TMKit is a scalable Python programming interface holding a bundle of function modules to allow a variety of transmembrane protein studies."
 readme = "README.md"
 authors = ["Jianfeng Sun <jianfeng.sun@ndorms.ox.ac.uk>"]
