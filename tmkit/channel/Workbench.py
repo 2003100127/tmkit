@@ -14,6 +14,7 @@ from Bio.PDB import *
 from tmkit.base import PDB
 from tmkit.sequence import Fasta as sfasta
 from tmkit.topology.pdbtm.TMH import TMH as tmhseg
+from tmkit.chain.PDB import PDB as cpdb
 from tmkit.util.Kit import chainid
 from tmkit.util.Reader import Reader
 from tmkit.util.Writer import Writer
@@ -86,10 +87,12 @@ class Workbench:
                 prot_name = self.df_prot.loc[i, "prot"]
                 seq_chain = self.df_prot.loc[i, "chain"]
                 try:
-                    if metric == "rez" or metric == "met":
+                    if metric == "rez" or metric == "met" or metric == "nchain":
                         prot_name_pre = self.df_prot.loc[i - 1 if i > 0 else i, "prot"]
                         if i > 0 and prot_name_pre == prot_name:
                             self.df_prot.loc[i, "rez"] = self.df_prot.loc[i - 1, "rez"]
+                            self.df_prot.loc[i, "met"] = self.df_prot.loc[i - 1, "met"]
+                            self.df_prot.loc[i, "nchain"] = self.df_prot.loc[i - 1, "nchain"]
                         else:
                             struct = PDB.Structure(
                                 pdb_fp=self.pdb_cplx_fp,
@@ -101,6 +104,11 @@ class Workbench:
                                 self.df_prot.loc[i, metric] = struct.rez
                             elif metric == "met":
                                 self.df_prot.loc[i, metric] = struct.met
+                            elif metric == "nchain":
+                                self.df_prot.loc[i, metric] = len(cpdb(
+                                    pdb_fp=self.pdb_cplx_fp,
+                                    prot_name=prot_name,
+                                ).chains())
                     else:
                         if metric == "bio_name":
                             struct = PDB.Structure(

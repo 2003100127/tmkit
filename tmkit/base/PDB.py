@@ -100,6 +100,12 @@ class ID:
         self.structure = self.bio_parser.get_structure(self.prot_name, self.pdb_fpn)
         self.model = self.structure[0]
         self.pdb_chain = self.model[self.seq_chain]
+        self.three_to_one = {
+            'CYS': 'C', 'ASP': 'D', 'SER': 'S', 'GLN': 'Q', 'LYS': 'K',
+            'ILE': 'I', 'PRO': 'P', 'THR': 'T', 'PHE': 'F', 'ASN': 'N',
+            'GLY': 'G', 'HIS': 'H', 'LEU': 'L', 'ARG': 'R', 'TRP': 'W',
+            'ALA': 'A', 'VAL':'V', 'GLU': 'E', 'TYR': 'Y', 'MET': 'M',
+        }
 
 
 class Structure:

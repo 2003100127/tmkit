@@ -62,7 +62,7 @@ class determine:
         # print(fasta_lower_tmh)
         # print(fasta_upper_tmh)
         w = Phobius()
-        df = w.format(phobius_fpn=pred_fp)
+        df = w.format(phobius_fpn=pred_fp + prot_name + seq_chain + '.jphobius')
         pred_seg = w.extract(df=df)
         # print(pred_seg)
         pdbtm_seg = {}

@@ -19,8 +19,19 @@ from tmkit.sequence.XML import XML as sxml
 from tmkit.structure.PDB import PDB as stpdb
 from tmkit.seqnetrr.combo.Length import length as plength
 from tmkit.seqnetrr.combo.Position import Position as pfasta
+from tmkit.seqnetrr.combo.Segment import Segment as pseg
 from tmkit.seqnetrr.window.Single import Single as swin
 from tmkit.seqnetrr.window.Pair import Pair as pwin
+
+
+def pos_seg_list_single(
+    fas_lower,
+    fas_upper
+):
+    return pseg().tosgl(
+        fas_lower=fas_lower,
+        fas_upper=fas_upper,
+    )
 
 
 def pos_list_single(

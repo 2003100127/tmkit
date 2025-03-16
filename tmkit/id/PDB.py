@@ -7,7 +7,7 @@ __maintainer__ = "Jianfeng Sun"
 
 from typing import Dict
 
-from Bio.PDB.Polypeptide import three_to_one
+# from Bio.PDB.Polypeptide import three_to_one
 
 from tmkit.base import PDB as bpdb
 
@@ -41,7 +41,7 @@ class PDB(bpdb.ID):
         """
         ids: Dict[int, str] = {}
         for i, residue in enumerate(self.pdb_chain):
-            res_name: str = three_to_one(residue.get_resname())
+            res_name: str = self.three_to_one[residue.get_resname()]
             ids[residue.id[1]] = res_name
             # print([*ids.keys()])
         return ids

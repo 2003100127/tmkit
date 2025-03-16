@@ -21,14 +21,6 @@
 
 ## Overview
 
-```angular2html
- _____ __  __ _  ___ _
-|_   _|  \/  | |/ (_) |_
-  | | | |\/| | ' /| | __|
-  | | | |  | | . \| | |_
-  |_| |_|  |_|_|\_\_|\__|
-```
-
 TMKit is a scalable Python programming interface holding a bundle of function modules to allow a variety of transmembrane protein studies.
 
 ## Documentation
