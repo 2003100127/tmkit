@@ -1,8 +1,12 @@
-# 
+# MSA
 
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 
-
+hhblits
+jackhmmer
+hhfilter
+reformat
+foldseek_af2
 ```

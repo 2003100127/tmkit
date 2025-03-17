@@ -34,14 +34,11 @@ leading to a total of 2×*N<sub>t</sub>* GlobRRCs for each residue pair.
 
 The core challenge is efficiently assigning features to this large volume of residue pairs. A naive approach would result in an **O(n³)** time complexity, making it computationally infeasible for large datasets. However, by leveraging hashing techniques and optimizing the process to eliminate unnecessary computations, we can dramatically reduce runtime. Among various methods tested, the Hash-based approach has proven to be the most efficient.
 
-```{image} ../../../img/bi_comput.jpg
-:class: bg-primary
-:width: 650px
-:align: center
+```{figure} ../../../img/bi_comput.jpg
+:scale: 40%
+
+**Caption**: Computing scheme of assigning features to GlobRRCs in seqNetRR.
 ```
-<div align="center">
-Caption: Computing scheme of assigning features to GlobRRCs in seqNetRR.
-</div>
 
 | **Method**         | **Description**                                                                                                                                                                             |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -65,13 +62,10 @@ As illustrated in the plot below, methods utilizing hash tables significantly ou
 
 Furthermore, the runtime per molecule exhibits a strong exponential correlation with molecular length and a linear correlation with the number of residue pairs, as evidenced by exceptionally high R-squared values (0.95 and 1.00, respectively). For instance, for a protein of length 500 with approximately 120,000 non-redundant residue pairs, seqNetRR efficiently isolates GlobRRCs from other connections in the residue contact network, completing feature assignment in ~16 seconds.
 
-```{image} ../../../img/bar_bi.png
-:class: bg-primary
-:width: 600px
-:align: center
+```{figure} ../../../img/bar_bi.png
+:scale: 11%
+
+**Caption**: The runtime of the two tasks at the per-protein level.
 ```
-<div align="center">
-Caption: The runtime of the two tasks at the per-protein level.
-</div>
 
 [^1]: Sun J, Frishman D. DeepHelicon: Accurate prediction of inter-helical residue contacts in transmembrane proteins by residual neural networks. J Struct Biol. 2020 Oct 1;212(1):107574. doi: 10.1016/j.jsb.2020.107574. Epub 2020 Jul 11. PMID: 32663598.

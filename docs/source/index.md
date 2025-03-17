@@ -162,7 +162,7 @@ install
 
 
 ## 👨‍💻 **Developer**
-Jianfeng Sun,  Nuffield Department of Orthopaedics, Rheumatology and Musculoskeletal Sciences (NDORMS), Headington, Oxford OX3 7LD, University of Oxford.
+[Jianfeng Sun{octicon}`link-external;1em;sd-text-info`](https://scholar.google.com/citations?hl=en&user=TfLBR9kAAAAJ&view_op=list_works&sortby=pubdate),  Nuffield Department of Orthopaedics, Rheumatology and Musculoskeletal Sciences (NDORMS), Headington, Oxford OX3 7LD, University of Oxford.
 
 
 
@@ -178,9 +178,12 @@ Jianfeng Sun,  Nuffield Department of Orthopaedics, Rheumatology and Musculoskel
 :maxdepth: 1
 
 installation
+tutorial/index
 feature
 faq
 about
 contact
-tutorial/index
+whatsnew
+issue
+versions
 ```

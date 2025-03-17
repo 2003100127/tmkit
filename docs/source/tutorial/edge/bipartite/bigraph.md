@@ -18,14 +18,11 @@ This, we will go through how to define and make a bigraph in Python.
 ## {octicon}`share-android;1em;sd-text-info` **Patch**
 The first bigraph we want to show is patch, which is defined by a square centering around a residue pair in a correlation matrix (e.g., residue contact map) as shown in the plot below. We use the `patch` function below to generate a patch with a length `L`.
 
-```{image} ../../../img/patch.jpg
-:class: bg-primary
-:width: 240px
-:align: center
+```{figure} ../../../img/patch.jpg
+:scale: 50%
+
+**Caption**: Patch bipartite graph in a residue contact map.
 ```
-<div align="center">
-Caption: Patch bipartite graph in a residue contact map.
-</div>
 
 
 ```{code} python
@@ -56,27 +53,20 @@ Then, we will have the following output, after calling this function by `patch(l
 ## {octicon}`share-android;1em;sd-text-info` **MemConP**
 The second bigraph we show here is `memconp`, which is used to study the two residues from two different helices that face each other, for example, residue 1 and residue 2 in the plot below.
 
-```{image} ../../../img/tmsc.png
-:class: bg-primary
-:width: 500px
-:align: center
+```{figure} ../../../img/tmsc.png
+:scale: 40%
+
+**Caption**: Two residues facing each other in a pair of helices.
 ```
-<div align="center">
-Caption: Two residues facing each other in a pair of helices.
-</div>
 
 
 Residue 1 and residue 2 connect to each other's neighbouring residues, like below.
 
-```{image} ../../../img/memconp.png
-:class: bg-primary
-:width: 300px
-:align: center
-```
-<div align="center">
-Caption: Helix-helix connections in MemConP in bipartite graphs
-</div>
+```{figure} ../../../img/memconp.png
+:scale: 45%
 
+**Caption**: Helix-helix connections in MemConP in bipartite graphs.
+```
 
 It is defined by a group of specified coordinates, like in the code area below.
 
@@ -95,14 +85,11 @@ bigraph = [
 ## {octicon}`share-android;1em;sd-text-info` **Cross**
 Next, residues can cross connected as cross as shown in the plot.
 
-```{image} ../../../img/cross.jpg
-:class: bg-primary
-:width: 240px
-:align: center
+```{figure} ../../../img/cross.jpg
+:scale: 45%
+
+**Caption**: Cross connections of two residues in a bipartite graph.
 ```
-<div align="center">
-Caption: Cross connections of two residues in a bipartite graph
-</div>
 
 We can represent this `cross`-style bigraph in Python, which can be recognized by TMKit.
 

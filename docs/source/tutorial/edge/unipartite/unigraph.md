@@ -20,14 +20,11 @@ where edges between two vertices from the same set are only available are used t
 ## {octicon}`share-android;1em;sd-text-info` **Fully-connected**
  Here, we mainly want to show how to construct a unipartite graph in Python, which can be recognised by TMKit. The unipartite graph is constructed by considering residue pairs in a fully-connected manner, as shown in the plot below.
 
-```{image} ../../../img/local.jpg
-:class: bg-primary
-:width: 300px
-:align: center
+```{figure} ../../../img/local.jpg
+:scale: 45%
+
+**Caption**: Connections in a fully-connected manner in a unipartite graph.
 ```
-<div align="center">
-Caption: Connections in a fully-connected manner in a unipartite graph.
-</div>
 
 
 :::{tip}

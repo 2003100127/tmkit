@@ -1,32 +1,36 @@
 # Feature
 
+:::{dropdown} Motivition
+:open:
 
-<strong>TMKit</strong> supports researchers to analyze the problems involving transmembrane proteins by offering both commonly-used and bespoke methods that access their sequences, structures, topologies, etc. It has many features from both technical and biological perspectives. Technically, the library is written by an object-oriented programming (OOP) manner with its specific system for naming parameters. Biologically, we have been focusing on sorting out problems that are infested in a whole analysis process, regardless of whether they are small or big. We summarize the feature of TMKit in the following sections <strong>Nomenclature</strong> and <strong>What is TMKit focused most on</strong>.
+Computational analysis and modeling of transmembrane protein sequences and structures involve a complex workflow that requires integrating multiple tools for sequence alignment, topology prediction, structural analysis, and functional annotation. These tasks often demand extensive manual effort and switching between different software environments, making the process time-consuming and prone to inconsistencies.
+:::
 
-```{grid} 2
-:gutter: 3
 
-```{grid-item-card} Block 1
-:link: https://example.com
-:link-type: url
-:class-header: bg-primary text-white
+:::{dropdown} What has been done
+:open:
+:color: light
 
-This is the content of Block 1.
+For this reason, we developed TMKit to offer a comprehensive and unified computational framework. It simplifies and standardises transmembrane protein analysis. TMKit consolidates various computational procedures under a single, intuitive interface, enabling researchers to efficiently perform sequence retrieval, topology parsing, structure comparison, and contact prediction without the need for multiple disparate tools.
+:::
 
-:link: https://example.com
-:link-type: url
-:class-header: bg-secondary text-white
 
-This is the content of Block 2.
+:::{dropdown} Result
+:open:
+:color: success
 
-:link: https://example.com
-:link-type: url
-:class-header: bg-success text-white
+By reducing complexity and automating key steps, TMKit significantly lowers the computational workload, enhances data consistency, and facilitates seamless transmembrane protein research from sequence to structure.
+:::
 
-This is the content of Block 3.
 
-:link: https://example.com
-:link-type: url
-:class-header: bg-danger text-white
+TMKit provides currently nine modules to handle a number of transmembrane protein sequence and structural analysis problems, including visualization, sequence, quality control, topology, mapping, annotation, connectivity, edge extraction, and feature.
 
-This is the content of Block 4.
+```{figure} ./img/tmkit_modules.png
+:scale: 24%
+
+**Caption**: Functionality of TMKit.
+```
+
+:::{tip}
+Visualization, Mapping, Annotation, Connectivity, and Edge extraction modules in TMKit are considered unique compared to existing tools.
+:::

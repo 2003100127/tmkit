@@ -1,8 +1,9 @@
-# 
+# Collation
 
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 
-
+individual_protein
+batch_proteins
 ```

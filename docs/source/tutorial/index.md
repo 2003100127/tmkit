@@ -37,3 +37,84 @@ edge/index
 
 visualisation/index
 ```
+
+
+## Feature
+
+```{toctree}
+:maxdepth: 2
+
+feature/index
+```
+
+
+## Topology
+
+```{toctree}
+:maxdepth: 2
+
+topology/index
+```
+
+
+## MSA
+
+```{toctree}
+:maxdepth: 2
+
+msa/index
+```
+
+
+## Collation
+
+```{toctree}
+:maxdepth: 2
+
+collation/index
+```
+
+
+## Mutation
+
+```{toctree}
+:maxdepth: 2
+
+mutation/index
+```
+
+
+## Mapping
+
+```{toctree}
+:maxdepth: 2
+
+mapping/index
+```
+
+
+## Quality control
+
+```{toctree}
+:maxdepth: 3
+
+quality_control/index
+```
+
+
+## Protein-protein interaction
+
+```{toctree}
+:maxdepth: 2
+
+ppi/index
+```
+
+
+## Cath
+
+```{toctree}
+:maxdepth: 2
+
+cath/index
+```
