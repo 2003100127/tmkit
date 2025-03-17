@@ -7,15 +7,41 @@ on:
     branches:
       - main
 
-
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: publish-to-conda
-      uses: 2003100127/conda-publish-action@master
-      with:
-        subdir: 'conda'
-        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
-        platforms: 'win osx linux'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: 3.11  # ✅ Fix Biopython compatibility (must be <=3.11)
+          channels: conda-forge,bioconda
+
+      - name: Install Conda Build Tools
+        run: |
+          conda install -y conda-build conda-verify
+
+      - name: Build Conda Package
+        run: |
+          conda build -c conda-forge -c bioconda -c jianfeng_sun --output-folder conda conda/
+
+      - name: Verify Built Package
+        run: |
+          ls -lah conda/linux-64/  # ✅ Ensure package is built before publishing
+
+      - name: Convert Package for Other Platforms
+        run: |
+          mkdir -p conda/osx-64 conda/win-64  # ✅ Create directories for converted packages
+          conda convert -p osx-64 conda/linux-64/*.tar.bz2 -o conda/
+          conda convert -p win-64 conda/linux-64/*.tar.bz2 -o conda/
+
+      - name: Publish to Conda
+        uses: 2003100127/conda-publish-action@master
+        with:
+          subdir: 'conda'
+          anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
+          platforms: 'win osx linux'
