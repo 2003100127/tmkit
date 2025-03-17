@@ -3,10 +3,13 @@ name: test
 # on: [push, pull_request]
 on:
   push:
-    # branches to consider in the event; optional, defaults to all
-    branches:
-      - main
-      - draft_release
+    tags:
+      - "test*"
+#  push:
+#    # branches to consider in the event; optional, defaults to all
+#    branches:
+#      - main
+#      - draft_release
 
 jobs:
   build:

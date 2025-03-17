@@ -1,20 +1,21 @@
-name: Anaconda
+name: publish_conda
 
 on:
+#  release:
+#    types: [ published ]
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
+
 
 jobs:
-  upload:
+  publish:
     runs-on: ubuntu-latest
-    name: build2anaconda
     steps:
-      - name: get_repo
-        uses: actions/checkout@v3
-      - name: localbuild
-        id: p2a
-        uses: rujinlong/build_anaconda_package@v1.0
-        with:
-          AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-          CONDADIR: ".conda"
+    - uses: actions/checkout@v2
+    - name: publish-to-conda
+      uses: 2003100127/conda-publish-action@master
+      with:
+        subdir: 'conda'
+        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'win osx linux'
