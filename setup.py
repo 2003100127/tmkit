@@ -27,4 +27,9 @@ setup(
         "biopython==1.79",
         "pyfiglet==0.8.post1",
     ],
+    entry_points={
+        'console_scripts': [
+            'tmkit=tmkit.main:main',
+        ],
+    }
 )
