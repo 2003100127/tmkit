@@ -1,10 +1,10 @@
 <h1>
-    <img src="https://github.com/2003100127/tmkit/blob/main/tmkit/util/tmkit_sign.png?raw=true" width="300" height="100">
+    <img src="https://github.com/2003100127/tmkit/blob/main/docs/source/img/tmkit_logo.png?raw=true" width="300" height="100">
     <br>
 </h1>
 
 ![](https://img.shields.io/pypi/v/tmkit?logo=PyPI)
-![Test](https://github.com/2003100127/tmkit/actions/workflows/test.yml/badge.svg)
+[//]: # (![Test]&#40;https://github.com/2003100127/tmkit/actions/workflows/test.yml/badge.svg&#41;)
 ![](https://img.shields.io/badge/last_released-Jul14._2023-green.svg)
 ![](https://img.shields.io/badge/tmkit-executable-519dd9.svg)
 ![Coverage Report](assets/images/coverage.svg)
@@ -46,33 +46,30 @@ conda activate tmkit
 pip install tmkit==0.0.3
 ```
 
-### Using conda
-
-If you want to install TMKit with some optional packages, including hh-suite, pymol, and hmmer, you can select the conda option. You should have [miniconda](https://docs.conda.io/en/latest/miniconda.html) installed first. Please run the following commands to create a new conda environment and install TMKit.
-
-```sh
-# create a conda environment
-conda create --name tmkit python=3.11
-
-# activate the conda environment
-conda activate tmkit
-
-conda install -c 2003100127 -c conda-forge -c bioconda tmkit
-```
-
-### Using docker
-
-You can also use docker to run TMKit. You should have [docker](https://docs.docker.com/get-docker/) installed first. Then run the following commands to pull the docker image.
-
-```sh
-docker pull jinlongru/tmkit:latest
-```
+For more ways to install TMKit, please refer to [here](https://tmkit-guide.herokuapp.com/doc/overview).
 
 
-## Citation
+## **Citation**
 
-Please cite our work if you use TMKit in your research.
+Jianfeng Sun, Arulsamy Kulandaisamy, Jinlong Ru, M Michael Gromiha, Adam P Cribbs, TMKit: a Python interface for computational analysis of transmembrane proteins, Briefings in Bioinformatics, Volume 24, Issue 5, September 2023, bbad288, https://doi.org/10.1093/bib/bbad288
 
-## Contact
+@article{10.1093/bib/bbad288,
+    author = {Sun, Jianfeng and Kulandaisamy, Arulsamy and Ru, Jinlong and Gromiha, M Michael and Cribbs, Adam P},
+    title = {TMKit: a Python interface for computational analysis of transmembrane proteins},
+    journal = {Briefings in Bioinformatics},
+    volume = {24},
+    number = {5},
+    pages = {bbad288},
+    year = {2023},
+    month = {08},
+    issn = {1477-4054},
+    doi = {10.1093/bib/bbad288},
+    url = {https://doi.org/10.1093/bib/bbad288},
+    eprint = {https://academic.oup.com/bib/article-pdf/24/5/bbad288/51711304/bbad288.pdf},
+}
 
-Please report any questions on [issue](https://github.com/2003100127/tmkit/issues) pages.
+
+
+## **Contact**
+
+Jianfeng Sun: jianfeng.sunmt@gmail.com | jianfeng.sun@ndorms.ox.ac.uk
