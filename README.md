@@ -17,8 +17,6 @@
 
 <!-- ![Build](https://github.com/2003100127/tmkit/actions/workflows/build.yml/badge.svg) -->
 
-###### tags: `bioinformatics`, `protein-protein interfaces`
-
 
 
 ## Overview

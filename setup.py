@@ -2,8 +2,8 @@ from setuptools import find_packages, setup
 
 setup(
     name="tmkit",
-    version="0.0.4",
-    keywords=("pip", "tmkit"),
+    version="0.0.6",
+    keywords=["pip", "tmkit"],
     description="TMKit",
     long_description="TMKit",
     license="GNU GENERAL V3.0",
@@ -23,7 +23,6 @@ setup(
         "numpy",
         "openpyxl",
         "biopandas",
-        "pypdb==2.2",
         "xmltramp2==3.1.1",
         "biopython==1.79",
         "pyfiglet==0.8.post1",

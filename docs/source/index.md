@@ -1,5 +1,4 @@
 ![](https://img.shields.io/pypi/v/tmkit?logo=PyPI)
-![Test](https://github.com/2003100127/tmkit/actions/workflows/test.yml/badge.svg)
 ![](https://img.shields.io/badge/last_released-Jul14._2023-green.svg)
 ![](https://img.shields.io/badge/tmkit-executable-519dd9.svg)
 [![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/2003100127/tmkit/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
@@ -11,7 +10,7 @@
 
 # TMKit: transmembrane protein analysis
 
-TMKit is an open-source Python programming interface, which is modular, scalable, and specifically designed for processing transmembrane protein data. It enables users to perform database wrangling, engineer features at the mutational, domain, and topological levels, and visualize protein-protein interaction interfaces through its unique programming interface. In addition, TMKit includes seqNetRR, a high-performance computing library that allows for customised construction and rewiring of residue connections. This library is particularly well-suited for assigning coevolutionary features at a fast speed.
+TMKit is an open-source Python programming interface, which is modular, scalable, and specifically designed for processing transmembrane protein data. It enables users to perform database wrangling, engineer features at the mutational, domain, and topological levels, and visualise protein-protein interaction interfaces through its unique programming interface. In addition, TMKit includes seqNetRR, a high-performance computing library that allows for customised construction and rewiring of residue connections. This library is particularly well-suited for assigning coevolutionary features at a fast speed.
 
 ```{image} img/tmkit_logo.png
 :width: 230px
@@ -37,7 +36,7 @@ TMKit is an open-source Python programming interface, which is modular, scalable
 
 
 ## 🔧 **Functionalities**
-TMKit provides **9** function classes to handle a number of transmembrane protein sequence and structural analysis problems, including visualization, sequence, quality control, topology, mapping, annotation, connectivity, edge extraction, and feature.
+TMKit provides **9** function classes to handle a number of transmembrane protein sequence and structural analysis problems, including visualisation, sequence, quality control, topology, mapping, annotation, connectivity, edge extraction, and feature.
 
 :::::{grid} 1 2 3 3
 :gutter: 2
@@ -78,7 +77,7 @@ A high-performance computing library for extracting connections between residues
 learn more>>
 ::::
 
-::::{grid-item-card} Visualization
+::::{grid-item-card} Visualisation
 :img-top: img/module/visualization.png
 :img-alt: 
 ^^^
@@ -154,7 +153,7 @@ install
 | 8   | `tmk.rrc`     | Feature         |    	performance evaluation of residue contact prediction    |
 | 9   | `tmk.ppi`     | Connectivity    |                    	protein connectivity                    |
 | 10  | `tmk.mut`     | Annotation      |      	transmembrane protein's mutation data processing      |
-| 11  | `tmk.vs`      | Visualization   |                	visualize protein structures                |
+| 11  | `tmk.vs`      | Visualisation   |                	visualise protein structures                |
 | 12  | `tmk.cath`    | Annotation      |             access protein domains and families             |
 | 13  | `tmk.mapping` | Mapping         |           	conversion between protein identifiers           |
 | 14  | `tmk.edge`    | Edge extraction |          rewiring of connections between residues           |

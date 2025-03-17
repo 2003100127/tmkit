@@ -1,0 +1,24 @@
+.bd-sidebar {
+    max-height: 100vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.bd-sidebar::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+}
+
+.bd-sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.bd-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.bd-sidebar:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
