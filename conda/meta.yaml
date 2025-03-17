@@ -1,7 +1,7 @@
 {% set data = load_setup_py_data() %}
 
 package:
-  name: 'pypropel'
+  name: 'tmkit'
   version: {{ data['version'] }}
 
 source:
@@ -17,13 +17,13 @@ build:
 
 requirements:
   build:
-    - python
+    - python >=3.7,<3.12
     - poetry
     - pip
     - setuptools
 
   run:
-    - python
+    - python >=3.7,<3.12
     {% for dependency in data['install_requires'] %}
     - {{ dependency.lower() }}
     {% endfor %}
