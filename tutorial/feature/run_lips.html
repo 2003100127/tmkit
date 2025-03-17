@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LIPS program &#8212; TMKit 0.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=18b79de6" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=e645c8fa"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/feature/run_lips';</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Helix surface" href="helix_surface.html" />
+    <link rel="prev" title="Feature" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/tmkit_logo.png" class="logo__image only-light" alt="TMKit 0.0.1 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/tmkit_logo.png" class="logo__image only-dark" alt="TMKit 0.0.1 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/2003100127?tab=repositories" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://scholar.google.com/citations?hl=en&user=TfLBR9kAAAAJ&view_op=list_works&sortby=pubdate" title="Google Scholar" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-google-scholar fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Google Scholar</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/Jianfeng_Sunny" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/in/jianfeng-sun-2ba9b1132/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorial</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../get_started/index.html">Get started</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/feature.html">Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/example_dataset.html">Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sequence/index.html">Sequence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sequence/read.html">Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sequence/retrieve.html">Retrieve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../edge/index.html">Edge extraction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/unipartite/index.html">Unipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/unigraph.html">Unigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/bipartite/index.html">Bipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/bigraph.html">Bigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/cumulative/index.html">Cumulative</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../visualisation/index.html">Visualisation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../visualisation/structure/index.html">Structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/ppi_interface.html">PPI interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/coloring.html">Coloring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/binding_pocket.html">Protein-ligand binding pocket</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Feature</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">LIPS program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helix_surface.html">Helix surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lips_score.html">Lipophilicity score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="entropy.html">Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topology.html">Topology</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../topology/index.html">Topology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../topology/pdbtm.html">PDBTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/phobius.html">Phobius</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/tmhmm.html">TMHMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/segment.html">Segment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../msa/index.html">MSA</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../msa/hhblits.html">HHblits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../msa/jackhmmer.html">JackHmmer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../msa/hhfilter.html">HHfilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../msa/reformat.html">Reformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../msa/foldseek_af2.html">Foldseek-AlphaFold2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../collation/index.html">Collation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../collation/individual_protein.html">Individual collation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collation/batch_proteins.html">Batch collation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mutation/index.html">Mutation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mutation/muthtp.html">MutHTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mutation/predmuthtp.html">Pred-MutHTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mapping/index.html">Mapping</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mapping/pdb_uniprot.html">Conversion between PDB and UniProt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../quality_control/index.html">Quality control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../quality_control/pre_processing/index.html">Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/pre_processing/single_metric.html">Single metric</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/pre_processing/integrated_metrics.html">Integrated metric</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../quality_control/post_evaluation/index.html">Post evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/post_evaluation/residue_contact.html">Residue contact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/post_evaluation/two_site_evaluation.html">Evaluation involving two-site prediction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ppi/index.html">Protein-protein interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/biogrid.html">BioGRID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/intact.html">IntAct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/connectivity.html">Connectivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cath/index.html">Cath</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cath/fetch_data.html">Fetch data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cath/customised_fetch.html">Fetch with customised metrics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issue.html">Issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Versions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/2003100127/tmkit" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorial/feature/run_lips.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LIPS program</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-lipid-facing-surface"><svg aria-hidden="true" class="sd-octicon sd-octicon-book sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path></svg> <strong>Introduction to LIPid-facing Surface</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-code sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><svg aria-hidden="true" class="sd-octicon sd-octicon-key sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg> <strong>Attributes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="lips-program">
+<h1>LIPS program<a class="headerlink" href="#lips-program" title="Link to this heading">#</a></h1>
+<section id="introduction-to-lipid-facing-surface">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-book sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path></svg> <strong>Introduction to LIPid-facing Surface</strong><a class="headerlink" href="#introduction-to-lipid-facing-surface" title="Link to this heading">#</a></h2>
+<p>TMKit integrates the <strong>LIPS (LIPid-facing Surface)</strong> method<a class="footnote-reference brackets" href="#id5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> to generate helix surfaces, LIPS scores, and entropy scores, facilitating the analysis of transmembrane protein interactions.</p>
+<p>You can also refer to our recent publication<a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for further illustration. Transmembrane (TM) proteins are anchored to the membrane via α-helices, allowing them to interact with lipids. Therefore, studying lipid-accessible protein properties, such as helix orientation relative to lipids, is crucial. Below, we detail a helix orientation prediction process used in the <strong>LIPS</strong> method, which highlights the relationship between specialized structural features and the biological functions of membrane proteins.</p>
+<p>Notably, TM proteins are enriched with coiled coils in TM regions, which contain heptad repeats—periodically recurring seven-amino-acid sequences labeled ABCDEFG. A heptad repeat generates seven distinct helical faces, with each of the seven residues alternately considered as an anchoring residue. According to Adamian and Liang<a class="footnote-reference brackets" href="#id5" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, each anchoring residue is complemented by two adjacent residues (two positions apart), forming one of the seven surfaces. Thus, starting from the first residue A, the seven helical faces are <strong>ADE</strong>, <strong>BEF</strong>, <strong>CFG</strong>, <strong>DGA</strong>, <strong>EAB</strong>, <strong>FBC</strong>, and <strong>GCD</strong>, as demonstrated below.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="../../_images/lips.png"><img alt="../../_images/lips.png" src="../../_images/lips.png" style="width: 710.8000000000001px; height: 441.20000000000005px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Caption</strong>: Schematic illustration of helical surfaces generated using the LIPS method. (a) shows the representations of the heptad repeat (seven residues <strong>ABCDEFG</strong>) in sequence and structural contexts. (b) shows the seven canonical surfaces of transmembrane α-helices, which are generated by taking each of the seven residues as an anchoring residue. Each surface consists of an anchoring residue and two residues complementing the anchoring residue. The seven surfaces are <strong>ADE</strong>, <strong>BEF</strong>, <strong>CFG</strong>, <strong>DGA</strong>, <strong>EAB</strong>, <strong>FBC</strong>, and <strong>GCD</strong>.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the LIPS pipeline, this helical partitioning is applied systematically:</p>
+<p>Sliding through the TM protein sequence, each residue is assigned to one of the seven helical faces.
+Each helical face receives an entropy score and a lipophilicity score.
+These scores are integrated to compute the LIPS score, which estimates helix orientation.
+Since the majority of residues involved in TM helix interactions align with heptad repeats, both face-level LIPS scores and residue-level lipophilicity scores may aid in identifying interaction sites within TM proteins. In MBPred, the significance of helical face-related scores in predicting interaction sites is demonstrated through:</p>
+<p>Mean Decrease in Impurity (Gini Importance), and
+Leave-One-Out Cross-Validation tests.
+These findings reinforce the functional relevance of heptad repeat-derived structural features in TM protein interactions.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in" open="open">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-icon"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-database" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 3.5c0-.626.292-1.165.7-1.59.406-.422.956-.767 1.579-1.041C4.525.32 6.195 0 8 0c1.805 0 3.475.32 4.722.869.622.274 1.172.62 1.578 1.04.408.426.7.965.7 1.591v9c0 .626-.292 1.165-.7 1.59-.406.422-.956.767-1.579 1.041C11.476 15.68 9.806 16 8 16c-1.805 0-3.475-.32-4.721-.869-.623-.274-1.173-.62-1.579-1.04-.408-.426-.7-.965-.7-1.591Zm1.5 0c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 5.205 6.353 5.5 8 5.5c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55 0-.133-.058-.318-.282-.551-.227-.237-.591-.483-1.101-.707C11.102 1.795 9.647 1.5 8 1.5c-1.646 0-3.101.295-4.118.742-.508.224-.873.471-1.1.708-.224.232-.282.417-.282.55Zm0 4.5c0 .133.058.318.282.551.227.237.591.483 1.101.707C4.898 9.705 6.353 10 8 10c1.646 0 3.101-.295 4.118-.742.508-.224.873-.471 1.1-.708.224-.232.282-.417.282-.55V5.724c-.241.15-.503.286-.778.407C11.475 6.68 9.805 7 8 7c-1.805 0-3.475-.32-4.721-.869a6.15 6.15 0 0 1-.779-.407Zm0 2.225V12.5c0 .133.058.318.282.55.227.237.592.484 1.1.708 1.016.447 2.471.742 4.118.742 1.647 0 3.102-.295 4.117-.742.51-.224.874-.47 1.101-.707.224-.233.282-.418.282-.551v-2.275c-.241.15-.503.285-.778.406-1.247.549-2.917.869-4.722.869-1.805 0-3.475-.32-4.721-.869a6.327 6.327 0 0 1-.779-.406Z"></path></svg></span><span class="sd-summary-text">Reminder of data</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Please make sure that <a class="reference internal" href="../get_started/example_dataset.html"><span class="std std-doc">the build-in example dataset<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-link-external sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path></svg></span></a> has been downloaded before you walk through the tutorial.</p>
+</div>
+</details></section>
+<section id="example-usage">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-code sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong><a class="headerlink" href="#example-usage" title="Link to this heading">#</a></h2>
+<p>LIPS replies on an input of a <strong>multiple sequence alignment (MSA)</strong>. We use the MSA of protein <code class="docutils literal notranslate"><span class="pre">1xqf</span></code> chain <code class="docutils literal notranslate"><span class="pre">A</span></code> to generate LIPS results. We have put it in <code class="docutils literal notranslate"><span class="pre">./data/msa/</span></code>.</p>
+<p>Please note that TMKit includes a method that serves as a wrapper for the external <code class="docutils literal notranslate"><span class="pre">lips.pl</span></code> library, which can be accessed via the provided link. The <code class="docutils literal notranslate"><span class="pre">lips.pl</span></code> version in TMKit has been slightly modified from the original implementation, making it more convenient to retrieve results. The results will be saved in <code class="docutils literal notranslate"><span class="pre">./data/lips/</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you use this script or incorporate LIPS results in your studies, please also cite the original research<a class="footnote-reference brackets" href="#id5" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.0.3: </span><code class="docutils literal notranslate"><span class="pre">lips.pl</span></code> was supported by this version of TMKit or above.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tmkit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tmk</span>
+
+<span class="n">tmk</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">generate_helix_surfaces</span><span class="p">(</span>
+    <span class="n">msa_path</span><span class="o">=</span><span class="s1">&#39;./data/msa/&#39;</span><span class="p">,</span>
+    <span class="n">prot_name</span><span class="o">=</span><span class="s1">&#39;1xqf&#39;</span><span class="p">,</span>
+    <span class="n">file_chain</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="n">sv_fp</span><span class="o">=</span><span class="s1">&#39;./data/lips/&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have multiple proteins and want to get the LIPS results all at once, you can do it as follows. First, let’s generate a Pandas dataframe to describe the proteins.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">prots</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;1xqf&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;3pux&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;3rko&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">df_prot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">prots</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;prot&#39;</span><span class="p">,</span> <span class="s1">&#39;chain&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then, please put the dataframe to <code class="docutils literal notranslate"><span class="pre">df_prot</span></code> in command <code class="docutils literal notranslate"><span class="pre">tmk.feature.bgenerate_helix_surfaces</span></code> below. Please find the output and parameter illustration below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tmkit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tmk</span>
+
+<span class="n">tmk</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">bgenerate_helix_surfaces</span><span class="p">(</span>
+    <span class="n">msa_path</span><span class="o">=</span><span class="s1">&#39;./data/msa/&#39;</span><span class="p">,</span>
+    <span class="n">sv_fp</span><span class="o">=</span><span class="s1">&#39;./data/lips/&#39;</span><span class="p">,</span>
+    <span class="n">df_prot</span><span class="o">=</span><span class="n">df_prot</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="attributes">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-key sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg> <strong>Attributes</strong><a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Arribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prot_name</span></code></p></td>
+<td><p>name of a protein in the prefix of a PDB file name (e.g., 1xqf in 1xqfA.pdb)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">file_chain</span></code></p></td>
+<td><p>chain of a protein in the prefix of a PDB file name (e.g., A in 1xqfA.pdb)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df_prot</span></code></p></td>
+<td><p>Pandas dataframe storing protein names and chain names</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">msa_path</span></code></p></td>
+<td><p>path where a protein MSA file is placed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sv_fp</span></code></p></td>
+<td><p>path to save files</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Please see <a class="reference internal" href="#../../get_started/feature.md#nomenclature"><span class="xref myst">here<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-link-external sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path></svg></span></a> for better understanding the file-naming system.</p>
+</div>
+</section>
+<section id="output">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-added sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong><a class="headerlink" href="#output" title="Link to this heading">#</a></h2>
+<p>We show below that for a single protein <code class="docutils literal notranslate"><span class="pre">1xqf</span></code> chain <code class="docutils literal notranslate"><span class="pre">A</span></code>, what kind of output the program will give users. First, it has 7 files for 7 surfaces, each having their residues residing. Finally, it outputs a summary file with 7 surfaces with <strong>LIPOPHILICITY</strong>, <strong>ENTROPY</strong>, and <strong>LIPS scores</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">save</span> <span class="n">path</span> <span class="ow">is</span><span class="p">:</span> <span class="n">tmkit</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="mi">1</span><span class="n">xqfA</span><span class="o">/</span>
+     <span class="n">SURFACE</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="mi">1</span> <span class="n">A</span>  <span class="mf">0.018</span> <span class="mf">1.125</span>
+  <span class="mi">4</span> <span class="n">D</span>  <span class="mf">0.740</span> <span class="mf">5.710</span>
+  <span class="mi">5</span> <span class="n">K</span>  <span class="mf">0.804</span> <span class="mf">6.798</span>
+<span class="o">...</span>
+<span class="mi">362</span> <span class="n">P</span>  <span class="mf">0.615</span> <span class="mf">4.539</span>
+     <span class="n">SURFACE</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="mi">2</span> <span class="n">V</span>  <span class="mf">0.026</span> <span class="mf">1.158</span>
+  <span class="mi">5</span> <span class="n">K</span>  <span class="mf">0.804</span> <span class="mf">6.798</span>
+  <span class="mi">6</span> <span class="n">A</span>  <span class="mf">0.573</span> <span class="mf">4.896</span>
+ <span class="o">...</span>
+<span class="mi">362</span> <span class="n">P</span>  <span class="mf">0.615</span> <span class="mf">4.539</span>
+     <span class="n">SURFACE</span> <span class="mi">2</span><span class="p">:</span>
+  <span class="mi">3</span> <span class="n">A</span>  <span class="mf">0.552</span> <span class="mf">4.238</span>
+  <span class="mi">6</span> <span class="n">A</span>  <span class="mf">0.573</span> <span class="mf">4.896</span>
+  <span class="mi">7</span> <span class="n">D</span>  <span class="mf">0.865</span> <span class="mf">2.885</span>
+ <span class="o">...</span>
+<span class="mi">360</span> <span class="n">R</span>  <span class="mf">1.174</span> <span class="mf">1.749</span>
+     <span class="n">SURFACE</span> <span class="mi">3</span><span class="p">:</span>
+  <span class="mi">4</span> <span class="n">D</span>  <span class="mf">0.740</span> <span class="mf">5.710</span>
+  <span class="mi">7</span> <span class="n">D</span>  <span class="mf">0.865</span> <span class="mf">2.885</span>
+  <span class="mi">8</span> <span class="n">N</span>  <span class="mf">0.679</span> <span class="mf">5.217</span>
+ <span class="o">...</span>
+<span class="mi">361</span> <span class="n">V</span>  <span class="mf">0.751</span> <span class="mf">3.144</span>
+     <span class="n">SURFACE</span> <span class="mi">4</span><span class="p">:</span>
+  <span class="mi">5</span> <span class="n">K</span>  <span class="mf">0.804</span> <span class="mf">6.798</span>
+  <span class="mi">8</span> <span class="n">N</span>  <span class="mf">0.679</span> <span class="mf">5.217</span>
+  <span class="mi">9</span> <span class="n">A</span>  <span class="mf">0.697</span> <span class="mf">4.852</span>
+<span class="o">...</span>
+<span class="mi">362</span> <span class="n">P</span>  <span class="mf">0.615</span> <span class="mf">4.539</span>
+  <span class="mi">1</span> <span class="n">A</span>  <span class="mf">0.018</span> <span class="mf">1.125</span>
+  <span class="mi">2</span> <span class="n">V</span>  <span class="mf">0.026</span> <span class="mf">1.158</span>
+     <span class="n">SURFACE</span> <span class="mi">5</span><span class="p">:</span>
+  <span class="mi">6</span> <span class="n">A</span>  <span class="mf">0.573</span> <span class="mf">4.896</span>
+  <span class="mi">9</span> <span class="n">A</span>  <span class="mf">0.697</span> <span class="mf">4.852</span>
+ <span class="mi">10</span> <span class="n">F</span>  <span class="mf">1.621</span> <span class="mf">2.735</span>
+ <span class="o">...</span>
+<span class="mi">360</span> <span class="n">R</span>  <span class="mf">1.174</span> <span class="mf">1.749</span>
+  <span class="mi">2</span> <span class="n">V</span>  <span class="mf">0.026</span> <span class="mf">1.158</span>
+  <span class="mi">3</span> <span class="n">A</span>  <span class="mf">0.552</span> <span class="mf">4.238</span>
+     <span class="n">SURFACE</span> <span class="mi">6</span><span class="p">:</span>
+  <span class="mi">7</span> <span class="n">D</span>  <span class="mf">0.865</span> <span class="mf">2.885</span>
+ <span class="mi">10</span> <span class="n">F</span>  <span class="mf">1.621</span> <span class="mf">2.735</span>
+ <span class="mi">11</span> <span class="n">M</span>  <span class="mf">0.975</span> <span class="mf">4.820</span>
+ <span class="o">...</span>
+<span class="mi">361</span> <span class="n">V</span>  <span class="mf">0.751</span> <span class="mf">3.144</span>
+  <span class="mi">3</span> <span class="n">A</span>  <span class="mf">0.552</span> <span class="mf">4.238</span>
+  <span class="mi">4</span> <span class="n">D</span>  <span class="mf">0.740</span> <span class="mf">5.710</span>
+
+<span class="n">SURFACE</span> <span class="n">LIPOPHILICITY</span> <span class="n">ENTROPY</span>   <span class="n">LIPS</span>
+   <span class="mi">5</span>        <span class="mf">1.834</span>      <span class="mf">4.846</span>    <span class="mf">8.889</span>
+   <span class="mi">3</span>        <span class="mf">1.729</span>      <span class="mf">4.852</span>    <span class="mf">8.389</span>
+   <span class="mi">0</span>        <span class="mf">1.770</span>      <span class="mf">4.912</span>    <span class="mf">8.694</span>
+   <span class="mi">6</span>        <span class="mf">1.777</span>      <span class="mf">4.746</span>    <span class="mf">8.435</span>
+   <span class="mi">2</span>        <span class="mf">1.791</span>      <span class="mf">4.749</span>    <span class="mf">8.507</span>
+   <span class="mi">1</span>        <span class="mf">1.815</span>      <span class="mf">4.885</span>    <span class="mf">8.865</span>
+   <span class="mi">4</span>        <span class="mf">1.767</span>      <span class="mf">4.948</span>    <span class="mf">8.741</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id4">3</a>)</span>
+<p>Adamian, L., Liang, J. Prediction of transmembrane helix orientation in polytopic membrane proteins. BMC Struct Biol 6, 13 (2006). https://doi.org/10.1186/1472-6807-6-13</p>
+</aside>
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Sun J, Kulandaisamy A, Liu J, Hu K, Gromiha MM, Zhang Y. Machine learning in computational modelling of membrane protein sequences and structures: From methodologies to applications. Comput Struct Biotechnol J. 2023 Jan 28;21:1205-1226. doi: 10.1016/j.csbj.2023.01.036. PMID: 36817959; PMCID: PMC9932300.</p>
+</aside>
+</aside>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Feature</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="helix_surface.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Helix surface</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-lipid-facing-surface"><svg aria-hidden="true" class="sd-octicon sd-octicon-book sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path></svg> <strong>Introduction to LIPid-facing Surface</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-code sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes"><svg aria-hidden="true" class="sd-octicon sd-octicon-key sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg> <strong>Attributes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jianfeng Sun
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jianfeng Sun.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

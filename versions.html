@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Versions &#8212; TMKit 0.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=18b79de6" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=e645c8fa"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'versions';</script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Issue" href="issue.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/tmkit_logo.png" class="logo__image only-light" alt="TMKit 0.0.1 documentation - Home"/>
+    <script>document.write(`<img src="_static/tmkit_logo.png" class="logo__image only-dark" alt="TMKit 0.0.1 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/2003100127?tab=repositories" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://scholar.google.com/citations?hl=en&user=TfLBR9kAAAAJ&view_op=list_works&sortby=pubdate" title="Google Scholar" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-google-scholar fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Google Scholar</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/Jianfeng_Sunny" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/in/jianfeng-sun-2ba9b1132/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorial/index.html">Tutorial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/get_started/index.html">Get started</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/get_started/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/get_started/feature.html">Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/get_started/example_dataset.html">Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/sequence/index.html">Sequence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/sequence/read.html">Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/sequence/retrieve.html">Retrieve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/edge/index.html">Edge extraction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/edge/unipartite/index.html">Unipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/unipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/unipartite/unigraph.html">Unigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/unipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/unipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/edge/bipartite/index.html">Bipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/bipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/bipartite/bigraph.html">Bigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/bipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/bipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/edge/cumulative/index.html">Cumulative</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/cumulative/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/cumulative/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/edge/cumulative/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/visualisation/index.html">Visualisation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/visualisation/structure/index.html">Structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/visualisation/structure/ppi_interface.html">PPI interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/visualisation/structure/coloring.html">Coloring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/visualisation/structure/binding_pocket.html">Protein-ligand binding pocket</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/feature/index.html">Feature</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/feature/run_lips.html">LIPS program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/feature/helix_surface.html">Helix surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/feature/lips_score.html">Lipophilicity score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/feature/entropy.html">Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/feature/topology.html">Topology</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/topology/index.html">Topology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/topology/pdbtm.html">PDBTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/topology/phobius.html">Phobius</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/topology/tmhmm.html">TMHMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/topology/segment.html">Segment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/msa/index.html">MSA</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/msa/hhblits.html">HHblits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/msa/jackhmmer.html">JackHmmer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/msa/hhfilter.html">HHfilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/msa/reformat.html">Reformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/msa/foldseek_af2.html">Foldseek-AlphaFold2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/collation/index.html">Collation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/collation/individual_protein.html">Individual collation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/collation/batch_proteins.html">Batch collation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/mutation/index.html">Mutation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/mutation/muthtp.html">MutHTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/mutation/predmuthtp.html">Pred-MutHTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/mapping/index.html">Mapping</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/mapping/pdb_uniprot.html">Conversion between PDB and UniProt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/quality_control/index.html">Quality control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/quality_control/pre_processing/index.html">Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/quality_control/pre_processing/single_metric.html">Single metric</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/quality_control/pre_processing/integrated_metrics.html">Integrated metric</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial/quality_control/post_evaluation/index.html">Post evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/quality_control/post_evaluation/residue_contact.html">Residue contact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tutorial/quality_control/post_evaluation/two_site_evaluation.html">Evaluation involving two-site prediction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/ppi/index.html">Protein-protein interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/ppi/biogrid.html">BioGRID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/ppi/intact.html">IntAct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/ppi/connectivity.html">Connectivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tutorial/cath/index.html">Cath</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/cath/fetch_data.html">Fetch data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/cath/customised_fetch.html">Fetch with customised metrics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issue.html">Issue</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Versions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/2003100127/tmkit" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/versions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Versions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#release"><svg aria-hidden="true" class="sd-octicon sd-octicon-share sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M3.75 6.5a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-6.5a.25.25 0 0 0-.25-.25h-1a.75.75 0 0 1 0-1.5h1c.966 0 1.75.784 1.75 1.75v6.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-6.5C2 5.784 2.784 5 3.75 5h1a.75.75 0 0 1 0 1.5ZM7.823.177a.25.25 0 0 1 .354 0l2.896 2.896a.25.25 0 0 1-.177.427H8.75v5.75a.75.75 0 0 1-1.5 0V3.5H5.104a.25.25 0 0 1-.177-.427Z"></path></svg> <strong>Release</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#change-logs"><svg aria-hidden="true" class="sd-octicon sd-octicon-shield-check sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="m8.533.133 5.25 1.68A1.75 1.75 0 0 1 15 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.697 1.697 0 0 1-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 0 1 1.217-1.667l5.25-1.68a1.748 1.748 0 0 1 1.066 0Zm-.61 1.429.001.001-5.25 1.68a.251.251 0 0 0-.174.237V7c0 1.36.275 2.666 1.057 3.859.784 1.194 2.121 2.342 4.366 3.298a.196.196 0 0 0 .154 0c2.245-.957 3.582-2.103 4.366-3.297C13.225 9.666 13.5 8.358 13.5 7V3.48a.25.25 0 0 0-.174-.238l-5.25-1.68a.25.25 0 0 0-.153 0ZM11.28 6.28l-3.5 3.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l.97.97 2.97-2.97a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"></path></svg> <strong>Change logs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-reports"><svg aria-hidden="true" class="sd-octicon sd-octicon-report sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> <strong>Test reports</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="versions">
+<h1>Versions<a class="headerlink" href="#versions" title="Link to this heading">#</a></h1>
+<section id="release">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-share sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 6.5a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-6.5a.25.25 0 0 0-.25-.25h-1a.75.75 0 0 1 0-1.5h1c.966 0 1.75.784 1.75 1.75v6.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-6.5C2 5.784 2.784 5 3.75 5h1a.75.75 0 0 1 0 1.5ZM7.823.177a.25.25 0 0 1 .354 0l2.896 2.896a.25.25 0 0 1-.177.427H8.75v5.75a.75.75 0 0 1-1.5 0V3.5H5.104a.25.25 0 0 1-.177-.427Z"></path></svg> <strong>Release</strong><a class="headerlink" href="#release" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>version</p></th>
+<th class="head"><p>time</p></th>
+<th class="head"><p>who</p></th>
+<th class="head"><p>status</p></th>
+<th class="head"><p>note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>v0.0.1</p></td>
+<td><p>05.03.2023</p></td>
+<td><p>Jianfeng Sun</p></td>
+<td><p>success</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>v0.0.2</p></td>
+<td><p>18.06.2023</p></td>
+<td><p>Jianfeng Sun</p></td>
+<td><p>success</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>v0.0.3</p></td>
+<td><p>06.07.2023</p></td>
+<td><p>Jianfeng Sun</p></td>
+<td><p>success</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="change-logs">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-shield-check sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="m8.533.133 5.25 1.68A1.75 1.75 0 0 1 15 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.697 1.697 0 0 1-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 0 1 1.217-1.667l5.25-1.68a1.748 1.748 0 0 1 1.066 0Zm-.61 1.429.001.001-5.25 1.68a.251.251 0 0 0-.174.237V7c0 1.36.275 2.666 1.057 3.859.784 1.194 2.121 2.342 4.366 3.298a.196.196 0 0 0 .154 0c2.245-.957 3.582-2.103 4.366-3.297C13.225 9.666 13.5 8.358 13.5 7V3.48a.25.25 0 0 0-.174-.238l-5.25-1.68a.25.25 0 0 0-.153 0ZM11.28 6.28l-3.5 3.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l.97.97 2.97-2.97a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"></path></svg> <strong>Change logs</strong><a class="headerlink" href="#change-logs" title="Link to this heading">#</a></h2>
+<p>…</p>
+</section>
+<section id="test-reports">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-report sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> <strong>Test reports</strong><a class="headerlink" href="#test-reports" title="Link to this heading">#</a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-p-0 sd-mt-2 sd-mb-4 sd-p-2 sd-outline-muted sd-rounded-1 docutils">
+<div class="sd-row sd-row-cols-2 sd-gx-2 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<a class="reference external image-reference" href="https://scholar.google.com/citations?hl=en&amp;user=TfLBR9kAAAAJ&amp;view_op=list_works&amp;sortby=pubdate"><img alt="" class="sd-avatar-sm sd-outline-muted" src="_images/jsun.ico" />
+</a>
+</div>
+<div class="sd-col sd-d-flex-row sd-align-minor-center docutils">
+<div class="sd-container-fluid sd-sphinx-override docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-gx-3 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0">Jianfeng Sun</p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-calendar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"></path></svg></span><strong>July 6, 2023</strong></p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-clock" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg></span>10 min</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-check-circle-fill sd-text-success" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path></svg><strong>Test 1</strong></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-tools sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.433 2.304A4.492 4.492 0 0 0 3.5 6c0 1.598.832 3.002 2.09 3.802.518.328.929.923.902 1.64v.008l-.164 3.337a.75.75 0 1 1-1.498-.073l.163-3.33c.002-.085-.05-.216-.207-.316A5.996 5.996 0 0 1 2 6a5.993 5.993 0 0 1 2.567-4.92 1.482 1.482 0 0 1 1.673-.04c.462.296.76.827.76 1.423v2.82c0 .082.041.16.11.206l.75.51a.25.25 0 0 0 .28 0l.75-.51A.249.249 0 0 0 9 5.282V2.463c0-.596.298-1.127.76-1.423a1.482 1.482 0 0 1 1.673.04A5.993 5.993 0 0 1 14 6a5.996 5.996 0 0 1-2.786 5.068c-.157.1-.209.23-.207.315l.163 3.33a.752.752 0 0 1-1.094.714.75.75 0 0 1-.404-.64l-.164-3.345c-.027-.717.384-1.312.902-1.64A4.495 4.495 0 0 0 12.5 6a4.492 4.492 0 0 0-1.933-3.696c-.024.017-.067.067-.067.16v2.818a1.75 1.75 0 0 1-.767 1.448l-.75.51a1.75 1.75 0 0 1-1.966 0l-.75-.51A1.75 1.75 0 0 1 5.5 5.282V2.463c0-.092-.043-.142-.067-.159Z"></path></svg><strong>system parameters</strong></label><div class="sd-tab-content docutils">
+<ul class="simple">
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">Python</span> 3.11.4</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">conda</span> 4.12.0</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">install</span> Github (also PyPI)</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">system</span> Windows10 (also Ubuntu 20.04)</p></li>
+</ul>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-log sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 8.25a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 5 8.25ZM4 10.5A.75.75 0 0 0 4 12h4a.75.75 0 0 0 0-1.5H4Z"></path><path d="M13-.005c1.654 0 3 1.328 3 3 0 .982-.338 1.933-.783 2.818-.443.879-1.028 1.758-1.582 2.588l-.011.017c-.568.853-1.104 1.659-1.501 2.446-.398.789-.623 1.494-.623 2.136a1.5 1.5 0 1 0 2.333-1.248.75.75 0 0 1 .834-1.246A3 3 0 0 1 13 16H3a3 3 0 0 1-3-3c0-1.582.891-3.135 1.777-4.506.209-.322.418-.637.623-.946.473-.709.923-1.386 1.287-2.048H2.51c-.576 0-1.381-.133-1.907-.783A2.68 2.68 0 0 1 0 2.995a3 3 0 0 1 3-3Zm0 1.5a1.5 1.5 0 0 0-1.5 1.5c0 .476.223.834.667 1.132A.75.75 0 0 1 11.75 5.5H5.368c-.467 1.003-1.141 2.015-1.773 2.963-.192.289-.381.571-.558.845C2.13 10.711 1.5 11.916 1.5 13A1.5 1.5 0 0 0 3 14.5h7.401A2.989 2.989 0 0 1 10 13c0-.979.338-1.928.784-2.812.441-.874 1.023-1.748 1.575-2.576l.017-.026c.568-.853 1.103-1.658 1.501-2.448.398-.79.623-1.497.623-2.143 0-.838-.669-1.5-1.5-1.5Zm-10 0a1.5 1.5 0 0 0-1.5 1.5c0 .321.1.569.27.778.097.12.325.227.74.227h7.674A2.737 2.737 0 0 1 10 2.995c0-.546.146-1.059.401-1.5Z"></path></svg><strong>test logs</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>tmkit<span class="o">)</span><span class="w"> </span>D:<span class="se">\D</span>ocument<span class="se">\P</span>rogramming<span class="se">\P</span>ython<span class="se">\d</span>eepbio<span class="se">\s</span>ymphony<span class="se">\g</span>ithub<span class="se">\t</span>mkit&gt;pip<span class="w"> </span>install<span class="w"> </span>.
+Processing<span class="w"> </span>d:<span class="se">\d</span>ocument<span class="se">\p</span>rogramming<span class="se">\p</span>ython<span class="se">\d</span>eepbio<span class="se">\s</span>ymphony<span class="se">\g</span>ithub<span class="se">\t</span>mkit
+<span class="w">  </span>Preparing<span class="w"> </span>metadata<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+Collecting<span class="w"> </span>scikit-learn<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scikit_learn-1.3.0-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">9</span>.2<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">9</span>.2/9.2<span class="w"> </span>MB<span class="w"> </span><span class="m">2</span>.9<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>pandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>pandas-2.0.3-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">10</span>.6<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">10</span>.6/10.6<span class="w"> </span>MB<span class="w"> </span><span class="m">6</span>.3<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>numpy<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>numpy-1.25.0-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">15</span>.0<span class="w"> </span>MB<span class="o">)</span>
+Collecting<span class="w"> </span>openpyxl<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>openpyxl-3.1.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">249</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>biopandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>biopandas-0.4.1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">878</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pypdb-2.2-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">34</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>xmltramp2-3.1.1-py3-none-any.whl
+Collecting<span class="w"> </span><span class="nv">biopython</span><span class="o">==</span><span class="m">1</span>.79<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>biopython-1.79-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">2</span>.3<span class="w"> </span>MB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">pyfiglet</span><span class="o">==</span><span class="m">0</span>.8.post1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pyfiglet-0.8.post1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">865</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>requests<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>requests-2.31.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">62</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>six<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>six-1.16.0-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">11</span><span class="w"> </span>kB<span class="o">)</span>
+Requirement<span class="w"> </span>already<span class="w"> </span>satisfied:<span class="w"> </span>setuptools<span class="w"> </span><span class="k">in</span><span class="w"> </span>d:<span class="se">\p</span>rogramming<span class="se">\a</span>naconda3<span class="se">\e</span>nvs<span class="se">\t</span>mkit<span class="se">\l</span>ib<span class="se">\s</span>ite-packages<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>biopandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="m">68</span>.0.0<span class="o">)</span>
+Collecting<span class="w"> </span>python-dateutil&gt;<span class="o">=</span><span class="m">2</span>.8.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>python_dateutil-2.8.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">247</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>pytz&gt;<span class="o">=</span><span class="m">2020</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pytz-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">502</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>tzdata&gt;<span class="o">=</span><span class="m">2022</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>tzdata-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">341</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>et-xmlfile<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>openpyxl-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>et_xmlfile-1.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">4</span>.7<span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>scipy&gt;<span class="o">=</span><span class="m">1</span>.5.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scipy-1.11.1-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">44</span>.0<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">44</span>.0/44.0<span class="w"> </span>MB<span class="w"> </span><span class="m">7</span>.4<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>joblib&gt;<span class="o">=</span><span class="m">1</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>joblib-1.3.1-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">301</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">302</span>.0/302.0<span class="w"> </span>kB<span class="w"> </span><span class="m">1</span>.0<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>threadpoolctl&gt;<span class="o">=</span><span class="m">2</span>.0.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>threadpoolctl-3.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">14</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>charset-normalizer&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>charset_normalizer-3.1.0-cp311-cp311-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">96</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>idna&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span>.5<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>idna-3.4-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">61</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>urllib3&lt;<span class="m">3</span>,&gt;<span class="o">=</span><span class="m">1</span>.21.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>urllib3-2.0.3-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">123</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>certifi&gt;<span class="o">=</span><span class="m">2017</span>.4.17<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>certifi-2023.5.7-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">156</span><span class="w"> </span>kB<span class="o">)</span>
+Building<span class="w"> </span>wheels<span class="w"> </span><span class="k">for</span><span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>tmkit
+<span class="w">  </span>Building<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+<span class="w">  </span>Created<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit:<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>tmkit-0.0.0.2-py3-none-any.whl<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">126845</span><span class="w"> </span><span class="nv">sha256</span><span class="o">=</span>d0c281f14de1a88d5f6ab4823beef5bf5ab2c76b2a9d192b115f7eda96a81673
+<span class="w">  </span>Stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory:<span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\j</span>ianf<span class="se">\A</span>ppData<span class="se">\L</span>ocal<span class="se">\T</span>emp<span class="se">\p</span>ip-ephem-wheel-cache-w38g_yjh<span class="se">\w</span>heels<span class="se">\8</span><span class="m">2</span><span class="se">\8</span><span class="m">2</span><span class="se">\2</span><span class="m">3</span><span class="se">\5</span>336955fb4e65eecd46be3d7456ca520d46b96168443a78564
+Successfully<span class="w"> </span>built<span class="w"> </span>tmkit
+Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>pytz,<span class="w"> </span>pyfiglet,<span class="w"> </span>urllib3,<span class="w"> </span>tzdata,<span class="w"> </span>threadpoolctl,<span class="w"> </span>six,<span class="w"> </span>numpy,<span class="w"> </span>joblib,<span class="w"> </span>idna,<span class="w"> </span>et-xmlfile,<span class="w"> </span>charset-normalizer,<span class="w"> </span>certifi,<span class="w"> </span>xmltramp2,<span class="w"> </span>scipy,<span class="w"> </span>requests,<span class="w"> </span>python-dateutil,<span class="w"> </span>openpyxl,<span class="w"> </span>biopython,<span class="w"> </span>scikit-learn,<span class="w"> </span>pypdb,<span class="w"> </span>pandas,<span class="w"> </span>biopandas,<span class="w"> </span>tmkit
+Successfully<span class="w"> </span>installed<span class="w"> </span>biopandas-0.4.1<span class="w"> </span>biopython-1.79<span class="w"> </span>certifi-2023.5.7<span class="w"> </span>charset-normalizer-3.1.0<span class="w"> </span>et-xmlfile-1.1.0<span class="w"> </span>idna-3.4<span class="w"> </span>joblib-1.3.1<span class="w"> </span>numpy-1.25.0<span class="w"> </span>openpyxl-3.1.2<span class="w"> </span>pandas-2.0.3
+pyfiglet-0.8.post1<span class="w"> </span>pypdb-2.2<span class="w"> </span>python-dateutil-2.8.2<span class="w"> </span>pytz-2023.3<span class="w"> </span>requests-2.31.0<span class="w"> </span>scikit-learn-1.3.0<span class="w"> </span>scipy-1.11.1<span class="w"> </span>six-1.16.0<span class="w"> </span>threadpoolctl-3.1.0<span class="w"> </span>tmkit-0.0.0.2<span class="w"> </span>tzdata-2023.3<span class="w"> </span>urllib3-2.0.3<span class="w"> </span>xmltramp2-3.1.1
+</pre></div>
+</div>
+</div>
+</div>
+<p><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-check-circle-fill sd-text-success" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path></svg><strong>Test 2</strong></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-tools sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.433 2.304A4.492 4.492 0 0 0 3.5 6c0 1.598.832 3.002 2.09 3.802.518.328.929.923.902 1.64v.008l-.164 3.337a.75.75 0 1 1-1.498-.073l.163-3.33c.002-.085-.05-.216-.207-.316A5.996 5.996 0 0 1 2 6a5.993 5.993 0 0 1 2.567-4.92 1.482 1.482 0 0 1 1.673-.04c.462.296.76.827.76 1.423v2.82c0 .082.041.16.11.206l.75.51a.25.25 0 0 0 .28 0l.75-.51A.249.249 0 0 0 9 5.282V2.463c0-.596.298-1.127.76-1.423a1.482 1.482 0 0 1 1.673.04A5.993 5.993 0 0 1 14 6a5.996 5.996 0 0 1-2.786 5.068c-.157.1-.209.23-.207.315l.163 3.33a.752.752 0 0 1-1.094.714.75.75 0 0 1-.404-.64l-.164-3.345c-.027-.717.384-1.312.902-1.64A4.495 4.495 0 0 0 12.5 6a4.492 4.492 0 0 0-1.933-3.696c-.024.017-.067.067-.067.16v2.818a1.75 1.75 0 0 1-.767 1.448l-.75.51a1.75 1.75 0 0 1-1.966 0l-.75-.51A1.75 1.75 0 0 1 5.5 5.282V2.463c0-.092-.043-.142-.067-.159Z"></path></svg><strong>system parameters</strong></label><div class="sd-tab-content docutils">
+<ul class="simple">
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">Python</span> 3.10.12</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">conda</span> 4.12.0</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">install</span> Github (also PyPI)</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">system</span> Windows10</p></li>
+</ul>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-log sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 8.25a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 5 8.25ZM4 10.5A.75.75 0 0 0 4 12h4a.75.75 0 0 0 0-1.5H4Z"></path><path d="M13-.005c1.654 0 3 1.328 3 3 0 .982-.338 1.933-.783 2.818-.443.879-1.028 1.758-1.582 2.588l-.011.017c-.568.853-1.104 1.659-1.501 2.446-.398.789-.623 1.494-.623 2.136a1.5 1.5 0 1 0 2.333-1.248.75.75 0 0 1 .834-1.246A3 3 0 0 1 13 16H3a3 3 0 0 1-3-3c0-1.582.891-3.135 1.777-4.506.209-.322.418-.637.623-.946.473-.709.923-1.386 1.287-2.048H2.51c-.576 0-1.381-.133-1.907-.783A2.68 2.68 0 0 1 0 2.995a3 3 0 0 1 3-3Zm0 1.5a1.5 1.5 0 0 0-1.5 1.5c0 .476.223.834.667 1.132A.75.75 0 0 1 11.75 5.5H5.368c-.467 1.003-1.141 2.015-1.773 2.963-.192.289-.381.571-.558.845C2.13 10.711 1.5 11.916 1.5 13A1.5 1.5 0 0 0 3 14.5h7.401A2.989 2.989 0 0 1 10 13c0-.979.338-1.928.784-2.812.441-.874 1.023-1.748 1.575-2.576l.017-.026c.568-.853 1.103-1.658 1.501-2.448.398-.79.623-1.497.623-2.143 0-.838-.669-1.5-1.5-1.5Zm-10 0a1.5 1.5 0 0 0-1.5 1.5c0 .321.1.569.27.778.097.12.325.227.74.227h7.674A2.737 2.737 0 0 1 10 2.995c0-.546.146-1.059.401-1.5Z"></path></svg><strong>test logs</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>tmkit1<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\j</span>ianf&gt;pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2
+Collecting<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>tmkit-0.0.2.tar.gz<span class="w"> </span><span class="o">(</span><span class="m">90</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">  </span>Preparing<span class="w"> </span>metadata<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+Collecting<span class="w"> </span>scikit-learn<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scikit_learn-1.3.0-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">9</span>.2<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">9</span>.2/9.2<span class="w"> </span>MB<span class="w"> </span><span class="m">5</span>.5<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>pandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>pandas-2.0.3-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">10</span>.7<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">10</span>.7/10.7<span class="w"> </span>MB<span class="w"> </span><span class="m">5</span>.9<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>numpy<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>numpy-1.25.0-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">15</span>.0<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">15</span>.0/15.0<span class="w"> </span>MB<span class="w"> </span><span class="m">13</span>.1<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>openpyxl<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>openpyxl-3.1.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">249</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>biopandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>biopandas-0.4.1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">878</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pypdb-2.2-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">34</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>xmltramp2-3.1.1.tar.gz<span class="w"> </span><span class="o">(</span><span class="m">6</span>.7<span class="w"> </span>kB<span class="o">)</span>
+<span class="w">  </span>Preparing<span class="w"> </span>metadata<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+Collecting<span class="w"> </span><span class="nv">biopython</span><span class="o">==</span><span class="m">1</span>.79<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>biopython-1.79-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">2</span>.3<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">2</span>.3/2.3<span class="w"> </span>MB<span class="w"> </span><span class="m">3</span>.4<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span><span class="nv">pyfiglet</span><span class="o">==</span><span class="m">0</span>.8.post1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pyfiglet-0.8.post1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">865</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>requests<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>requests-2.31.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">62</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>six<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>six-1.16.0-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">11</span><span class="w"> </span>kB<span class="o">)</span>
+Requirement<span class="w"> </span>already<span class="w"> </span>satisfied:<span class="w"> </span>setuptools<span class="w"> </span><span class="k">in</span><span class="w"> </span>d:<span class="se">\p</span>rogramming<span class="se">\a</span>naconda3<span class="se">\e</span>nvs<span class="se">\t</span>mkit1<span class="se">\l</span>ib<span class="se">\s</span>ite-packages<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>biopandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="m">68</span>.0.0<span class="o">)</span>
+Collecting<span class="w"> </span>python-dateutil&gt;<span class="o">=</span><span class="m">2</span>.8.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>python_dateutil-2.8.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">247</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>pytz&gt;<span class="o">=</span><span class="m">2020</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pytz-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">502</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>tzdata&gt;<span class="o">=</span><span class="m">2022</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>tzdata-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">341</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>et-xmlfile<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>openpyxl-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>et_xmlfile-1.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">4</span>.7<span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>scipy&gt;<span class="o">=</span><span class="m">1</span>.5.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scipy-1.11.1-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">44</span>.0<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">44</span>.0/44.0<span class="w"> </span>MB<span class="w"> </span><span class="m">8</span>.8<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>joblib&gt;<span class="o">=</span><span class="m">1</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>joblib-1.3.1-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">301</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>threadpoolctl&gt;<span class="o">=</span><span class="m">2</span>.0.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>threadpoolctl-3.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">14</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>charset-normalizer&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>charset_normalizer-3.1.0-cp310-cp310-win_amd64.whl<span class="w"> </span><span class="o">(</span><span class="m">97</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>----------------------------------------<span class="w"> </span><span class="m">97</span>.1/97.1<span class="w"> </span>kB<span class="w"> </span><span class="m">5</span>.8<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>idna&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span>.5<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>idna-3.4-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">61</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>urllib3&lt;<span class="m">3</span>,&gt;<span class="o">=</span><span class="m">1</span>.21.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>urllib3-2.0.3-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">123</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>certifi&gt;<span class="o">=</span><span class="m">2017</span>.4.17<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>certifi-2023.5.7-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">156</span><span class="w"> </span>kB<span class="o">)</span>
+Building<span class="w"> </span>wheels<span class="w"> </span><span class="k">for</span><span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>tmkit,<span class="w"> </span>xmltramp2
+<span class="w">  </span>Building<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+<span class="w">  </span>Created<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit:<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>tmkit-0.0.2-py3-none-any.whl<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">126820</span><span class="w"> </span><span class="nv">sha256</span><span class="o">=</span>8b9a3aea025c331054bfbb1ea2bd85ed93e57720648bc53a0f0e4f500677117d
+<span class="w">  </span>Stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory:<span class="w"> </span>c:<span class="se">\u</span>sers<span class="se">\j</span>ianf<span class="se">\a</span>ppdata<span class="se">\l</span>ocal<span class="se">\p</span>ip<span class="se">\c</span>ache<span class="se">\w</span>heels<span class="se">\e</span>e<span class="se">\5</span><span class="m">8</span><span class="se">\1</span><span class="m">2</span><span class="se">\a</span>f9f861f381f0a053abcc1dafb852d8c4509d705155f87dd3b
+<span class="w">  </span>Building<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>xmltramp2<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+<span class="w">  </span>Created<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>xmltramp2:<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>xmltramp2-3.1.1-py3-none-any.whl<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">7342</span><span class="w"> </span><span class="nv">sha256</span><span class="o">=</span>aebbc8dfc223fc198e6d66a3ccb6a71f1bcdd076079bea32bc894f937586267c
+<span class="w">  </span>Stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory:<span class="w"> </span>c:<span class="se">\u</span>sers<span class="se">\j</span>ianf<span class="se">\a</span>ppdata<span class="se">\l</span>ocal<span class="se">\p</span>ip<span class="se">\c</span>ache<span class="se">\w</span>heels<span class="se">\c</span><span class="m">0</span><span class="se">\c</span>e<span class="se">\4</span>f<span class="se">\4</span>4f18aefe657d47acbcbcafe21743b4fed1bfd6c9fd0e85ab2
+Successfully<span class="w"> </span>built<span class="w"> </span>tmkit<span class="w"> </span>xmltramp2
+Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>pytz,<span class="w"> </span>pyfiglet,<span class="w"> </span>urllib3,<span class="w"> </span>tzdata,<span class="w"> </span>threadpoolctl,<span class="w"> </span>six,<span class="w"> </span>numpy,<span class="w"> </span>joblib,<span class="w"> </span>idna,<span class="w"> </span>et-xmlfile,<span class="w"> </span>charset-normalizer,<span class="w"> </span>certifi,<span class="w"> </span>xmltramp2,<span class="w"> </span>scipy,<span class="w"> </span>requests,<span class="w"> </span>python-dateutil,<span class="w"> </span>openpyxl,<span class="w"> </span>biopython,<span class="w"> </span>scikit-learn,<span class="w"> </span>pypdb,<span class="w"> </span>pandas,<span class="w"> </span>biopandas,<span class="w"> </span>tmkit
+Successfully<span class="w"> </span>installed<span class="w"> </span>biopandas-0.4.1<span class="w"> </span>biopython-1.79<span class="w"> </span>certifi-2023.5.7<span class="w"> </span>charset-normalizer-3.1.0<span class="w"> </span>et-xmlfile-1.1.0<span class="w"> </span>idna-3.4<span class="w"> </span>joblib-1.3.1<span class="w"> </span>numpy-1.25.0<span class="w"> </span>openpyxl-3.1.2<span class="w"> </span>pandas-2.0.3
+pyfiglet-0.8.post1<span class="w"> </span>pypdb-2.2<span class="w"> </span>python-dateutil-2.8.2<span class="w"> </span>pytz-2023.3<span class="w"> </span>requests-2.31.0<span class="w"> </span>scikit-learn-1.3.0<span class="w"> </span>scipy-1.11.1<span class="w"> </span>six-1.16.0<span class="w"> </span>threadpoolctl-3.1.0<span class="w"> </span>tmkit-0.0.2<span class="w"> </span>tzdata-2023.3<span class="w"> </span>urllib3-2.0.3<span class="w"> </span>xmltramp2-3.1.1
+</pre></div>
+</div>
+</div>
+</div>
+<p><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-check-circle-fill sd-text-success" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path></svg><strong>Test 3</strong></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-tools sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.433 2.304A4.492 4.492 0 0 0 3.5 6c0 1.598.832 3.002 2.09 3.802.518.328.929.923.902 1.64v.008l-.164 3.337a.75.75 0 1 1-1.498-.073l.163-3.33c.002-.085-.05-.216-.207-.316A5.996 5.996 0 0 1 2 6a5.993 5.993 0 0 1 2.567-4.92 1.482 1.482 0 0 1 1.673-.04c.462.296.76.827.76 1.423v2.82c0 .082.041.16.11.206l.75.51a.25.25 0 0 0 .28 0l.75-.51A.249.249 0 0 0 9 5.282V2.463c0-.596.298-1.127.76-1.423a1.482 1.482 0 0 1 1.673.04A5.993 5.993 0 0 1 14 6a5.996 5.996 0 0 1-2.786 5.068c-.157.1-.209.23-.207.315l.163 3.33a.752.752 0 0 1-1.094.714.75.75 0 0 1-.404-.64l-.164-3.345c-.027-.717.384-1.312.902-1.64A4.495 4.495 0 0 0 12.5 6a4.492 4.492 0 0 0-1.933-3.696c-.024.017-.067.067-.067.16v2.818a1.75 1.75 0 0 1-.767 1.448l-.75.51a1.75 1.75 0 0 1-1.966 0l-.75-.51A1.75 1.75 0 0 1 5.5 5.282V2.463c0-.092-.043-.142-.067-.159Z"></path></svg><strong>system parameters</strong></label><div class="sd-tab-content docutils">
+<ul class="simple">
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">Python</span> 3.9.17</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">conda</span> 4.11.0</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">install</span> Github (also PyPI)</p></li>
+<li><p><span class="sd-sphinx-override sd-badge sd-outline-dark sd-text-dark">system</span> Ubuntu 20.04</p></li>
+</ul>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-log sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 8.25a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 5 8.25ZM4 10.5A.75.75 0 0 0 4 12h4a.75.75 0 0 0 0-1.5H4Z"></path><path d="M13-.005c1.654 0 3 1.328 3 3 0 .982-.338 1.933-.783 2.818-.443.879-1.028 1.758-1.582 2.588l-.011.017c-.568.853-1.104 1.659-1.501 2.446-.398.789-.623 1.494-.623 2.136a1.5 1.5 0 1 0 2.333-1.248.75.75 0 0 1 .834-1.246A3 3 0 0 1 13 16H3a3 3 0 0 1-3-3c0-1.582.891-3.135 1.777-4.506.209-.322.418-.637.623-.946.473-.709.923-1.386 1.287-2.048H2.51c-.576 0-1.381-.133-1.907-.783A2.68 2.68 0 0 1 0 2.995a3 3 0 0 1 3-3Zm0 1.5a1.5 1.5 0 0 0-1.5 1.5c0 .476.223.834.667 1.132A.75.75 0 0 1 11.75 5.5H5.368c-.467 1.003-1.141 2.015-1.773 2.963-.192.289-.381.571-.558.845C2.13 10.711 1.5 11.916 1.5 13A1.5 1.5 0 0 0 3 14.5h7.401A2.989 2.989 0 0 1 10 13c0-.979.338-1.928.784-2.812.441-.874 1.023-1.748 1.575-2.576l.017-.026c.568-.853 1.103-1.658 1.501-2.448.398-.79.623-1.497.623-2.143 0-.838-.669-1.5-1.5-1.5Zm-10 0a1.5 1.5 0 0 0-1.5 1.5c0 .321.1.569.27.778.097.12.325.227.74.227h7.674A2.737 2.737 0 0 1 10 2.995c0-.546.146-1.059.401-1.5Z"></path></svg><strong>test logs</strong></label><div class="sd-tab-content docutils">
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>tmkit<span class="o">)</span><span class="w"> </span>jsun@DESKTOP-68LV7AB:~$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2
+Collecting<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>tmkit-0.0.2.tar.gz<span class="w"> </span><span class="o">(</span><span class="m">90</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">  </span>Preparing<span class="w"> </span>metadata<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+Collecting<span class="w"> </span>scikit-learn<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scikit_learn-1.3.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">10</span>.9<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">10</span>.9/10.9<span class="w"> </span>MB<span class="w"> </span><span class="m">6</span>.0<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>pandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>pandas-2.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">12</span>.4<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">12</span>.4/12.4<span class="w"> </span>MB<span class="w"> </span><span class="m">6</span>.1<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>numpy<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>numpy-1.25.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">17</span>.7<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">17</span>.7/17.7<span class="w"> </span>MB<span class="w"> </span><span class="m">15</span>.6<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>openpyxl<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>openpyxl-3.1.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">249</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">250</span>.0/250.0<span class="w"> </span>kB<span class="w"> </span><span class="m">12</span>.0<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>biopandas<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>biopandas-0.4.1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">878</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">879</span>.0/879.0<span class="w"> </span>kB<span class="w"> </span><span class="m">9</span>.1<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>pypdb-2.2-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">34</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>xmltramp2-3.1.1.tar.gz<span class="w"> </span><span class="o">(</span><span class="m">6</span>.7<span class="w"> </span>kB<span class="o">)</span>
+<span class="w">  </span>Preparing<span class="w"> </span>metadata<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+Collecting<span class="w"> </span><span class="nv">biopython</span><span class="o">==</span><span class="m">1</span>.79<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>biopython-1.79-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">2</span>.7<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">2</span>.7/2.7<span class="w"> </span>MB<span class="w"> </span><span class="m">6</span>.5<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span><span class="nv">pyfiglet</span><span class="o">==</span><span class="m">0</span>.8.post1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">tmkit</span><span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pyfiglet-0.8.post1-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">865</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>requests<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">pypdb</span><span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>requests-2.31.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">62</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">62</span>.6/62.6<span class="w"> </span>kB<span class="w"> </span><span class="m">2</span>.7<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>six<span class="w"> </span><span class="o">(</span>from<span class="w"> </span><span class="nv">xmltramp2</span><span class="o">==</span><span class="m">3</span>.1.1-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>six-1.16.0-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">11</span><span class="w"> </span>kB<span class="o">)</span>
+Requirement<span class="w"> </span>already<span class="w"> </span>satisfied:<span class="w"> </span>setuptools<span class="w"> </span><span class="k">in</span><span class="w"> </span>./anaconda3/envs/tmkit/lib/python3.9/site-packages<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>biopandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="m">67</span>.8.0<span class="o">)</span>
+Collecting<span class="w"> </span>python-dateutil&gt;<span class="o">=</span><span class="m">2</span>.8.2<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>python_dateutil-2.8.2-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">247</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>pytz&gt;<span class="o">=</span><span class="m">2020</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>pytz-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">502</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>tzdata&gt;<span class="o">=</span><span class="m">2022</span>.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>pandas-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>tzdata-2023.3-py2.py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">341</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>et-xmlfile<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>openpyxl-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>et_xmlfile-1.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">4</span>.7<span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>scipy&gt;<span class="o">=</span><span class="m">1</span>.5.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>scipy-1.11.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">36</span>.5<span class="w"> </span>MB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">36</span>.5/36.5<span class="w"> </span>MB<span class="w"> </span><span class="m">13</span>.5<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>joblib&gt;<span class="o">=</span><span class="m">1</span>.1.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>joblib-1.3.1-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">301</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">302</span>.0/302.0<span class="w"> </span>kB<span class="w"> </span><span class="m">23</span>.3<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>threadpoolctl&gt;<span class="o">=</span><span class="m">2</span>.0.0<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>scikit-learn-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Using<span class="w"> </span>cached<span class="w"> </span>threadpoolctl-3.1.0-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">14</span><span class="w"> </span>kB<span class="o">)</span>
+Collecting<span class="w"> </span>charset-normalizer&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>charset_normalizer-3.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl<span class="w"> </span><span class="o">(</span><span class="m">199</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">199</span>.2/199.2<span class="w"> </span>kB<span class="w"> </span><span class="m">19</span>.0<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>idna&lt;<span class="m">4</span>,&gt;<span class="o">=</span><span class="m">2</span>.5<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>idna-3.4-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">61</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">61</span>.5/61.5<span class="w"> </span>kB<span class="w"> </span><span class="m">6</span>.3<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>urllib3&lt;<span class="m">3</span>,&gt;<span class="o">=</span><span class="m">1</span>.21.1<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>urllib3-2.0.3-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">123</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">123</span>.6/123.6<span class="w"> </span>kB<span class="w"> </span><span class="m">5</span>.6<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Collecting<span class="w"> </span>certifi&gt;<span class="o">=</span><span class="m">2017</span>.4.17<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>requests-&gt;pypdb<span class="o">==</span><span class="m">2</span>.2-&gt;tmkit<span class="o">==</span><span class="m">0</span>.0.2<span class="o">)</span>
+<span class="w">  </span>Downloading<span class="w"> </span>certifi-2023.5.7-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">156</span><span class="w"> </span>kB<span class="o">)</span>
+<span class="w">     </span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class="w"> </span><span class="m">157</span>.0/157.0<span class="w"> </span>kB<span class="w"> </span><span class="m">5</span>.4<span class="w"> </span>MB/s<span class="w"> </span>eta<span class="w"> </span><span class="m">0</span>:00:00
+Building<span class="w"> </span>wheels<span class="w"> </span><span class="k">for</span><span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>tmkit,<span class="w"> </span>xmltramp2
+<span class="w">  </span>Building<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+<span class="w">  </span>Created<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>tmkit:<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>tmkit-0.0.2-py3-none-any.whl<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">126814</span><span class="w"> </span><span class="nv">sha256</span><span class="o">=</span>4ee0217af2e4410c90d04c99139093b4d04ac81877ef39657483407b94c1c4b2
+<span class="w">  </span>Stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory:<span class="w"> </span>/home/jsun/.cache/pip/wheels/87/4c/f0/775490eb43a4ab0b4414c9da46181d47eb4b9e0c85b7dfbd9c
+<span class="w">  </span>Building<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>xmltramp2<span class="w"> </span><span class="o">(</span>setup.py<span class="o">)</span><span class="w"> </span>...<span class="w"> </span><span class="k">done</span>
+<span class="w">  </span>Created<span class="w"> </span>wheel<span class="w"> </span><span class="k">for</span><span class="w"> </span>xmltramp2:<span class="w"> </span><span class="nv">filename</span><span class="o">=</span>xmltramp2-3.1.1-py3-none-any.whl<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">7314</span><span class="w"> </span><span class="nv">sha256</span><span class="o">=</span>2ded5ec37f707af6ef7fdd877cadbfb3db78f42f388bf21c61f7d8f180c7321c
+<span class="w">  </span>Stored<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory:<span class="w"> </span>/home/jsun/.cache/pip/wheels/f5/62/42/3499542889072e2014b670c46f963313862c86adc55229d2d5
+<span class="w">  </span>Successfully<span class="w"> </span>built<span class="w"> </span>tmkit<span class="w"> </span>xmltramp2
+Installing<span class="w"> </span>collected<span class="w"> </span>packages:<span class="w"> </span>pytz,<span class="w"> </span>pyfiglet,<span class="w"> </span>urllib3,<span class="w"> </span>tzdata,<span class="w"> </span>threadpoolctl,<span class="w"> </span>six,<span class="w"> </span>numpy,<span class="w"> </span>joblib,<span class="w"> </span>idna,<span class="w"> </span>et-xmlfile,<span class="w"> </span>charset-normalizer,<span class="w"> </span>certifi,<span class="w"> </span>xmltramp2,<span class="w"> </span>scipy,<span class="w"> </span>requests,<span class="w"> </span>python-dateutil,<span class="w"> </span>openpyxl,<span class="w"> </span>biopython,<span class="w"> </span>scikit-learn,<span class="w"> </span>pypdb,<span class="w"> </span>pandas,<span class="w"> </span>biopandas,<span class="w"> </span>tmkit
+Successfully<span class="w"> </span>installed<span class="w"> </span>biopandas-0.4.1<span class="w"> </span>biopython-1.79<span class="w"> </span>certifi-2023.5.7<span class="w"> </span>charset-normalizer-3.1.0<span class="w"> </span>et-xmlfile-1.1.0<span class="w"> </span>idna-3.4<span class="w"> </span>joblib-1.3.1<span class="w"> </span>numpy-1.25.0<span class="w"> </span>openpyxl-3.1.2<span class="w"> </span>pandas-2.0.3<span class="w"> </span>pyfiglet-0.8.post1<span class="w"> </span>pypdb-2.2<span class="w"> </span>python-dateutil-2.8.2<span class="w"> </span>pytz-2023.3<span class="w"> </span>requests-2.31.0<span class="w"> </span>scikit-learn-1.3.0<span class="w"> </span>scipy-1.11.1<span class="w"> </span>six-1.16.0<span class="w"> </span>threadpoolctl-3.1.0<span class="w"> </span>tmkit-0.0.2<span class="w"> </span>tzdata-2023.3<span class="w"> </span>urllib3-2.0.3<span class="w"> </span>xmltramp2-3.1.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="issue.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Issue</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#release"><svg aria-hidden="true" class="sd-octicon sd-octicon-share sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M3.75 6.5a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-6.5a.25.25 0 0 0-.25-.25h-1a.75.75 0 0 1 0-1.5h1c.966 0 1.75.784 1.75 1.75v6.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-6.5C2 5.784 2.784 5 3.75 5h1a.75.75 0 0 1 0 1.5ZM7.823.177a.25.25 0 0 1 .354 0l2.896 2.896a.25.25 0 0 1-.177.427H8.75v5.75a.75.75 0 0 1-1.5 0V3.5H5.104a.25.25 0 0 1-.177-.427Z"></path></svg> <strong>Release</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#change-logs"><svg aria-hidden="true" class="sd-octicon sd-octicon-shield-check sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="m8.533.133 5.25 1.68A1.75 1.75 0 0 1 15 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.697 1.697 0 0 1-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 0 1 1.217-1.667l5.25-1.68a1.748 1.748 0 0 1 1.066 0Zm-.61 1.429.001.001-5.25 1.68a.251.251 0 0 0-.174.237V7c0 1.36.275 2.666 1.057 3.859.784 1.194 2.121 2.342 4.366 3.298a.196.196 0 0 0 .154 0c2.245-.957 3.582-2.103 4.366-3.297C13.225 9.666 13.5 8.358 13.5 7V3.48a.25.25 0 0 0-.174-.238l-5.25-1.68a.25.25 0 0 0-.153 0ZM11.28 6.28l-3.5 3.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l.97.97 2.97-2.97a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"></path></svg> <strong>Change logs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-reports"><svg aria-hidden="true" class="sd-octicon sd-octicon-report sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> <strong>Test reports</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jianfeng Sun
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jianfeng Sun.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Foldseek-AlphaFold2 &#8212; TMKit 0.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=18b79de6" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=e645c8fa"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/msa/foldseek_af2';</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Collation" href="../collation/index.html" />
+    <link rel="prev" title="Reformat" href="reformat.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/tmkit_logo.png" class="logo__image only-light" alt="TMKit 0.0.1 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/tmkit_logo.png" class="logo__image only-dark" alt="TMKit 0.0.1 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/2003100127?tab=repositories" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://scholar.google.com/citations?hl=en&user=TfLBR9kAAAAJ&view_op=list_works&sortby=pubdate" title="Google Scholar" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-google-scholar fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Google Scholar</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/Jianfeng_Sunny" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/in/jianfeng-sun-2ba9b1132/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorial</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../get_started/index.html">Get started</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/feature.html">Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get_started/example_dataset.html">Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sequence/index.html">Sequence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sequence/read.html">Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sequence/retrieve.html">Retrieve</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../edge/index.html">Edge extraction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/unipartite/index.html">Unipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/unigraph.html">Unigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/unipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/bipartite/index.html">Bipartite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/bigraph.html">Bigraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/bipartite/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../edge/cumulative/index.html">Cumulative</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/concept.html">Concept</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/usage.html">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../edge/cumulative/pipeline.html">Pipeline</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../visualisation/index.html">Visualisation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../visualisation/structure/index.html">Structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/ppi_interface.html">PPI interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/coloring.html">Coloring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../visualisation/structure/binding_pocket.html">Protein-ligand binding pocket</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../feature/index.html">Feature</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../feature/run_lips.html">LIPS program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../feature/helix_surface.html">Helix surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../feature/lips_score.html">Lipophilicity score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../feature/entropy.html">Entropy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../feature/topology.html">Topology</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../topology/index.html">Topology</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../topology/pdbtm.html">PDBTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/phobius.html">Phobius</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/tmhmm.html">TMHMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topology/segment.html">Segment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">MSA</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hhblits.html">HHblits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jackhmmer.html">JackHmmer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hhfilter.html">HHfilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reformat.html">Reformat</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Foldseek-AlphaFold2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../collation/index.html">Collation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../collation/individual_protein.html">Individual collation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collation/batch_proteins.html">Batch collation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mutation/index.html">Mutation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mutation/muthtp.html">MutHTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mutation/predmuthtp.html">Pred-MutHTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mapping/index.html">Mapping</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mapping/pdb_uniprot.html">Conversion between PDB and UniProt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../quality_control/index.html">Quality control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../quality_control/pre_processing/index.html">Preprocessing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/pre_processing/single_metric.html">Single metric</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/pre_processing/integrated_metrics.html">Integrated metric</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../quality_control/post_evaluation/index.html">Post evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/post_evaluation/residue_contact.html">Residue contact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quality_control/post_evaluation/two_site_evaluation.html">Evaluation involving two-site prediction</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ppi/index.html">Protein-protein interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/biogrid.html">BioGRID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/intact.html">IntAct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppi/connectivity.html">Connectivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cath/index.html">Cath</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cath/fetch_data.html">Fetch data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cath/customised_fetch.html">Fetch with customised metrics</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew.html">What’s new</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../issue.html">Issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Versions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/2003100127/tmkit" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorial/msa/foldseek_af2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Foldseek-AlphaFold2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-code sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="foldseek-alphafold2">
+<h1>Foldseek-AlphaFold2<a class="headerlink" href="#foldseek-alphafold2" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we introduce how TMKit can use a structural alignment method, <a class="reference external" href="https://search.foldseek.com/">Foldseek<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-link-external sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path></svg></a><a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, for seeking functional similar protein structures to an input protein struture by searching a few databases.</p>
+<section id="example-usage">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-code sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong><a class="headerlink" href="#example-usage" title="Link to this heading">#</a></h2>
+<p>First, a good scenario where Foldseek is applied is when we need to understand a predicted structure of a protein. For conveniences, we use 4 AlphaFold2-predicted structures of proteins <code class="docutils literal notranslate"><span class="pre">P63092</span></code>, <code class="docutils literal notranslate"><span class="pre">Q9B6E8</span></code>, <code class="docutils literal notranslate"><span class="pre">P07256</span></code>, and <code class="docutils literal notranslate"><span class="pre">P63027</span></code>. They are saved in <code class="docutils literal notranslate"><span class="pre">./data/</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tmkit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tmk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">prot_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;P63092&#39;</span><span class="p">,</span> <span class="s1">&#39;Q9B6E8&#39;</span><span class="p">,</span> <span class="s1">&#39;P07256&#39;</span><span class="p">,</span> <span class="s1">&#39;P63027&#39;</span><span class="p">])</span>
+<span class="n">tmk</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">retrieve_pdb_alphafold</span><span class="p">(</span>
+    <span class="n">prot_series</span><span class="o">=</span><span class="n">prot_series</span><span class="p">,</span>
+    <span class="n">sv_fp</span><span class="o">=</span><span class="s1">&#39;./data/&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="output">
+<h3><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-added sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong><a class="headerlink" href="#output" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">===&gt;</span><span class="n">No</span><span class="mf">.1</span> <span class="n">protein</span> <span class="n">name</span><span class="p">:</span> <span class="n">P63092</span>
+<span class="o">======&gt;</span><span class="n">successfully</span> <span class="n">downloaded</span><span class="err">!</span>
+<span class="o">===&gt;</span><span class="n">No</span><span class="mf">.2</span> <span class="n">protein</span> <span class="n">name</span><span class="p">:</span> <span class="n">Q9B6E8</span>
+<span class="o">======&gt;</span><span class="n">successfully</span> <span class="n">downloaded</span><span class="err">!</span>
+<span class="o">===&gt;</span><span class="n">No</span><span class="mf">.3</span> <span class="n">protein</span> <span class="n">name</span><span class="p">:</span> <span class="n">P07256</span>
+<span class="o">======&gt;</span><span class="n">successfully</span> <span class="n">downloaded</span><span class="err">!</span>
+<span class="o">===&gt;</span><span class="n">No</span><span class="mf">.4</span> <span class="n">protein</span> <span class="n">name</span><span class="p">:</span> <span class="n">P63027</span>
+<span class="o">======&gt;</span><span class="n">successfully</span> <span class="n">downloaded</span><span class="err">!</span>
+</pre></div>
+</div>
+<p>Then, we can run <code class="docutils literal notranslate"><span class="pre">tmk.seq.retrieve_foldseek</span></code> to search a few databases by Foldseek. By default, the databases include <code class="docutils literal notranslate"><span class="pre">afdb50</span></code>, <code class="docutils literal notranslate"><span class="pre">afdb-swissprot</span></code>, <code class="docutils literal notranslate"><span class="pre">afdb-proteome</span></code>, <code class="docutils literal notranslate"><span class="pre">cath50</span></code>, <code class="docutils literal notranslate"><span class="pre">mgnify_esm30</span></code>, <code class="docutils literal notranslate"><span class="pre">pdb100</span></code>, and <code class="docutils literal notranslate"><span class="pre">gmgcl_id</span></code>. We can save the Foldseek results in <code class="docutils literal notranslate"><span class="pre">./data/</span></code> as well.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tmkit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tmk</span>
+
+<span class="n">tmk</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">retrieve_foldseek</span><span class="p">(</span>
+    <span class="n">pdb_fp</span><span class="o">=</span><span class="s1">&#39;./data/&#39;</span><span class="p">,</span>
+    <span class="n">prot_name</span><span class="o">=</span><span class="s1">&#39;P63027&#39;</span><span class="p">,</span> <span class="c1"># https://alphafold.ebi.ac.uk/entry/P63027</span>
+    <span class="n">sv_fp</span><span class="o">=</span><span class="s1">&#39;./data/&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-added sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">===&gt;</span><span class="n">Searching</span> <span class="n">databases</span> <span class="n">by</span> <span class="n">foldseek</span><span class="o">...</span>
+<span class="o">===&gt;</span><span class="n">Results</span> <span class="n">have</span> <span class="n">been</span> <span class="n">saved</span><span class="err">!</span>
+</pre></div>
+</div>
+<p>Then, we can check the results using the following code. For example, we want to check the result for <code class="docutils literal notranslate"><span class="pre">P63027</span></code> and the file is saved as <code class="docutils literal notranslate"><span class="pre">./data/P63027_foldseek_result.gz</span></code>. Please find the output in section 3 Output below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./data/P63027_foldseek_result.gz&#39;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
+    <span class="n">csv_path</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-added sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_afdb</span><span class="o">-</span><span class="n">proteome</span><span class="o">.</span><span class="n">m8</span>
+         <span class="mi">0</span>   <span class="o">...</span>                               <span class="mi">20</span>
+<span class="mi">0</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">1</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                      <span class="n">Danio</span> <span class="n">rerio</span>
+<span class="mi">2</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Mus</span> <span class="n">musculus</span>
+<span class="mi">3</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>              <span class="n">Trichuris</span> <span class="n">trichiura</span>
+<span class="mi">4</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>       <span class="n">Cladophialophora</span> <span class="n">carrionii</span>
+<span class="mi">5</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>            <span class="n">Madurella</span> <span class="n">mycetomatis</span>
+<span class="mi">6</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Sporothrix</span> <span class="n">schenckii</span> <span class="n">ATCC</span> <span class="mi">58251</span>
+<span class="mi">7</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Schizosaccharomyces</span> <span class="n">pombe</span> <span class="mi">972</span><span class="n">h</span><span class="o">-</span>
+<span class="mi">8</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>    <span class="n">Fonsecaea</span> <span class="n">pedrosoi</span> <span class="n">CBS</span> <span class="mf">271.37</span>
+<span class="mi">9</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>           <span class="n">Caenorhabditis</span> <span class="n">elegans</span>
+<span class="mi">10</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>    <span class="n">Histoplasma</span> <span class="n">capsulatum</span> <span class="n">G186AR</span>
+<span class="mi">11</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                         <span class="n">Zea</span> <span class="n">mays</span>
+
+<span class="p">[</span><span class="mi">12</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">21</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_afdb</span><span class="o">-</span><span class="n">swissprot</span><span class="o">.</span><span class="n">m8</span>
+         <span class="mi">0</span>   <span class="o">...</span>                               <span class="mi">20</span>
+<span class="mi">0</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">1</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                   <span class="n">Macaca</span> <span class="n">mulatta</span>
+<span class="mi">2</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                       <span class="n">Bos</span> <span class="n">taurus</span>
+<span class="mi">3</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">4</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Mus</span> <span class="n">musculus</span>
+<span class="mi">5</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                   <span class="n">Xenopus</span> <span class="n">laevis</span>
+<span class="mi">6</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Mus</span> <span class="n">musculus</span>
+<span class="mi">7</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                       <span class="n">Bos</span> <span class="n">taurus</span>
+<span class="mi">8</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">9</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">10</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Mus</span> <span class="n">musculus</span>
+<span class="mi">11</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>              <span class="n">Macaca</span> <span class="n">fascicularis</span>
+<span class="mi">12</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">13</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>           <span class="n">Caenorhabditis</span> <span class="n">elegans</span>
+<span class="mi">14</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>              <span class="n">Schistosoma</span> <span class="n">mansoni</span>
+<span class="mi">15</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                       <span class="n">Bos</span> <span class="n">taurus</span>
+<span class="mi">16</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Pongo</span> <span class="n">abelii</span>
+<span class="mi">17</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>   <span class="n">Saccharomyces</span> <span class="n">cerevisiae</span> <span class="n">S288C</span>
+<span class="mi">18</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Schizosaccharomyces</span> <span class="n">pombe</span> <span class="mi">972</span><span class="n">h</span><span class="o">-</span>
+<span class="mi">19</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>           <span class="n">Caenorhabditis</span> <span class="n">elegans</span>
+<span class="mi">20</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">21</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                     <span class="n">Homo</span> <span class="n">sapiens</span>
+
+<span class="p">[</span><span class="mi">22</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">21</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_afdb50</span><span class="o">.</span><span class="n">m8</span>
+         <span class="mi">0</span>   <span class="o">...</span>                             <span class="mi">20</span>
+<span class="mi">0</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                    <span class="n">Danio</span> <span class="n">rerio</span>
+<span class="mi">1</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                    <span class="n">Danio</span> <span class="n">rerio</span>
+<span class="mi">2</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                   <span class="n">Mus</span> <span class="n">musculus</span>
+<span class="mi">3</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>            <span class="n">Macaca</span> <span class="n">fascicularis</span>
+<span class="mi">4</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Periophthalmus</span> <span class="n">magnuspinnatus</span>
+<span class="o">..</span>      <span class="o">...</span>  <span class="o">...</span>                            <span class="o">...</span>
+<span class="mi">56</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>      <span class="n">Verrucomicrobia</span> <span class="n">bacterium</span>
+<span class="mi">57</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>           <span class="n">Caulobacter</span> <span class="n">sp</span><span class="o">.</span> <span class="n">FWC2</span>
+<span class="mi">58</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>           <span class="n">Fusarium</span> <span class="n">euwallaceae</span>
+<span class="mi">59</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>                <span class="n">Jatropha</span> <span class="n">curcas</span>
+<span class="mi">60</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>            <span class="n">Tribolium</span> <span class="n">castaneum</span>
+
+<span class="p">[</span><span class="mi">61</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">21</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_cath50</span><span class="o">.</span><span class="n">m8</span>
+         <span class="mi">0</span>        <span class="mi">1</span>   <span class="o">...</span>       <span class="mi">19</span>                              <span class="mi">20</span>
+<span class="mi">0</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">3</span><span class="n">hd7A00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">1</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">3</span><span class="n">hd7E00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">2</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">1</span><span class="n">sfcE00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">3</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">1</span><span class="n">sfcI00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">4</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">1</span><span class="n">sfcA00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">5</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">1</span><span class="n">kilA00</span>  <span class="o">...</span>     <span class="mi">9606</span>                    <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">6</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">2</span><span class="n">n1tA00</span>  <span class="o">...</span>     <span class="mi">9606</span>                    <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">7</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">5</span><span class="n">ccgG00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">8</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">5</span><span class="n">ccgA00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">9</span>   <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">5</span><span class="n">kj7A00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">10</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">5</span><span class="n">cchA00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">11</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">6</span><span class="n">ip1A00</span>  <span class="o">...</span>     <span class="mi">9913</span>                      <span class="n">Bos</span> <span class="n">taurus</span>
+<span class="mi">12</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">1</span><span class="n">l4aA00</span>  <span class="o">...</span>  <span class="mi">1051067</span>             <span class="n">Doryteuthis</span> <span class="n">pealeii</span>
+<span class="mi">13</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">2</span><span class="n">npsA00</span>  <span class="o">...</span>    <span class="mi">10116</span>               <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">14</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">4</span><span class="n">wy4A00</span>  <span class="o">...</span>     <span class="mi">9606</span>                    <span class="n">Homo</span> <span class="n">sapiens</span>
+<span class="mi">15</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="mi">3</span><span class="n">b5nA00</span>  <span class="o">...</span>   <span class="mi">559292</span>  <span class="n">Saccharomyces</span> <span class="n">cerevisiae</span> <span class="n">S288C</span>
+
+<span class="p">[</span><span class="mi">16</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">21</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_gmgcl_id</span><span class="o">.</span><span class="n">m8</span>
+        <span class="mi">0</span>   <span class="o">...</span>                                                 <span class="mi">18</span>
+<span class="mi">0</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">YEVTNVSPDEITGDGPGFTDTEWDGDDVTASLPNPSEADDAAGVLD</span><span class="o">...</span>
+<span class="mi">1</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">LTTVSDEWCVSTCAAGCPPAASLWCRCEDVRAADAVPANQGAAAWG</span><span class="o">...</span>
+<span class="mi">2</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">IILSISNKQDTEKIQRESWNIWGTSQWYSTYTIMIKTDVDEYKIVE</span><span class="o">...</span>
+
+<span class="p">[</span><span class="mi">3</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">19</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_mgnify_esm30</span><span class="o">.</span><span class="n">m8</span>
+        <span class="mi">0</span>   <span class="o">...</span>                                                 <span class="mi">18</span>
+<span class="mi">0</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MSIKYLLIGNPEDCEEIGHYPDRGASKTTAKEADKIFKKLSQSGIQ</span><span class="o">...</span>
+<span class="mi">1</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MSIQYVLIGNPEDCEEIGHYPDRGASKSIAKEANQIFKKLSESGIK</span><span class="o">...</span>
+<span class="mi">2</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MTSSSPYEYSAVARNTTILAQFANSNGNFDVLVTEILQKINIPENQ</span><span class="o">...</span>
+<span class="mi">3</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MAVQYSSIYQGQDLLASKSNGSLPNNVKKLMDSIAIQAKPNDLACV</span><span class="o">...</span>
+<span class="mi">4</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MASSSATTPACPSLRHVLIVRHDAAIREGTLLCEAWAAAVGTARTS</span><span class="o">...</span>
+<span class="mi">5</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">YLASDKTTGADVAIKEFFPRDYCGRAPDGSLAMSPGHNAGLVDTLK</span><span class="o">...</span>
+<span class="mi">6</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">LMFADGPLTQPPNLAALVRLAGTTAAVDRAIRLTEQQAGNLITTAA</span><span class="o">...</span>
+<span class="mi">7</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">MQEILPARGLARRRSLAASTGIGETTEMDQDSNQTSPGAVAAGPGS</span><span class="o">...</span>
+<span class="mi">8</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">APAASTAPAAPSGGPASACGPEAQGTTPEGRAERELLGALRARRAE</span><span class="o">...</span>
+
+<span class="p">[</span><span class="mi">9</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">19</span> <span class="n">columns</span><span class="p">]</span>
+<span class="o">===&gt;</span><span class="n">Database</span><span class="p">:</span> <span class="n">alis_pdb100</span><span class="o">.</span><span class="n">m8</span>
+        <span class="mi">0</span>   <span class="o">...</span>                 <span class="mi">20</span>
+<span class="mi">0</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Rattus</span> <span class="n">norvegicus</span>
+<span class="mi">1</span>  <span class="n">job</span><span class="o">.</span><span class="n">pdb</span>  <span class="o">...</span>  <span class="n">Rattus</span> <span class="n">norvegicus</span>
+
+<span class="p">[</span><span class="mi">2</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">21</span> <span class="n">columns</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Results from each database contains 20 columns. Please see <a class="reference external" href="https://github.com/steineggerlab/foldseek/issues/25#issuecomment-1193354723">this issue comment<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-link-external sd-text-info" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path></svg></a> for their explanations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="s1">&#39;job_desc&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;query&#39;</span><span class="p">,</span><span class="s1">&#39;target&#39;</span><span class="p">,</span><span class="s1">&#39;pident&#39;</span><span class="p">,</span><span class="s1">&#39;alnlen&#39;</span><span class="p">,</span><span class="s1">&#39;mismatch&#39;</span><span class="p">,</span><span class="s1">&#39;gapopen&#39;</span><span class="p">,</span><span class="s1">&#39;qstart&#39;</span><span class="p">,</span><span class="s1">&#39;qend&#39;</span><span class="p">,</span><span class="s1">&#39;tstart&#39;</span><span class="p">,</span><span class="s1">&#39;tend&#39;</span><span class="p">,</span><span class="s1">&#39;evalue&#39;</span><span class="p">,</span><span class="s1">&#39;bits&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;qlen&#39;</span><span class="p">,</span><span class="s1">&#39;tlen&#39;</span><span class="p">,</span><span class="s1">&#39;qaln&#39;</span><span class="p">,</span><span class="s1">&#39;taln&#39;</span><span class="p">,</span><span class="s1">&#39;tca&#39;</span><span class="p">,</span><span class="s1">&#39;tseq&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;taxid&#39;</span><span class="p">,</span><span class="s1">&#39;taxname&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>van Kempen, M., Kim, S.S., Tumescheit, C. et al. Fast and accurate protein structure search with Foldseek. Nat Biotechnol 42, 243–246 (2024). https://doi.org/10.1038/s41587-023-01773-0</p>
+</aside>
+</aside>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reformat.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reformat</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../collation/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Collation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-code sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0Zm1.72 4.97a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.47-1.47-1.47-1.47a.75.75 0 0 1 0-1.06ZM3.28 7.78 1.81 9.25l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Zm8.22-6.218V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"></path></svg> <strong>Example usage</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><svg aria-hidden="true" class="sd-octicon sd-octicon-file-added sd-text-info" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073Zm4.48 3.758a.75.75 0 0 1 .755.745l.01 1.497h1.497a.75.75 0 0 1 0 1.5H9v1.507a.75.75 0 0 1-1.5 0V9.005l-1.502.01a.75.75 0 0 1-.01-1.5l1.507-.01-.01-1.492a.75.75 0 0 1 .745-.755Z"></path></svg> <strong>Output</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jianfeng Sun
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Jianfeng Sun.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
