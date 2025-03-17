@@ -1,8 +1,6 @@
 name: publish_conda
 
 on:
-#  release:
-#    types: [ published ]
   push:
     branches:
       - main
@@ -18,7 +16,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
-          python-version: 3.11  # ✅ Fix Biopython compatibility (must be <=3.11)
+          python-version: 3.11  # ✅ Force Python 3.11 (Biopython 1.79 does NOT support 3.12)
           channels: conda-forge,bioconda
 
       - name: Install Conda Build Tools
@@ -31,13 +29,19 @@ jobs:
 
       - name: Verify Built Package
         run: |
-          ls -lah conda/linux-64/  # ✅ Ensure package is built before publishing
+          echo "Checking built packages..."
+          ls -lah conda/linux-64/ || echo "No package found!"  # ✅ Check if the package exists
 
       - name: Convert Package for Other Platforms
         run: |
-          mkdir -p conda/osx-64 conda/win-64  # ✅ Create directories for converted packages
-          conda convert -p osx-64 conda/linux-64/*.tar.bz2 -o conda/
-          conda convert -p win-64 conda/linux-64/*.tar.bz2 -o conda/
+          if ls conda/linux-64/*.tar.bz2 1> /dev/null 2>&1; then  # ✅ Only convert if package exists
+            mkdir -p conda/osx-64 conda/win-64
+            conda convert -p osx-64 conda/linux-64/*.tar.bz2 -o conda/
+            conda convert -p win-64 conda/linux-64/*.tar.bz2 -o conda/
+          else
+            echo "No package found, skipping conversion."
+            exit 1
+          fi
 
       - name: Publish to Conda
         uses: 2003100127/conda-publish-action@master
